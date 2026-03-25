@@ -5,8 +5,16 @@ Despite their prevalence, WAF effectiveness against modern attackers remains cha
 
 This paper proposes a preprocessing-based defense that performs HTTP normalization before the request reaches the WAF and application processing logic. The key idea is to eliminate representational degrees of freedom by enforcing deterministic, RFC-compliant message handling. Specifically, we normalize URI and header encodings, canonicalize structured bodies according to their declared Content-Type, and reject malformed or ambiguous requests. By aligning the on-the-wire representation with a single canonical interpretation, the approach prevents mutation-based SQL injection payloads from surviving semantic inconsistencies \cite{rfc7230,rfc3986}.
 
-\subsection{Background and Problem Statement}
-Rule-based WAFs typically combine signature matching with selective parsing heuristics. When parsing differs across layers, attackers can leverage edge cases such as optional syntax elements, variant whitespace rules, and inconsistent percent-decoding behavior \cite{parsing-discrepancies}. In particular, request-body formats such as \texttt{multipart/form-data}, JSON, and XML often require specialized parsers. If the WAF applies a different parser or a more permissive decoder than the backend application, payloads can be transformed into a form that bypasses detection but is still interpreted as malicious downstream.
+\subsection{Research Problem}
+Modern SQL injection (SQLi) evasion exhibits two complementary ``failure modes'': (i) adversarial mutations at the syntax level and (ii) parsing discrepancies at the protocol level.
+
+\subsubsection{Adversarial Mutations (Syntax-Level Evasion)}
+Attackers frequently craft mutation sets that aim to preserve \emph{Semantic Equivalence} while altering the textual representation inspected by the WAF. Reinforcement learning enables this process in a closed loop: SSQLi formulates SQLi mutation as a black-box reinforcement-learning problem and, using a soft actor--critic (SAC) strategy, reports bypass rates of up to 97.39\% \cite{guan2023ssqli}. Likewise, GSQLi leverages a GAN-based generator to produce diverse mutated SQLi payloads that evade detection while retaining exploit intent \cite{khan2024gsqli}. Beyond neural generation, WAF-A-MoLE demonstrates that syntax-preserving mutational fuzzing can systematically reduce ML-based WAF confidence and achieve successful bypasses \cite{demetrio2020wafamole}.
+
+\subsubsection{Parsing Discrepancies (Protocol-Level Divergence)}
+Even when signature and ML-based detectors are hardened, bypasses can persist because the WAF and the backend application may not agree on how to interpret the same on-the-wire bytes. WAFFLED shows that by mutating non-malicious HTTP components (e.g., boundary and structure elements) attackers can induce 1{,}207 confirmed parsing-discrepancy bypasses across major WAF deployments, including AWS WAF and Cloudflare, using content-types such as multipart/form-data, application/json, and application/xml \cite{akhavani2025waffled}. 
+
+Together, these observations define the core research problem: how to prevent AI-driven, syntactically diverse SQLi mutations from exploiting representational mismatches between the WAF inspection layer and the application parsing layer.
 
 \subsection{Objective and Contributions}
 The objective of this work is to reduce mutation-based SQL injection bypass rates by ensuring consistent HTTP request interpretation via RFC-based normalization. Our contributions are as follows:

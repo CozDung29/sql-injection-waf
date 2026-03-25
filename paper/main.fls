@@ -110,27 +110,6 @@ INPUT .\sections\abstract.tex
 INPUT .\sections\abstract.tex
 INPUT .\sections\abstract.tex
 INPUT sections\abstract.tex
-INPUT D:\New folder\fonts\tfm\public\cm\cmr9.tfm
-INPUT D:\New folder\fonts\tfm\public\cm\cmr6.tfm
-INPUT D:\New folder\fonts\tfm\public\cm\cmmi9.tfm
-INPUT D:\New folder\fonts\tfm\public\cm\cmmi6.tfm
-INPUT D:\New folder\fonts\tfm\public\cm\cmsy9.tfm
-INPUT D:\New folder\fonts\tfm\public\cm\cmsy6.tfm
-INPUT D:\New folder\fonts\tfm\public\amsfonts\cmextra\cmex9.tfm
-INPUT D:\New folder\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
-INPUT D:\New folder\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
-INPUT D:\New folder\tex\latex\amsfonts\umsa.fd
-INPUT D:\New folder\tex\latex\amsfonts\umsa.fd
-INPUT D:\New folder\tex\latex\amsfonts\umsa.fd
-INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msam10.tfm
-INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msam7.tfm
-INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msam5.tfm
-INPUT D:\New folder\tex\latex\amsfonts\umsb.fd
-INPUT D:\New folder\tex\latex\amsfonts\umsb.fd
-INPUT D:\New folder\tex\latex\amsfonts\umsb.fd
-INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
-INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
-INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
 INPUT .\sections\keywords.tex
 INPUT .\sections\keywords.tex
 INPUT .\sections\keywords.tex
@@ -142,15 +121,6 @@ INPUT .\sections\introduction.tex
 INPUT .\sections\introduction.tex
 INPUT sections\introduction.tex
 INPUT D:\New folder\fonts\tfm\adobe\times\ptmrc7t.tfm
-INPUT D:\New folder\tex\latex\psnfss\ot1pcr.fd
-INPUT D:\New folder\tex\latex\psnfss\ot1pcr.fd
-INPUT D:\New folder\tex\latex\psnfss\ot1pcr.fd
-INPUT D:\New folder\fonts\tfm\adobe\courier\pcrr7t.tfm
-INPUT D:\New folder\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
-INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msam10.tfm
-INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msam7.tfm
-INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
-INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
 OUTPUT main.pdf
 INPUT D:\New folder\fonts\vf\adobe\times\ptmr7t.vf
 INPUT D:\New folder\fonts\tfm\adobe\times\ptmr8r.tfm
@@ -168,36 +138,56 @@ INPUT D:\New folder\fonts\vf\adobe\times\ptmb7t.vf
 INPUT D:\New folder\fonts\tfm\adobe\times\ptmb8r.tfm
 INPUT D:\New folder\fonts\vf\adobe\times\ptmrc7t.vf
 INPUT D:\New folder\fonts\tfm\adobe\times\ptmr8r.tfm
-INPUT D:\New folder\fonts\vf\adobe\times\ptmb7t.vf
-INPUT D:\New folder\fonts\tfm\adobe\times\ptmb8r.tfm
-INPUT D:\New folder\fonts\vf\adobe\courier\pcrr7t.vf
-INPUT D:\New folder\fonts\tfm\adobe\courier\pcrr8r.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
+INPUT D:\New folder\tex\latex\amsfonts\umsa.fd
+INPUT D:\New folder\tex\latex\amsfonts\umsa.fd
+INPUT D:\New folder\tex\latex\amsfonts\umsa.fd
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msam7.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msam5.tfm
+INPUT D:\New folder\tex\latex\amsfonts\umsb.fd
+INPUT D:\New folder\tex\latex\amsfonts\umsb.fd
+INPUT D:\New folder\tex\latex\amsfonts\umsb.fd
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
 INPUT .\sections\background.tex
 INPUT .\sections\background.tex
 INPUT .\sections\background.tex
 INPUT .\sections\background.tex
 INPUT sections\background.tex
-INPUT D:\New folder\fonts\tfm\adobe\times\ptmrc7t.tfm
-INPUT D:\New folder\fonts\tfm\public\cm\cmr8.tfm
-INPUT D:\New folder\fonts\tfm\public\cm\cmmi8.tfm
-INPUT D:\New folder\fonts\tfm\public\cm\cmsy8.tfm
-INPUT D:\New folder\fonts\tfm\public\amsfonts\cmextra\cmex8.tfm
-INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msam10.tfm
-INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT .\sections\methodology.tex
 INPUT .\sections\methodology.tex
 INPUT .\sections\methodology.tex
 INPUT .\sections\methodology.tex
 INPUT sections\methodology.tex
 INPUT D:\New folder\fonts\vf\adobe\times\ptmr7t.vf
-INPUT D:\New folder\fonts\vf\adobe\times\ptmrc7t.vf
-INPUT D:\New folder\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT D:\New folder\tex\latex\psnfss\ot1pcr.fd
+INPUT D:\New folder\tex\latex\psnfss\ot1pcr.fd
+INPUT D:\New folder\tex\latex\psnfss\ot1pcr.fd
+INPUT D:\New folder\fonts\tfm\adobe\courier\pcrr7t.tfm
 INPUT .\sections\experiments.tex
 INPUT .\sections\experiments.tex
 INPUT .\sections\experiments.tex
 INPUT .\sections\experiments.tex
 INPUT sections\experiments.tex
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmrc7t.tfm
+INPUT D:\New folder\fonts\tfm\public\cm\cmr8.tfm
+INPUT D:\New folder\fonts\tfm\public\cm\cmr6.tfm
+INPUT D:\New folder\fonts\tfm\public\cm\cmmi8.tfm
+INPUT D:\New folder\fonts\tfm\public\cm\cmmi6.tfm
+INPUT D:\New folder\fonts\tfm\public\cm\cmsy8.tfm
+INPUT D:\New folder\fonts\tfm\public\cm\cmsy6.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\cmextra\cmex8.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msam7.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
 INPUT D:\New folder\fonts\tfm\adobe\courier\pcrr7t.tfm
+INPUT D:\New folder\fonts\vf\adobe\courier\pcrr7t.vf
+INPUT D:\New folder\fonts\tfm\adobe\courier\pcrr8r.tfm
 INPUT D:\New folder\fonts\vf\adobe\times\ptmr7t.vf
 INPUT D:\New folder\fonts\tfm\adobe\times\ptmr8r.tfm
 INPUT .\sections\conclusion.tex
@@ -225,8 +215,12 @@ INPUT .\content\references_items.tex
 INPUT .\content\references_items.tex
 INPUT .\content\references_items.tex
 INPUT content\references_items.tex
+INPUT D:\New folder\fonts\vf\adobe\times\ptmrc7t.vf
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmr8r.tfm
 INPUT D:\New folder\fonts\vf\adobe\courier\pcrr7t.vf
 INPUT D:\New folder\fonts\tfm\adobe\courier\pcrr8r.tfm
+INPUT D:\New folder\fonts\vf\adobe\times\ptmri7t.vf
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmri8r.tfm
 INPUT main.aux
 INPUT D:\New folder\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT D:\New folder\fonts\type1\public\amsfonts\cm\cmmi10.pfb
@@ -236,8 +230,6 @@ INPUT D:\New folder\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT D:\New folder\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT D:\New folder\fonts\type1\public\amsfonts\cm\cmsy7.pfb
 INPUT D:\New folder\fonts\type1\public\amsfonts\cm\cmsy7.pfb
-INPUT D:\New folder\fonts\type1\public\amsfonts\cm\cmsy9.pfb
-INPUT D:\New folder\fonts\type1\public\amsfonts\cm\cmsy9.pfb
 INPUT D:\New folder\fonts\type1\urw\courier\ucrr8a.pfb
 INPUT D:\New folder\fonts\type1\urw\courier\ucrr8a.pfb
 INPUT D:\New folder\fonts\type1\urw\times\utmb8a.pfb
