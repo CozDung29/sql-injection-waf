@@ -1,0 +1,47 @@
+\section{Background and Related Work}
+\label{sec:background}
+Web Application Firewalls (WAFs) are commonly deployed inline to inspect HTTP traffic and prevent exploitation attempts. In this section, we review typical WAF detection mechanisms, discuss parsing discrepancies that enable inconsistent request interpretations, and summarize mutation-based SQL injection obfuscation strategies.
+
+\subsection{WAF Mechanisms: Rule-based Detection}
+Many WAFs use rule-based detection pipelines that combine normalization, signature matching, and contextual heuristics. Signature-based rules are frequently derived from attack taxonomies and mappings such as OWASP Core Rule Set (CRS) \cite{owasp-crs}. While such signatures can be effective against previously observed exploit patterns, they depend on parser consistency: the detection logic must reason about a representation that is aligned with how the application will parse and interpret the request.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{\columnwidth}{\centering Placeholder figure: WAF inspection pipeline visualization}}
+  \caption{Conceptual view of a rule-based WAF inspecting canonicalized HTTP inputs.}
+  \label{fig:waf-pipeline}
+\end{figure}
+
+\subsection{Parsing Discrepancies and Content-Type Handling}
+Parsing discrepancies arise when different components interpret HTTP messages using distinct grammars or decoders. Even for syntactically valid requests, small representational differences can alter how structured data is tokenized. In particular, Content-Type-dependent parsing varies across stacks:
+
+\begin{itemize}
+\item \texttt{multipart/form-data} requires correct handling of boundaries and part headers \cite{rfc7578}. Differences in boundary parsing, part header decoding, or line-ending handling can change how payload segments are extracted.
+\item JSON parsers may resolve escaped characters, Unicode normalization, and number/string boundaries differently, even when the overall syntax is valid \cite{rfc8259}.
+\item XML parsers may differ in entity expansion behavior, character handling, and namespace processing \cite{xml-parser-discrepancies}.
+\end{itemize}
+
+Attackers can exploit these inconsistencies by crafting mutated payloads that appear benign under the WAF's interpretation but remain injection-relevant under the backend's parsing. Related work on request smuggling and differential parsing provides evidence that inconsistent message framing and body decoding can yield divergent downstream semantics \cite{request-smuggling,parsing-discrepancies}.
+
+\begin{table}[t]
+  \centering
+  \caption{Examples of parser discrepancy surfaces exploitable by mutation.}
+  \label{tab:discrepancy-surface}
+  \begin{tabular}{@{} l l @{}}
+    \toprule
+    Parsing Component & Discrepancy Example \\
+    \midrule
+    URI and query decoding & Percent-encoding resolution differences \\
+    Header decoding & Optional whitespace and delimiter handling \\
+    Multipart boundaries & Part boundary and line-ending ambiguity \\
+    JSON escaping & Treatment of escape sequences and unicode characters \\
+    XML entity handling & Differences in entity resolution and normalization \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Mutation-based SQL Injection Obfuscation}
+SQL injection (SQLi) payloads are frequently obfuscated to evade static pattern matching. Mutation-based techniques generate many semantically related variants by applying transformations involving special characters, alternate encodings, nested operators, or delimiter changes \cite{mutation-sqli}. As defensive systems improve, simplistic obfuscation patterns become easier to detect, motivating attackers to focus on representational edge cases that interact with parser inconsistencies rather than purely signature evasion.
+
+The remainder of this paper focuses on how enforcing a single canonical request representation can limit the space in which mutated SQLi payloads survive differential parsing between WAF and backend logic.
+

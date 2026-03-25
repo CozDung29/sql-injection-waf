@@ -1,0 +1,14 @@
+\section{Discussion and Conclusion}
+\label{sec:discussion}
+Our experiments demonstrate that mutation-based SQL injection bypasses succeed not only by hiding signatures, but also by leveraging differential HTTP parsing behavior across the WAF and the backend application. Even when WAF signatures are updated, representational degrees of freedom in HTTP message syntax, encoding, and Content-Type-specific body handling can preserve injection-relevant semantics across layers.
+
+\subsection{Security vs Performance Trade-off}
+HTTP normalization improves security by enforcing deterministic, RFC-compliant interpretation, which eliminates many discrepancy surfaces that attackers rely on \cite{rfc7230,rfc3986}. The primary cost is preprocessing latency and strictness. Requests that violate syntactic constraints or exhibit ambiguous structure are rejected, which may reduce compatibility with legacy clients that send non-conformant traffic. In deployment, this trade-off can be managed by configuring size limits, maintaining observability for rejected requests, and gradually tightening policies.
+
+Normalization also concentrates residual bypasses into a small set of mechanisms that remain relevant only when clients deviate from strict protocol expectations. This shift enables defenders to focus mitigations on a smaller and more principled attack surface, rather than chasing an expanding collection of mutation patterns.
+
+\subsection{Conclusion}
+This paper proposed an RFC-based, preprocessing approach that places an HTTP-Normalizer proxy before WAF inspection. By canonicalizing HTTP message components and enforcing strict parsing and re-serialization, the method aligns WAF inspection with backend parsing and reduces the success rate of mutation-based SQL injection bypasses across \texttt{multipart/form-data}, JSON, and XML request bodies.
+
+Overall, the results support the conclusion that deterministic RFC-based normalization is a robust defense against mutation-based attacks driven by parsing discrepancies. Future work will extend the normalization policy to additional HTTP versions and proxy behaviors and will explore automated discrepancy discovery to further reduce the residual bypass space.
+

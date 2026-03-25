@@ -1,0 +1,250 @@
+PWD d:\sql-injection-waf\paper
+INPUT C:\Users\codun\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
+INPUT d:\sql-injection-waf\paper\main.tex
+OUTPUT main.log
+INPUT D:\New folder\tex\latex\ieeetran\IEEEtran.cls
+INPUT D:\New folder\tex\latex\ieeetran\IEEEtran.cls
+INPUT D:\New folder\tex\latex\psnfss\ot1ptm.fd
+INPUT D:\New folder\tex\latex\psnfss\ot1ptm.fd
+INPUT D:\New folder\tex\latex\psnfss\ot1ptm.fd
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmri7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmbi7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmri7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmbi7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmri7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmbi7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmri7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmbi7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmri7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmbi7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmri7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmbi7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmri7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmbi7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmri7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmbi7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmri7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmbi7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmri7t.tfm
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmbi7t.tfm
+INPUT D:\New folder\tex\latex\cite\cite.sty
+INPUT D:\New folder\tex\latex\cite\cite.sty
+INPUT D:\New folder\tex\latex\amsmath\amsmath.sty
+INPUT D:\New folder\tex\latex\amsmath\amsmath.sty
+INPUT D:\New folder\tex\latex\amsmath\amsopn.sty
+INPUT D:\New folder\tex\latex\amsmath\amstext.sty
+INPUT D:\New folder\tex\latex\amsmath\amstext.sty
+INPUT D:\New folder\tex\latex\amsmath\amsgen.sty
+INPUT D:\New folder\tex\latex\amsmath\amsgen.sty
+INPUT D:\New folder\tex\latex\amsmath\amsbsy.sty
+INPUT D:\New folder\tex\latex\amsmath\amsbsy.sty
+INPUT D:\New folder\tex\latex\amsmath\amsopn.sty
+INPUT D:\New folder\tex\latex\amsfonts\amssymb.sty
+INPUT D:\New folder\tex\latex\amsfonts\amssymb.sty
+INPUT D:\New folder\tex\latex\amsfonts\amsfonts.sty
+INPUT D:\New folder\tex\latex\amsfonts\amsfonts.sty
+INPUT D:\New folder\tex\latex\graphics\graphicx.sty
+INPUT D:\New folder\tex\latex\graphics\graphicx.sty
+INPUT D:\New folder\tex\latex\graphics\keyval.sty
+INPUT D:\New folder\tex\latex\graphics\keyval.sty
+INPUT D:\New folder\tex\latex\graphics\graphics.sty
+INPUT D:\New folder\tex\latex\graphics\graphics.sty
+INPUT D:\New folder\tex\latex\graphics\trig.sty
+INPUT D:\New folder\tex\latex\graphics\trig.sty
+INPUT D:\New folder\tex\latex\graphics-cfg\graphics.cfg
+INPUT D:\New folder\tex\latex\graphics-cfg\graphics.cfg
+INPUT D:\New folder\tex\latex\graphics-cfg\graphics.cfg
+INPUT D:\New folder\tex\latex\graphics-def\pdftex.def
+INPUT D:\New folder\tex\latex\graphics-def\pdftex.def
+INPUT D:\New folder\tex\latex\graphics-def\pdftex.def
+INPUT D:\New folder\tex\latex\base\textcomp.sty
+INPUT D:\New folder\tex\latex\base\textcomp.sty
+INPUT D:\New folder\tex\latex\xcolor\xcolor.sty
+INPUT D:\New folder\tex\latex\xcolor\xcolor.sty
+INPUT D:\New folder\tex\latex\graphics-cfg\color.cfg
+INPUT D:\New folder\tex\latex\graphics-cfg\color.cfg
+INPUT D:\New folder\tex\latex\graphics-cfg\color.cfg
+INPUT D:\New folder\tex\latex\graphics\mathcolor.ltx
+INPUT D:\New folder\tex\latex\graphics\mathcolor.ltx
+INPUT D:\New folder\tex\latex\graphics\mathcolor.ltx
+INPUT D:\New folder\tex\latex\booktabs\booktabs.sty
+INPUT D:\New folder\tex\latex\booktabs\booktabs.sty
+INPUT D:\New folder\tex\latex\url\url.sty
+INPUT D:\New folder\tex\latex\url\url.sty
+INPUT D:\New folder\tex\latex\l3backend\l3backend-pdftex.def
+INPUT D:\New folder\tex\latex\l3backend\l3backend-pdftex.def
+INPUT .\main.aux
+INPUT .\main.aux
+INPUT main.aux
+OUTPUT main.aux
+INPUT D:\New folder\tex\context\base\mkii\supp-pdf.mkii
+INPUT D:\New folder\tex\context\base\mkii\supp-pdf.mkii
+INPUT D:\New folder\tex\context\base\mkii\supp-pdf.mkii
+INPUT D:\New folder\tex\latex\epstopdf-pkg\epstopdf-base.sty
+INPUT D:\New folder\tex\latex\epstopdf-pkg\epstopdf-base.sty
+INPUT D:\New folder\tex\latex\00miktex\epstopdf-sys.cfg
+INPUT D:\New folder\tex\latex\00miktex\epstopdf-sys.cfg
+INPUT D:\New folder\tex\latex\00miktex\epstopdf-sys.cfg
+INPUT .\sections\abstract.tex
+INPUT .\sections\abstract.tex
+INPUT .\sections\abstract.tex
+INPUT .\sections\abstract.tex
+INPUT sections\abstract.tex
+INPUT D:\New folder\fonts\tfm\public\cm\cmr9.tfm
+INPUT D:\New folder\fonts\tfm\public\cm\cmr6.tfm
+INPUT D:\New folder\fonts\tfm\public\cm\cmmi9.tfm
+INPUT D:\New folder\fonts\tfm\public\cm\cmmi6.tfm
+INPUT D:\New folder\fonts\tfm\public\cm\cmsy9.tfm
+INPUT D:\New folder\fonts\tfm\public\cm\cmsy6.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\cmextra\cmex9.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
+INPUT D:\New folder\tex\latex\amsfonts\umsa.fd
+INPUT D:\New folder\tex\latex\amsfonts\umsa.fd
+INPUT D:\New folder\tex\latex\amsfonts\umsa.fd
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msam7.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msam5.tfm
+INPUT D:\New folder\tex\latex\amsfonts\umsb.fd
+INPUT D:\New folder\tex\latex\amsfonts\umsb.fd
+INPUT D:\New folder\tex\latex\amsfonts\umsb.fd
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
+INPUT .\sections\keywords.tex
+INPUT .\sections\keywords.tex
+INPUT .\sections\keywords.tex
+INPUT .\sections\keywords.tex
+INPUT sections\keywords.tex
+INPUT .\sections\introduction.tex
+INPUT .\sections\introduction.tex
+INPUT .\sections\introduction.tex
+INPUT .\sections\introduction.tex
+INPUT sections\introduction.tex
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmrc7t.tfm
+INPUT D:\New folder\tex\latex\psnfss\ot1pcr.fd
+INPUT D:\New folder\tex\latex\psnfss\ot1pcr.fd
+INPUT D:\New folder\tex\latex\psnfss\ot1pcr.fd
+INPUT D:\New folder\fonts\tfm\adobe\courier\pcrr7t.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msam7.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
+OUTPUT main.pdf
+INPUT D:\New folder\fonts\vf\adobe\times\ptmr7t.vf
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\codun\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
+INPUT D:\New folder\fonts\enc\dvips\base\8r.enc
+INPUT D:\New folder\fonts\vf\adobe\times\ptmr7t.vf
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT D:\New folder\fonts\vf\adobe\times\ptmri7t.vf
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmri8r.tfm
+INPUT D:\New folder\fonts\vf\adobe\times\ptmr7t.vf
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT D:\New folder\fonts\vf\adobe\times\ptmbi7t.vf
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmbi8r.tfm
+INPUT D:\New folder\fonts\vf\adobe\times\ptmb7t.vf
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmb8r.tfm
+INPUT D:\New folder\fonts\vf\adobe\times\ptmrc7t.vf
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT D:\New folder\fonts\vf\adobe\times\ptmb7t.vf
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmb8r.tfm
+INPUT D:\New folder\fonts\vf\adobe\courier\pcrr7t.vf
+INPUT D:\New folder\fonts\tfm\adobe\courier\pcrr8r.tfm
+INPUT .\sections\background.tex
+INPUT .\sections\background.tex
+INPUT .\sections\background.tex
+INPUT .\sections\background.tex
+INPUT sections\background.tex
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmrc7t.tfm
+INPUT D:\New folder\fonts\tfm\public\cm\cmr8.tfm
+INPUT D:\New folder\fonts\tfm\public\cm\cmmi8.tfm
+INPUT D:\New folder\fonts\tfm\public\cm\cmsy8.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\cmextra\cmex8.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT D:\New folder\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT .\sections\methodology.tex
+INPUT .\sections\methodology.tex
+INPUT .\sections\methodology.tex
+INPUT .\sections\methodology.tex
+INPUT sections\methodology.tex
+INPUT D:\New folder\fonts\vf\adobe\times\ptmr7t.vf
+INPUT D:\New folder\fonts\vf\adobe\times\ptmrc7t.vf
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT .\sections\experiments.tex
+INPUT .\sections\experiments.tex
+INPUT .\sections\experiments.tex
+INPUT .\sections\experiments.tex
+INPUT sections\experiments.tex
+INPUT D:\New folder\fonts\tfm\adobe\courier\pcrr7t.tfm
+INPUT D:\New folder\fonts\vf\adobe\times\ptmr7t.vf
+INPUT D:\New folder\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT .\sections\conclusion.tex
+INPUT .\sections\conclusion.tex
+INPUT .\sections\conclusion.tex
+INPUT .\sections\conclusion.tex
+INPUT sections\conclusion.tex
+INPUT .\sections\acknowledgment.tex
+INPUT .\sections\acknowledgment.tex
+INPUT .\sections\acknowledgment.tex
+INPUT .\sections\acknowledgment.tex
+INPUT sections\acknowledgment.tex
+INPUT .\content\acknowledgment_text.tex
+INPUT .\content\acknowledgment_text.tex
+INPUT .\content\acknowledgment_text.tex
+INPUT .\content\acknowledgment_text.tex
+INPUT content\acknowledgment_text.tex
+INPUT .\sections\references.tex
+INPUT .\sections\references.tex
+INPUT .\sections\references.tex
+INPUT .\sections\references.tex
+INPUT sections\references.tex
+INPUT .\content\references_items.tex
+INPUT .\content\references_items.tex
+INPUT .\content\references_items.tex
+INPUT .\content\references_items.tex
+INPUT content\references_items.tex
+INPUT D:\New folder\fonts\vf\adobe\courier\pcrr7t.vf
+INPUT D:\New folder\fonts\tfm\adobe\courier\pcrr8r.tfm
+INPUT main.aux
+INPUT D:\New folder\fonts\type1\public\amsfonts\cm\cmmi10.pfb
+INPUT D:\New folder\fonts\type1\public\amsfonts\cm\cmmi10.pfb
+INPUT D:\New folder\fonts\type1\public\amsfonts\cm\cmr10.pfb
+INPUT D:\New folder\fonts\type1\public\amsfonts\cm\cmr10.pfb
+INPUT D:\New folder\fonts\type1\public\amsfonts\cm\cmsy10.pfb
+INPUT D:\New folder\fonts\type1\public\amsfonts\cm\cmsy10.pfb
+INPUT D:\New folder\fonts\type1\public\amsfonts\cm\cmsy7.pfb
+INPUT D:\New folder\fonts\type1\public\amsfonts\cm\cmsy7.pfb
+INPUT D:\New folder\fonts\type1\public\amsfonts\cm\cmsy9.pfb
+INPUT D:\New folder\fonts\type1\public\amsfonts\cm\cmsy9.pfb
+INPUT D:\New folder\fonts\type1\urw\courier\ucrr8a.pfb
+INPUT D:\New folder\fonts\type1\urw\courier\ucrr8a.pfb
+INPUT D:\New folder\fonts\type1\urw\times\utmb8a.pfb
+INPUT D:\New folder\fonts\type1\urw\times\utmb8a.pfb
+INPUT D:\New folder\fonts\type1\urw\times\utmbi8a.pfb
+INPUT D:\New folder\fonts\type1\urw\times\utmbi8a.pfb
+INPUT D:\New folder\fonts\type1\urw\times\utmr8a.pfb
+INPUT D:\New folder\fonts\type1\urw\times\utmr8a.pfb
+INPUT D:\New folder\fonts\type1\urw\times\utmri8a.pfb
+INPUT D:\New folder\fonts\type1\urw\times\utmri8a.pfb

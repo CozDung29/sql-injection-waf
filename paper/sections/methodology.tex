@@ -1,0 +1,58 @@
+\section{Methodology}
+\label{sec:methodology}
+This section describes the experimental pipeline for evaluating mutation-based SQL injection payloads and presents the HTTP normalization technique that aligns WAF inspection with backend parsing. The overall goal is to remove representational degrees of freedom so that mutated payloads cannot survive inconsistent interpretations.
+
+\subsection{Threat Model and Experimental Pipeline}
+We consider an adversary capable of sending arbitrary HTTP requests and generating many mutated variants of SQLi payloads. The defender deploys a rule-based WAF and an application backend that parses request data into application-specific query logic.
+
+To study bypass behavior, we implement a controlled pipeline:
+\[
+ \text{Fuzzer} \rightarrow \text{WAF} \rightarrow \text{Application}.
+ \]
+The WAF inspects the request and either blocks it or forwards it. The application then processes the forwarded request. A successful bypass is defined as a request that is allowed by the WAF and produces a behavior consistent with SQLi execution in the application context.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{\columnwidth}{\centering Placeholder figure: HTTP-Normalizer proxy and inspection flow}}
+  \caption{Evaluation pipeline showing the interaction between payload generation, WAF inspection, and application processing.}
+  \label{fig:pipeline}
+\end{figure}
+
+\subsection{Payload Generation}
+We generate mutation-based SQLi payloads using a targeted transformation strategy. Starting from a set of base payload patterns, we apply mutations that preserve intended semantics while altering representation. Examples include:
+
+\begin{enumerate}
+  \item Encoding and delimiter mutations (e.g., percent-encoding variations, alternative operator spellings).
+  \item Structural mutations (e.g., nested expressions and operator adjacency changes).
+  \item Content-Type-aware wrapper mutations that target \texttt{multipart/form-data}, JSON, and XML body decoding paths \cite{mutation-sqli}.
+\end{enumerate}
+
+Optionally, an ML-guided selection stage can prioritize mutations that are more likely to pass preliminary filters by learning from previous trial outcomes. In this paper, the selection stage is briefly described and used only for efficiency; the core normalization evaluation remains deterministic.
+
+\subsection{HTTP-Normalizer Design}
+The proposed defense uses a proxy-based \emph{HTTP-Normalizer} positioned before WAF inspection. The normalizer transforms raw inbound HTTP messages into a deterministic canonical representation. Downstream components (WAF and application) then operate on this single canonical form.
+
+Formally, given a raw request $R$, the normalizer produces a normalized request:
+\[
+ N(R) = R_{\text{canon}},
+ \]
+where $N(\cdot)$ is implemented by strict parsing, canonicalization, and re-serialization.
+
+\subsubsection{Ambiguity Elimination}
+The normalizer removes optional ambiguities that commonly appear in real-world clients. The implementation canonicalizes header values and whitespace, resolves safe encoding variations, and prevents duplicate semantic interpretations. When a client sends multiple representations that could be interpreted differently, the normalizer selects a single interpretation or rejects the request.
+
+\subsubsection{RFC-compliant Parsing and Re-serialization}
+To ensure deterministic behavior, the normalizer enforces RFC-compliant HTTP message structure and consistent Content-Type handling \cite{rfc7230,rfc3986,rfc8259,rfc7578}. For each request:
+
+\begin{itemize}
+  \item HTTP/1.1 message syntax is parsed using a strict grammar \cite{rfc7230}.
+  \item URI and query components are decoded and re-encoded under consistent rules \cite{rfc3986}.
+  \item Structured bodies are parsed according to the declared Content-Type, then re-serialized with deterministic formatting.
+\end{itemize}
+
+\subsubsection{Malformed Request Rejection}
+Requests that violate syntax constraints or exhibit ambiguous structure are rejected before reaching the WAF and application. This step limits differential parsing by ensuring that only messages conforming to the enforced grammar propagate further. In addition, size limits and structural validation reduce parser edge cases that attackers may exploit.
+
+\subsection{Implementation Considerations}
+The normalizer is designed to be content-type aware and to treat each body format with the corresponding standard. This design is crucial for reducing discrepancies in \texttt{multipart/form-data} boundaries, JSON escaping behavior, and XML parsing edge cases \cite{rfc7578,rfc8259,xml-parser-discrepancies}. While strict normalization may reject some legitimate but non-conformant traffic, the approach provides a clear and auditable enforcement point for deployers.
+

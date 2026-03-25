@@ -1,0 +1,65 @@
+\relax 
+\citation{owasp-crs,waf-survey}
+\citation{mutation-sqli-evasion}
+\citation{parsing-discrepancies,request-smuggling}
+\citation{rfc7230,rfc3986}
+\citation{parsing-discrepancies}
+\citation{rfc7230,rfc8259,rfc7578}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-A}}Background and Problem Statement}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-B}}Objective and Contributions}{1}{}\protected@file@percent }
+\citation{owasp-crs}
+\citation{rfc7578}
+\citation{rfc8259}
+\citation{xml-parser-discrepancies}
+\citation{request-smuggling,parsing-discrepancies}
+\citation{mutation-sqli}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Conceptual view of a rule-based WAF inspecting canonicalized HTTP inputs.}}{2}{}\protected@file@percent }
+\newlabel{fig:waf-pipeline}{{1}{2}{}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-C}}Paper Organization}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {II}Background and Related Work}{2}{}\protected@file@percent }
+\newlabel{sec:background}{{II}{2}{}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}WAF Mechanisms: Rule-based Detection}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Parsing Discrepancies and Content-Type Handling}{2}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Examples of parser discrepancy surfaces exploitable by mutation.}}{2}{}\protected@file@percent }
+\newlabel{tab:discrepancy-surface}{{I}{2}{}{table.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Evaluation pipeline showing the interaction between payload generation, WAF inspection, and application processing.}}{2}{}\protected@file@percent }
+\newlabel{fig:pipeline}{{2}{2}{}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Mutation-based SQL Injection Obfuscation}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {III}Methodology}{2}{}\protected@file@percent }
+\newlabel{sec:methodology}{{III}{2}{}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Threat Model and Experimental Pipeline}{2}{}\protected@file@percent }
+\citation{mutation-sqli}
+\citation{rfc7230,rfc3986,rfc8259,rfc7578}
+\citation{rfc7230}
+\citation{rfc3986}
+\citation{rfc7578,rfc8259,xml-parser-discrepancies}
+\citation{parsing-discrepancies}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Payload Generation}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}HTTP-Normalizer Design}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-C}1}Ambiguity Elimination}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-C}2}RFC-compliant Parsing and Re-serialization}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-C}3}Malformed Request Rejection}{3}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces WAF bypass rate measured with and without HTTP normalization.}}{3}{}\protected@file@percent }
+\newlabel{fig:bypass}{{3}{3}{}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Implementation Considerations}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Experiments and Results}{3}{}\protected@file@percent }
+\newlabel{sec:experiments}{{IV}{3}{}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Dataset and Content-Type Coverage}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Benchmark: WAF Bypass Without Normalization}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Normalization Impact and Bypass Categorization}{3}{}\protected@file@percent }
+\citation{rfc7230,rfc3986}
+\bibcite{b1}{1}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Dataset composition across Content-Types.}}{4}{}\protected@file@percent }
+\newlabel{tab:dataset}{{II}{4}{}{table.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces WAF bypass rate before and after normalization.}}{4}{}\protected@file@percent }
+\newlabel{tab:bypass_rates}{{III}{4}{}{table.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}Performance Overhead}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {V}Discussion and Conclusion}{4}{}\protected@file@percent }
+\newlabel{sec:discussion}{{V}{4}{}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Security vs Performance Trade-off}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Conclusion}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{4}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Residual bypass categories after normalization.}}{5}{}\protected@file@percent }
+\newlabel{tab:bypass_categories}{{IV}{5}{}{table.4}{}}
+\gdef \@abspage@last{5}

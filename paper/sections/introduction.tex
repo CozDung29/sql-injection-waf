@@ -1,0 +1,22 @@
+\section{Introduction}
+Web applications have become the dominant interface for e-commerce, identity management, and data-driven services. To mitigate common injection and exploitation attempts, many deployments rely on Web Application Firewalls (WAFs) that inspect inbound traffic and block requests that match known attack patterns. In practice, WAFs are often configured using rule-based signatures and curated detection logic, including collections aligned with OWASP guidance \cite{owasp-crs,waf-survey}.
+
+Despite their prevalence, WAF effectiveness against modern attackers remains challenging. First, traditional payload obfuscation techniques that were historically useful for bypassing static signatures are increasingly detected as defenders improve normalization and detection coverage \cite{mutation-sqli-evasion}. Second, even when the WAF blocks a large fraction of mutated inputs, parsing discrepancies between the WAF and the backend application can still be exploited. The same HTTP message can be interpreted differently due to differences in how Content-Type values are parsed, how encodings are resolved, and how multipart or structured bodies are tokenized \cite{parsing-discrepancies,request-smuggling}. As a result, an attacker may craft a request that appears benign under the WAF's interpretation while retaining an injection-relevant representation when processed by the application.
+
+This paper proposes a preprocessing-based defense that performs HTTP normalization before the request reaches the WAF and application processing logic. The key idea is to eliminate representational degrees of freedom by enforcing deterministic, RFC-compliant message handling. Specifically, we normalize URI and header encodings, canonicalize structured bodies according to their declared Content-Type, and reject malformed or ambiguous requests. By aligning the on-the-wire representation with a single canonical interpretation, the approach prevents mutation-based SQL injection payloads from surviving semantic inconsistencies \cite{rfc7230,rfc3986}.
+
+\subsection{Background and Problem Statement}
+Rule-based WAFs typically combine signature matching with selective parsing heuristics. When parsing differs across layers, attackers can leverage edge cases such as optional syntax elements, variant whitespace rules, and inconsistent percent-decoding behavior \cite{parsing-discrepancies}. In particular, request-body formats such as \texttt{multipart/form-data}, JSON, and XML often require specialized parsers. If the WAF applies a different parser or a more permissive decoder than the backend application, payloads can be transformed into a form that bypasses detection but is still interpreted as malicious downstream.
+
+\subsection{Objective and Contributions}
+The objective of this work is to reduce mutation-based SQL injection bypass rates by ensuring consistent HTTP request interpretation via RFC-based normalization. Our contributions are as follows:
+
+\begin{enumerate}
+\item We design an HTTP-Normalizer proxy that canonicalizes HTTP message components and enforces strict RFC compliance for syntax, encoding, and Content-Type-dependent body parsing \cite{rfc7230,rfc8259,rfc7578}.
+\item We implement a controlled experimental pipeline (\emph{Fuzzer} $\rightarrow$ \emph{WAF} $\rightarrow$ \emph{Application}) to evaluate mutated SQL injection payloads across multiple Content-Types.
+\item We provide an empirical analysis that categorizes remaining bypasses and shows how normalization shifts the residual attack surface toward non-conformant client behavior.
+\end{enumerate}
+
+\subsection{Paper Organization}
+Section~\ref{sec:background} reviews WAF mechanisms, parsing discrepancies, and mutation-based attacks. Section~\ref{sec:methodology} describes the normalization design and experimental setup. Section~\ref{sec:experiments} presents the dataset, benchmarking methodology, and results. Section~\ref{sec:discussion} concludes with implications, limitations, and future work.
+
