@@ -1,47 +1,20 @@
 \section{Background and Related Work}
 \label{sec:background}
-Web Application Firewalls (WAFs) are commonly deployed inline to inspect HTTP traffic and prevent exploitation attempts. In this section, we review typical WAF detection mechanisms, discuss parsing discrepancies that enable inconsistent request interpretations, and summarize mutation-based SQL injection obfuscation strategies.
-
-\subsection{WAF Mechanisms: Rule-based Detection}
-Many WAFs use rule-based detection pipelines that combine normalization, signature matching, and contextual heuristics. Signature-based rules are frequently derived from attack taxonomies and mappings such as OWASP Core Rule Set (CRS) \cite{owasp-crs}. While such signatures can be effective against previously observed exploit patterns, they depend on parser consistency: the detection logic must reason about a representation that is aligned with how the application will parse and interpret the request.
+Recent research shows that SQL injection evasion is increasingly driven by automated mutation strategies and by structural weaknesses in how HTTP messages are parsed across the request path. We group representative work into three categories: (i) adversarial attacks, (ii) structural vulnerabilities rooted in protocol-level parsing discrepancies, and (iii) hybrid defenses that combine detection and proactive response.
 
 \begin{figure}[t]
   \centering
-  \fbox{\parbox{\columnwidth}{\centering Placeholder figure: WAF inspection pipeline visualization}}
-  \caption{Conceptual view of a rule-based WAF inspecting canonicalized HTTP inputs.}
-  \label{fig:waf-pipeline}
+  \fbox{\parbox{\columnwidth}{\centering Placeholder figure: Taxonomy of attack surfaces and defenses}}
+  \caption{A taxonomy of SQL injection evasion vectors and defenses.}
+  \label{fig:related-taxonomy}
 \end{figure}
 
-\subsection{Parsing Discrepancies and Content-Type Handling}
-Parsing discrepancies arise when different components interpret HTTP messages using distinct grammars or decoders. Even for syntactically valid requests, small representational differences can alter how structured data is tokenized. In particular, Content-Type-dependent parsing varies across stacks:
+\subsection{Adversarial Attacks}
+Adversarial attacks often treat WAFs as semantic filters and search for \emph{semantically equivalent} payload variants that remain executable after mutation. SSQLi casts black-box SQLi evasion as a reinforcement-learning problem and reports bypass rates up to 97.39\% using a soft actor--critic (SAC) strategy \cite{guan2023ssqli}. GSQLi further automates syntax-level mutation using a GAN-based generator to craft obfuscated SQLi payloads that deceive ML-based detectors and real-world WAFs \cite{khan2024gsqli}. Beyond neural approaches, WAF-A-MoLE demonstrates that mutational fuzzing with semantics-preserving operators can systematically reduce classifier confidence and achieve bypasses against modern ML-based WAFs \cite{demetrio2020wafamole}.
 
-\begin{itemize}
-\item \texttt{multipart/form-data} requires correct handling of boundaries and part headers \cite{rfc7578}. Differences in boundary parsing, part header decoding, or line-ending handling can change how payload segments are extracted.
-\item JSON parsers may resolve escaped characters, Unicode normalization, and number/string boundaries differently, even when the overall syntax is valid \cite{rfc8259}.
-\item XML parsers may differ in entity expansion behavior, character handling, and namespace processing \cite{xml-parser-discrepancies}.
-\end{itemize}
+\subsection{Structural Vulnerabilities}
+Even strong signature and ML-based detection can be undermined by protocol-level parsing discrepancies. WAFFLED introduces discrepancy-based bypasses by mutating non-malicious HTTP components (e.g., body boundaries and structured elements) and reports 1{,}207 confirmed bypasses across major WAF deployments (including AWS WAF and Cloudflare) for content-types such as multipart/form-data, application/json, and application/xml \cite{akhavani2025waffled}. To mitigate these discrepancy surfaces, WAFFLED proposes HTTP-Normalizer, a proxy tool that validates HTTP messages against current RFC standards \cite{httpnormalizer}.
 
-Attackers can exploit these inconsistencies by crafting mutated payloads that appear benign under the WAF's interpretation but remain injection-relevant under the backend's parsing. Related work on request smuggling and differential parsing provides evidence that inconsistent message framing and body decoding can yield divergent downstream semantics \cite{request-smuggling,parsing-discrepancies}.
-
-\begin{table}[t]
-  \centering
-  \caption{Examples of parser discrepancy surfaces exploitable by mutation.}
-  \label{tab:discrepancy-surface}
-  \begin{tabular}{@{} l l @{}}
-    \toprule
-    Parsing Component & Discrepancy Example \\
-    \midrule
-    URI and query decoding & Percent-encoding resolution differences \\
-    Header decoding & Optional whitespace and delimiter handling \\
-    Multipart boundaries & Part boundary and line-ending ambiguity \\
-    JSON escaping & Treatment of escape sequences and unicode characters \\
-    XML entity handling & Differences in entity resolution and normalization \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\subsection{Mutation-based SQL Injection Obfuscation}
-SQL injection (SQLi) payloads are frequently obfuscated to evade static pattern matching. Mutation-based techniques generate many semantically related variants by applying transformations involving special characters, alternate encodings, nested operators, or delimiter changes \cite{mutation-sqli}. As defensive systems improve, simplistic obfuscation patterns become easier to detect, motivating attackers to focus on representational edge cases that interact with parser inconsistencies rather than purely signature evasion.
-
-The remainder of this paper focuses on how enforcing a single canonical request representation can limit the space in which mutated SQLi payloads survive differential parsing between WAF and backend logic.
+\subsection{Hybrid Defenses}
+Hybrid defenses attempt to combine improved detection with proactive mitigation. WAMM refines technology-aligned datasets and evaluates efficient classifiers, including XGBoost, to improve block rates against OWASP-aligned categories \cite{elebiary2026wamm}. WAFBOOSTER proactively exposes and neutralizes unknown mutated payloads by training shadow models to imitate a target WAF’s decisions, then generating and clustering bypass-inducing payloads to repair security gaps \cite{wu2025wafbooster}.
 
