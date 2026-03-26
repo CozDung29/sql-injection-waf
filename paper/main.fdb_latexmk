@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1774452532.6695 "d:/sql-injection-waf/paper/main.tex" "main.pdf" "main" 1774452533.68588 0
+["pdflatex"] 1774502749.82064 "d:/sql-injection-waf/paper/main.tex" "main.pdf" "main" 1774502750.9162 0
   "C:/Users/codun/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1774446696 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/codun/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1774361131 13318610 7f1f4543052a5f830552f30151302686 ""
   "D:/New folder/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -74,9 +74,9 @@
   "D:/New folder/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "content/acknowledgment_text.tex" 1774445494 33 1f368f4aa4f74de0ead5ab6e9662140e ""
   "content/references_items.tex" 1774452530 2635 a7ffae88bfb58d9a657ec36d5ed73966 ""
-  "d:/sql-injection-waf/paper/main.tex" 1774452415 846 b4d523835bbf3e51f7bdcf05eb814213 ""
-  "main.aux" 1774452533 6252 ff5604ccc318387640ad7f3152ae5907 "pdflatex"
-  "main.tex" 1774452415 846 b4d523835bbf3e51f7bdcf05eb814213 ""
+  "d:/sql-injection-waf/paper/main.tex" 1774502749 976 900e4240752d7c02a7936c0256366672 ""
+  "main.aux" 1774502750 6252 ff5604ccc318387640ad7f3152ae5907 "pdflatex"
+  "main.tex" 1774502749 976 900e4240752d7c02a7936c0256366672 ""
   "sections/abstract.tex" 1774452432 1624 7a75fea2fe3defd9eff303f4ea5d3e90 ""
   "sections/acknowledgment.tex" 1774445508 63 bebfb6ddfaa1ac81085d1c86c37937c1 ""
   "sections/background.tex" 1774452466 2716 6bd04b7b6c803abb4c51289c62ca8d94 ""
