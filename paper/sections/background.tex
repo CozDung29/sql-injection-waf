@@ -1,20 +1,24 @@
 \section{Background and Related Work}
 \label{sec:background}
-Recent research shows that SQL injection evasion is increasingly driven by automated mutation strategies and by structural weaknesses in how HTTP messages are parsed across the request path. We group representative work into three categories: (i) adversarial attacks, (ii) structural vulnerabilities rooted in protocol-level parsing discrepancies, and (iii) hybrid defenses that combine detection and proactive response.
+Offensive SQLi evaluation sits at the intersection of adversarial search against detectors, HTTP semantics, and operational security measurement. We review strands that motivate \emph{family-resolved} reporting rather than headline bypass percentages alone.
 
 \begin{figure}[t]
   \centering
-  \fbox{\parbox{\columnwidth}{\centering Placeholder figure: Taxonomy of attack surfaces and defenses}}
-  \caption{A taxonomy of SQL injection evasion vectors and defenses.}
+  \fbox{\parbox{\columnwidth}{\centering Layers: lexical SQLi mutations; URL/query encodings; edge WAF normalization; application parser and ORM; observable HTTP/app signals}}
+  \caption{Conceptual layering for SQLi WAF bypass experiments (simplified). Each layer can introduce transformations that affect whether a static rule or model ``sees'' attack tokens.}
   \label{fig:related-taxonomy}
 \end{figure}
 
-\subsection{Adversarial Attacks}
-Adversarial attacks often treat WAFs as semantic filters and search for \emph{semantically equivalent} payload variants that remain executable after mutation. SSQLi casts black-box SQLi evasion as a reinforcement-learning problem and reports bypass rates up to 97.39\% using a soft actor--critic (SAC) strategy \cite{guan2023ssqli}. GSQLi further automates syntax-level mutation using a GAN-based generator to craft obfuscated SQLi payloads that deceive ML-based detectors and real-world WAFs \cite{khan2024gsqli}. Beyond neural approaches, WAF-A-MoLE demonstrates that mutational fuzzing with semantics-preserving operators can systematically reduce classifier confidence and achieve bypasses against modern ML-based WAFs \cite{demetrio2020wafamole}.
+\subsection{Mutation and Learning-Based SQLi Attacks}
+Adversarial methods search for inputs that preserve attacker intent while evading a detector's decision boundary. SSQLi reports bypass rates up to 97.39\% in its experimental setting using SAC \cite{guan2023ssqli}. GSQLi uses GAN-based mutation \cite{khan2024gsqli}. WAF-A-MoLE applies semantics-preserving fuzzing to stress ML WAFs \cite{demetrio2020wafamole}. These lines of work share a structural insight: the attack space is combinatorial---comment insertion, case folding, encoding nests, whitespace and delimiter tricks, and dialect-specific spellings can be composed. Compositions interact non-monotonically with regex-based and tokenized defenses: an encoding that defeats one rule may trigger another, or may change how a downstream parser tokenizes a string \cite{mutation-sqli}.
 
-\subsection{Structural Vulnerabilities}
-Even strong signature and ML-based detection can be undermined by protocol-level parsing discrepancies. WAFFLED introduces discrepancy-based bypasses by mutating non-malicious HTTP components (e.g., body boundaries and structured elements) and reports 1{,}207 confirmed bypasses across major WAF deployments (including AWS WAF and Cloudflare) for content-types such as multipart/form-data, application/json, and application/xml \cite{akhavani2025waffled}. To mitigate these discrepancy surfaces, WAFFLED proposes HTTP-Normalizer, a proxy tool that validates HTTP messages against current RFC standards \cite{httpnormalizer}.
+From a measurement standpoint, the relevant output is therefore not only ``bypass rate'' but \emph{which} compositions survive, because survivors inform both attacker budgets (which mutations to prioritize) and defender budgets (which rules or tests to add first).
 
-\subsection{Hybrid Defenses}
-Hybrid defenses attempt to combine improved detection with proactive mitigation. WAMM refines technology-aligned datasets and evaluates efficient classifiers, including XGBoost, to improve block rates against OWASP-aligned categories \cite{elebiary2026wamm}. WAFBOOSTER proactively exposes and neutralizes unknown mutated payloads by training shadow models to imitate a target WAF’s decisions, then generating and clustering bypass-inducing payloads to repair security gaps \cite{wu2025wafbooster}.
+\subsection{Parsing Discrepancies and HTTP-Level Evasion}
+When components disagree on decoding order, charset, or structural boundaries, attackers can sometimes satisfy benign predicates at the edge while delivering malicious semantics to the application \cite{akhavani2025waffled}. WAFFLED's large-scale study underscores that HTTP is not a single abstract datatype but a family of implementations. Our experiments deliberately stabilize parameter binding via remapped seeds so that discrepancy across \emph{different parameter names} is minimized; remaining variance is dominated by representation of the injected value itself. This scoping choice trades ecological completeness (full HTTP discrepancy surface) for interpretability of per-family SQLi mutation outcomes against one policy snapshot.
 
+\subsection{Defenses and Evaluation Gaps}
+Hybrid defenses aim to raise evasion cost through better data \cite{elebiary2026wamm}, shadow models and patch generation \cite{wu2025wafbooster}, or preprocessing \cite{zhang2026bwafsql}. HTTP-Normalizer exemplifies RFC-oriented validation as a discrepancy mitigation \cite{httpnormalizer}. Such proposals, however, need \emph{paired} offensive benchmarks: without logs that tie attempts to mutation families and outcome labels, it is difficult to tell whether a reported improvement removes high-yield operators or merely reshuffles search order. Our work supplies an open, log-grounded offensive baseline for such comparisons.
+
+\subsection{Black-Box Metrics and Threat of Confounding}
+Black-box WAF evaluation is inherently tied to \emph{observable} outcomes: status codes, bodies, and timing. Different probes may map the same underlying vulnerability to different HTTP observables (e.g., generic 500 versus structured 422). Any operational definition of ``bypass'' therefore embeds epistemic commitments; transparent scripting and published logs mitigate but do not eliminate this issue. Section~\ref{sec:methodology} states our probe's labels explicitly; Section~\ref{sec:discussion} revisits threats to validity.

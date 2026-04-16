@@ -1,0 +1,95 @@
+{
+  "transforms": {
+    "other": {
+      "bypass": 0,
+      "block": 13,
+      "other": 0,
+      "reach": 0
+    },
+    "plus_space": {
+      "bypass": 0,
+      "block": 5,
+      "other": 0,
+      "reach": 0
+    },
+    "tab": {
+      "bypass": 0,
+      "block": 6,
+      "other": 0,
+      "reach": 0
+    },
+    "newline": {
+      "bypass": 0,
+      "block": 3,
+      "other": 0,
+      "reach": 0
+    },
+    "vtab": {
+      "bypass": 0,
+      "block": 1,
+      "other": 0,
+      "reach": 0
+    },
+    "cr": {
+      "bypass": 0,
+      "block": 2,
+      "other": 0,
+      "reach": 0
+    },
+    "ff": {
+      "bypass": 0,
+      "block": 2,
+      "other": 0,
+      "reach": 0
+    },
+    "comment_block": {
+      "bypass": 0,
+      "block": 3,
+      "other": 0,
+      "reach": 0
+    },
+    "encoded": {
+      "bypass": 0,
+      "block": 3,
+      "other": 0,
+      "reach": 0
+    },
+    "hex": {
+      "bypass": 2,
+      "block": 1814,
+      "other": 0,
+      "reach": 2
+    },
+    "case_mix": {
+      "bypass": 412,
+      "block": 53,
+      "other": 0,
+      "reach": 412
+    },
+    "url_encode": {
+      "bypass": 86,
+      "block": 3398,
+      "other": 0,
+      "reach": 86
+    },
+    "comment_inline": {
+      "bypass": 0,
+      "block": 2,
+      "other": 0,
+      "reach": 0
+    },
+    "identity": {
+      "bypass": 1612,
+      "block": 191,
+      "other": 0,
+      "reach": 1612
+    },
+    "null_byte": {
+      "bypass": 1612,
+      "block": 191,
+      "other": 0,
+      "reach": 1612
+    }
+  },
+  "updated_ts": 1775643287.8857417
+}

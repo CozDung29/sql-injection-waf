@@ -1,0 +1,77 @@
+{
+"transforms": {
+"other": {
+"bypass": 117,
+"block": 52
+},
+"plus_space": {
+"bypass": 0,
+"block": 38
+},
+"tab": {
+"bypass": 0,
+"block": 292
+},
+"newline": {
+"bypass": 0,
+"block": 96
+},
+"cr": {
+"bypass": 0,
+"block": 15
+},
+"ff": {
+"bypass": 843,
+"block": 1036
+},
+"comment_block": {
+"bypass": 11,
+"block": 21
+},
+"encoded": {
+"bypass": 0,
+"block": 16
+},
+"case_mix": {
+"bypass": 279,
+"block": 588
+},
+"split_comment": {
+"bypass": 0,
+"block": 24
+},
+"double_encoded_quote": {
+"bypass": 0,
+"block": 14
+},
+"chr_oracle": {
+"bypass": 0,
+"block": 22
+},
+"case_random": {
+"bypass": 0,
+"block": 24
+},
+"concat_oracle": {
+"bypass": 0,
+"block": 22
+},
+"identity": {
+"bypass": 844,
+"block": 814
+},
+"url_encode": {
+"bypass": 300,
+"block": 2045
+},
+"hex": {
+"bypass": 765,
+"block": 543
+},
+"comment_inline": {
+"bypass": 22,
+"block": 24
+}
+},
+"updated_ts": 1773767379.7530327
+}

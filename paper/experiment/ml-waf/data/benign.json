@@ -1,0 +1,12 @@
+[
+  {"method": "GET", "path": "/api/users", "query": "", "headers": {"content-type": "application/json"}, "body": ""},
+  {"method": "GET", "path": "/", "query": "", "headers": {}, "body": ""},
+  {"method": "POST", "path": "/api/login", "query": "", "headers": {"content-type": "application/json"}, "body": "{\"email\":\"user@example.com\",\"password\":\"***\"}"},
+  {"method": "GET", "path": "/api/products", "query": "page=1&limit=10", "headers": {"accept": "application/json"}, "body": ""},
+  {"method": "POST", "path": "/api/chat", "query": "", "headers": {"content-type": "application/json"}, "body": "{\"message\":\"Hello\"}"},
+  {"method": "GET", "path": "/health", "query": "", "headers": {}, "body": ""},
+  {"method": "GET", "path": "/api/profile", "query": "", "headers": {"authorization": "Bearer token123"}, "body": ""},
+  {"method": "PUT", "path": "/api/settings", "query": "", "headers": {"content-type": "application/json"}, "body": "{\"theme\":\"dark\"}"},
+  {"method": "GET", "path": "/docs", "query": "", "headers": {}, "body": ""},
+  {"method": "POST", "path": "/api/register", "query": "", "headers": {"content-type": "application/json"}, "body": "{\"name\":\"John\",\"email\":\"j@x.com\"}"}
+]

@@ -1,0 +1,177 @@
+{
+  "ts": 1774450631.5162847,
+  "current_file": "C:\\Users\\GAMING\\Desktop\\project\\chat-bot\\chat-bot-ai\\ml-waf\\data\\learned_encodings.json",
+  "reference_file": "C:\\Users\\GAMING\\Desktop\\project\\chat-bot\\chat-bot-ai\\ml-waf\\data\\learned_encodings.reference.json",
+  "current_totals": {
+    "bypass": 1427,
+    "block": 478,
+    "all": 1905
+  },
+  "reference_totals": {
+    "bypass": 3181,
+    "block": 5686,
+    "all": 8867
+  },
+  "per_key": [
+    {
+      "key": "case_mix",
+      "ref_bypass": 279,
+      "ref_block": 588,
+      "cur_bypass": 60,
+      "cur_block": 1,
+      "delta_total": -806
+    },
+    {
+      "key": "case_random",
+      "ref_bypass": 0,
+      "ref_block": 24,
+      "cur_bypass": 0,
+      "cur_block": 1,
+      "delta_total": -23
+    },
+    {
+      "key": "chr_oracle",
+      "ref_bypass": 0,
+      "ref_block": 22,
+      "cur_bypass": 0,
+      "cur_block": 1,
+      "delta_total": -21
+    },
+    {
+      "key": "comment_block",
+      "ref_bypass": 11,
+      "ref_block": 21,
+      "cur_bypass": 0,
+      "cur_block": 1,
+      "delta_total": -31
+    },
+    {
+      "key": "comment_inline",
+      "ref_bypass": 22,
+      "ref_block": 24,
+      "cur_bypass": 0,
+      "cur_block": 0,
+      "delta_total": -46
+    },
+    {
+      "key": "concat_oracle",
+      "ref_bypass": 0,
+      "ref_block": 22,
+      "cur_bypass": 0,
+      "cur_block": 1,
+      "delta_total": -21
+    },
+    {
+      "key": "cr",
+      "ref_bypass": 0,
+      "ref_block": 15,
+      "cur_bypass": 0,
+      "cur_block": 1,
+      "delta_total": -14
+    },
+    {
+      "key": "double_encoded_quote",
+      "ref_bypass": 0,
+      "ref_block": 14,
+      "cur_bypass": 0,
+      "cur_block": 0,
+      "delta_total": -14
+    },
+    {
+      "key": "encoded",
+      "ref_bypass": 0,
+      "ref_block": 16,
+      "cur_bypass": 0,
+      "cur_block": 8,
+      "delta_total": -8
+    },
+    {
+      "key": "ff",
+      "ref_bypass": 843,
+      "ref_block": 1036,
+      "cur_bypass": 0,
+      "cur_block": 1,
+      "delta_total": -1878
+    },
+    {
+      "key": "hex",
+      "ref_bypass": 765,
+      "ref_block": 543,
+      "cur_bypass": 456,
+      "cur_block": 0,
+      "delta_total": -852
+    },
+    {
+      "key": "identity",
+      "ref_bypass": 844,
+      "ref_block": 814,
+      "cur_bypass": 455,
+      "cur_block": 0,
+      "delta_total": -1203
+    },
+    {
+      "key": "newline",
+      "ref_bypass": 0,
+      "ref_block": 96,
+      "cur_bypass": 0,
+      "cur_block": 1,
+      "delta_total": -95
+    },
+    {
+      "key": "null_byte",
+      "ref_bypass": 0,
+      "ref_block": 0,
+      "cur_bypass": 456,
+      "cur_block": 0,
+      "delta_total": 456
+    },
+    {
+      "key": "other",
+      "ref_bypass": 117,
+      "ref_block": 52,
+      "cur_bypass": 0,
+      "cur_block": 1,
+      "delta_total": -168
+    },
+    {
+      "key": "plus_space",
+      "ref_bypass": 0,
+      "ref_block": 38,
+      "cur_bypass": 0,
+      "cur_block": 0,
+      "delta_total": -38
+    },
+    {
+      "key": "split_comment",
+      "ref_bypass": 0,
+      "ref_block": 24,
+      "cur_bypass": 0,
+      "cur_block": 1,
+      "delta_total": -23
+    },
+    {
+      "key": "tab",
+      "ref_bypass": 0,
+      "ref_block": 292,
+      "cur_bypass": 0,
+      "cur_block": 1,
+      "delta_total": -291
+    },
+    {
+      "key": "url_encode",
+      "ref_bypass": 300,
+      "ref_block": 2045,
+      "cur_bypass": 0,
+      "cur_block": 458,
+      "delta_total": -1887
+    },
+    {
+      "key": "vtab",
+      "ref_bypass": 0,
+      "ref_block": 0,
+      "cur_bypass": 0,
+      "cur_block": 1,
+      "delta_total": 1
+    }
+  ]
+}

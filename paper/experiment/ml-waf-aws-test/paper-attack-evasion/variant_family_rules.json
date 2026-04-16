@@ -1,0 +1,7 @@
+{
+  "prefix_rules": [
+    { "prefix": "aws_", "family": "aws_dialect_variants" },
+    { "prefix": "account_", "family": "hex_account_style" }
+  ],
+  "regex_rules": []
+}

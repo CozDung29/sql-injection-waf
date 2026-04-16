@@ -1,0 +1,57 @@
+Standalone tool (sibling of ml-waf / ml-waf-experiment). Reads ONLY from ml-waf data; writes ONLY under ml-waf-blocked-adv/data/.
+
+Default blocked file: ../ml-waf/data/blocked_learned.jsonl
+
+Full automation (expand -> HTTP test -> reorder rules; optional apply to mutate_rules.json):
+  cd ml-waf-blocked-adv
+  py -3 run_pipeline.py --fresh --blocked-tail 500 --sleep 0.15 --apply-learned
+
+  --fresh: clear adversarial + test jsonl before this run
+  --apply-learned: copy mutate_rules.suggested.json over data/mutate_rules.json after learn
+  Skip steps: --skip-expand / --skip-test / --skip-learn
+
+Manual steps (same as pipeline internals):
+From repo root:
+  cd ml-waf-blocked-adv
+  py -3 expand_from_blocked.py
+
+While ml-waf is still running, expand only recent blocks:
+  py -3 expand_from_blocked.py --tail 200
+
+Custom paths:
+  py -3 expand_from_blocked.py --ml-waf-root C:\path\to\ml-waf --out data\my_variants.jsonl
+
+Output lines (jsonl): blocked_source_name, blocked_source_payload, variant_payload, adv_label.
+
+Append mode: each run APPENDS to --out. Delete or rename the file for a fresh export.
+
+2) Test variants over HTTP (same WAF URL + headers as ml-waf/evasion/curl_bypass_f5.py):
+  py -3 test_variants.py
+  py -3 test_variants.py --in data/adversarial_from_blocked.jsonl --out data/test_results.jsonl
+  py -3 test_variants.py --tail 50 --max-tests 30 --sleep 0.2
+
+Results jsonl: result=bypass|blocked|unauthorized|error, http_status, body_snip.
+
+Stop on 401 matches ml-waf evasion/run_until_bypass.py (check status before bypass logic; timeout=12).
+Override: py -3 test_variants.py --no-stop-on-401
+
+New token: edit BEARER only in ml-waf/evasion/curl_bypass_f5.py (http_probe imports it). Does not overwrite jsonl.
+
+Resume testing after 401 (skip rows already bypass/blocked; retry unauthorized/error):
+  py -3 test_variants.py --resume
+  py -3 run_pipeline.py --skip-expand --resume-test --sleep 0.15 --apply-learned
+
+3) Customize generation (data/mutate_rules.json)
+   - transform_steps: list of {"label": "...", "fn": "..."} — fn must exist in ml-waf evasion/transformers (see mutate.py _FN_REGISTRY).
+   - regex_rules: {"label","pattern","replacement","count" optional} — extra substitutions.
+   - hex_prefix_rule: enable/disable, prefix_chars, max_hex_len.
+   expand_from_blocked.py --rules path/to/other_rules.json
+
+4) Suggest order from live tests (heuristic: higher bypass rate first)
+   py -3 learn_mutate_rules.py
+   Review data/mutate_rules.suggested.json then copy to data/mutate_rules.json if OK.
+
+Aggregate (like ml-waf data/learned_encodings.json — bypass/block per label + rates):
+   data/adv_learned_encodings.json
+   Written automatically after test in run_pipeline.py (unless --skip-adv-summary).
+   Standalone: py -3 adv_learned_encodings.py [--in data/test_results.jsonl]

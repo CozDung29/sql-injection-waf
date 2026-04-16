@@ -1,0 +1,29 @@
+{
+"transforms": {
+"ff": {
+"bypass": 0,
+"block": 1
+},
+"plus_space": {
+"bypass": 0,
+"block": 1
+},
+"encoded": {
+"bypass": 0,
+"block": 5
+},
+"hex": {
+"bypass": 9,
+"block": 0
+},
+"null_byte": {
+"bypass": 1590,
+"block": 0
+},
+"url_encode": {
+"bypass": 0,
+"block": 3171
+}
+},
+"updated_ts": 1774455322.5666614
+}

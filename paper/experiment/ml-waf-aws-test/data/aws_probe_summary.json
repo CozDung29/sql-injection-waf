@@ -1,0 +1,47 @@
+{
+  "ts": 1775374161.7169867,
+  "base_url": "http://test-waf-949142697.us-east-1.elb.amazonaws.com/projects",
+  "inject_mode": "query",
+  "query_param": "project_name",
+  "id_remap": {
+    "from": "36331",
+    "to": "Demo_project"
+  },
+  "id_remap_legacy": [
+    {
+      "from": "Project 1",
+      "to": "Demo_project"
+    },
+    {
+      "from": "Project+1",
+      "to": "Demo_project"
+    }
+  ],
+  "variants_tested": 1523,
+  "bypass": 0,
+  "blocked": 261,
+  "waf_passed": 1262,
+  "blocked_note": "blocked=WAF; bypass=200 OK, effective 500, 400/422 app errors; other_learned=404 not_found or 500 ineffective (utf8/encoding)",
+  "bypass_note": "bypass=effective outcome only; waf_passed=any non-WAF denial (includes 404 app not found, 502, ineffective 500)",
+  "other_or_error": 1262,
+  "http_status_counts": {
+    "403": 261,
+    "404": 914,
+    "500": 348
+  },
+  "calibration": {
+    "http_status": 200,
+    "url": "http://test-waf-949142697.us-east-1.elb.amazonaws.com/projects?project_name=Demo_project",
+    "body_snip": "{\"statusCode\":200,\"message\":\"[GET]:::/projects?project_name=Demo_project - Success\",\"data\":[{\"id\":5,\"applicationDomain\":\"https://example.com\",\"createdAt\":\"2026-04-04T09:05:41.643Z\",\"updatedAt\":\"2026-04-04T09:05:41.643Z\"}]}",
+    "hint": "ok",
+    "waf_blocked": false,
+    "classify_detail": "ok_200"
+  },
+  "config": "C:\\Users\\GAMING\\Desktop\\project\\chat-bot\\chat-bot-ai\\ml-waf-aws-test\\config.json",
+  "bypass_learned_jsonl": "C:\\Users\\GAMING\\Desktop\\project\\chat-bot\\chat-bot-ai\\ml-waf-aws-test\\data\\bypass_learned.jsonl",
+  "blocked_learned_jsonl": "C:\\Users\\GAMING\\Desktop\\project\\chat-bot\\chat-bot-ai\\ml-waf-aws-test\\data\\blocked_learned.jsonl",
+  "other_learned_jsonl": "C:\\Users\\GAMING\\Desktop\\project\\chat-bot\\chat-bot-ai\\ml-waf-aws-test\\data\\other_learned.jsonl",
+  "learned_encodings_json": "C:\\Users\\GAMING\\Desktop\\project\\chat-bot\\chat-bot-ai\\ml-waf-aws-test\\data\\learned_encodings.json",
+  "report_txt": "C:\\Users\\GAMING\\Desktop\\project\\chat-bot\\chat-bot-ai\\ml-waf-aws-test\\data\\aws_probe_report.txt",
+  "bypass_found_txt": "C:\\Users\\GAMING\\Desktop\\project\\chat-bot\\chat-bot-ai\\ml-waf-aws-test\\data\\bypass_found.txt"
+}

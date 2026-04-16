@@ -1,0 +1,12 @@
+{
+  "f5": {
+    "base_url": "https://bi.hososuckhoe.vn/api-hsskv3/api/userinf",
+    "param": "account",
+    "method": "GET"
+  },
+  "cloudflare": {
+    "base_url": "https://example.com/api/query",
+    "param": "q",
+    "method": "GET"
+  }
+}

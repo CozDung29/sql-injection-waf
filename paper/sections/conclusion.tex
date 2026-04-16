@@ -1,14 +1,25 @@
 \section{Discussion and Conclusion}
 \label{sec:discussion}
-Our experiments demonstrate that mutation-based SQL injection bypasses succeed not only by hiding signatures, but also by leveraging differential HTTP parsing behavior across the WAF and the backend application. Even when WAF signatures are updated, representational degrees of freedom in HTTP message syntax, encoding, and Content-Type-specific body handling can preserve injection-relevant semantics across layers.
+This work advances an attack-oriented, measurement-grounded view of SQLi WAF bypass. Rather than treating bypass as a scalar score, we decompose it along three axes emphasized throughout the paper: \emph{semantics} (operational labels tied to observable HTTP/application signals), \emph{scale} (attempt counts versus unique payload cardinality), and \emph{structure} (family-level rates $\mathrm{BR}_f$ under an induced search distribution).
 
-\subsection{Security vs Performance Trade-off}
-HTTP normalization improves security by enforcing deterministic, RFC-compliant interpretation, which eliminates many discrepancy surfaces that attackers rely on \cite{rfc7230,rfc3986}. The primary cost is preprocessing latency and strictness. Requests that violate syntactic constraints or exhibit ambiguous structure are rejected, which may reduce compatibility with legacy clients that send non-conformant traffic. In deployment, this trade-off can be managed by configuring size limits, maintaining observability for rejected requests, and gradually tightening policies.
+\subsection{Answering the Research Questions}
+\textbf{RQ1.} The archived lab log yields $\mathrm{BR}_{\mathrm{agg}}=39.4\%$ with $N=9{,}435$, but only dozens of unique bypass strings, illustrating that high attempt-level rates can coexist with concentrated string reuse and partial overlap between bypass- and blocked-labeled payloads.
 
-Normalization also concentrates residual bypasses into a small set of mechanisms that remain relevant only when clients deviate from strict protocol expectations. This shift enables defenders to focus mitigations on a smaller and more principled attack surface, rather than chasing an expanding collection of mutation patterns.
+\textbf{RQ2.} Bypass probability is highly anisotropic across families: identity-, case-, and null-byte-oriented spawns achieve $\mathrm{BR}_f\approx 0.89$--$0.90$ in the export, while an encoding-heavy spawn cohort is largely blocked ($\mathrm{BR}_f\approx 0.025$). For defenders, this implies that global block-rate dashboards can mask persistent holes in specific operator classes; regression suites should include family-targeted cases. For attackers (in authorized settings), the same table prioritizes mutation budget toward high-yield families for a given policy snapshot.
+
+\textbf{RQ3.} Fixpoint percent-decoding does not improve a 20-example random-forest surrogate; live bypass therefore cannot be dismissed as an artifact of ``the defender forgot to URL-decode once.'' Stronger mitigations must address richer feature interactions, policy coverage, and protocol-complete normalization where appropriate \cite{httpnormalizer,rfc7230}.
+
+\subsection{Implications for Defenders}
+Policy tuning should be \emph{family-aware}: after rule changes, re-run family-stratified probes rather than relying on a single aggregate metric. Combine WAF telemetry with application-layer controls (parameterized queries, least-privilege DB roles) because edge decisions will never be perfect. Where preprocessing is used, evaluate it against explicit attack logs rather than synthetic averages alone \cite{zhang2026bwafsql}.
+
+\subsection{Implications for Offensive Research}
+Open logs enable third parties to dispute or refine labels, add families, or compare alternative outcome definitions---a step toward reproducible offensive security science. Publishing induced search configurations (caps, policies, seeds) is as important as publishing headline rates.
+
+\subsection{Ethics and Legal Scope}
+The methodology is intended solely for systems the operator owns or is authorized to test. Unauthorized scanning or bypass attempts violate law and policy; the artifact is a measurement instrument, not an endorsement of misuse.
+
+\subsection{Limitations and Future Work}
+Limitations include single-channel URL injection in the archived aggregate, single policy snapshot, and non-uniform search bias. Future work comprises multipart/JSON/XML probes, synchronized comparison of surrogate scores and live decisions on identical corpora, adaptive attackers that reweight families online, and pairing offensive logs with defensive rule synthesis tools already sketched in the repository (\texttt{generate\_rules\_from\_data.py}).
 
 \subsection{Conclusion}
-This paper proposed an RFC-based, preprocessing approach that places an HTTP-Normalizer proxy before WAF inspection. By canonicalizing HTTP message components and enforcing strict parsing and re-serialization, the method aligns WAF inspection with backend parsing and reduces the success rate of mutation-based SQL injection bypasses across \texttt{multipart/form-data}, JSON, and XML request bodies.
-
-Overall, the results support the conclusion that deterministic RFC-based normalization is a robust defense against mutation-based attacks driven by parsing discrepancies. Future work will extend the normalization policy to additional HTTP versions and proxy behaviors and will explore automated discrepancy discovery to further reduce the residual bypass space.
-
+We presented a reproducible black-box mutation and probing methodology for SQLi WAF evaluation, together with aggregate metrics, unique-payload structure, and family-resolved bypass rates from a live AWS WAF lab. The central methodological takeaway is that \emph{depth} in offensive evaluation comes from explicit labels, decomposed statistics, and honest discussion of search bias and validity---not from a lone percentage. Family-level analysis reveals which mutation shapes dominate success under our conditions; a minimal RFC decoding control shows that trivial normalization does not resolve the offline surrogate pilot, reinforcing the need for layered defenses and richer benchmarks.

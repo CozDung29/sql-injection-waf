@@ -1,0 +1,1096 @@
+{
+  "meta": {
+    "mode": "both",
+    "mutate_rules_path": "E:\\installQ\\chatbotAI\\chat-bot-ai\\ml-waf-aws-test\\data\\mutate_rules.json",
+    "mutate_rules_loaded": true,
+    "mutate_regex_patterns": 18,
+    "mutate_byte_literals": 3,
+    "mutate_pattern_labels": [
+      {
+        "pattern": "(?:0x[0-9a-fA-F]{2}){4,}",
+        "label": "adv_hex_chars"
+      },
+      {
+        "pattern": "%00",
+        "label": "adv_null_suffix"
+      },
+      {
+        "pattern": "(?i)\\+(?:or|and|union|select)\\+",
+        "label": "adv_plus_space"
+      },
+      {
+        "pattern": "/\\*\\*/",
+        "label": "adv_comment_mysql"
+      },
+      {
+        "pattern": "/\\*x\\*/",
+        "label": "adv_comment_slash"
+      },
+      {
+        "pattern": "\\t",
+        "label": "adv_tab_space"
+      },
+      {
+        "pattern": "%27",
+        "label": "adv_url_encode"
+      },
+      {
+        "pattern": "%20",
+        "label": "adv_url_encode"
+      },
+      {
+        "pattern": "%22",
+        "label": "adv_url_encode_full"
+      },
+      {
+        "pattern": "%3[Dd]",
+        "label": "adv_url_encode_full"
+      },
+      {
+        "pattern": "%2[Ff]",
+        "label": "adv_url_encode_full"
+      },
+      {
+        "pattern": "%[0-9A-Fa-f]{2}",
+        "label": "adv_url_encode_non_alnum"
+      },
+      {
+        "pattern": "%25[0-9A-Fa-f]{2}",
+        "label": "adv_double_url_encode"
+      },
+      {
+        "pattern": "%25%25%25",
+        "label": "adv_triple_url_encode"
+      },
+      {
+        "pattern": "\\b(?:SELECT|UNION|FROM|WHERE|OR|AND)\\b",
+        "label": "adv_case_upper_kw"
+      },
+      {
+        "pattern": "\\\\u[0-9a-fA-F]{4}",
+        "label": "adv_unicode_esc"
+      },
+      {
+        "pattern": "''",
+        "label": "adv_double_quote_esc"
+      },
+      {
+        "pattern": "0x[0-9a-fA-F]{40,}",
+        "label": "adv_hex_prefix"
+      }
+    ],
+    "sources": [
+      "E:\\installQ\\chatbotAI\\chat-bot-ai\\ml-waf-aws-test\\data",
+      "E:\\installQ\\chatbotAI\\chat-bot-ai\\ml-waf\\data"
+    ],
+    "counts": {
+      "bypass_unique": 117,
+      "blocked_unique": 279,
+      "benign_strings": 5
+    },
+    "design_notes": {
+      "mutate_rules": "regex_rules patterns and per-transform_fn signatures approximate what adv_mutate can emit; review AWS WAF regex compatibility.",
+      "bypass_generalized": "Strips leading id remap prefix, adds structural regex (long 0x/x hex, %00), mines frequent substrings with doc support, generalizes literals to regex, adds TF-IDF char n-grams on normalized bypass-only text.",
+      "why_byte_match": "ByteMatchStatement is easy to audit literal-by-literal but one statement per substring inflates Web ACL size/WCU.",
+      "why_regex_compact_data": "RegexMatchStatement with re.escaped literals from the combined literal pool (mutate bytes + mined strings).",
+      "why_regex_mutate": "RegexMatchStatement uses raw patterns from mutate_rules (regex_rules + fn map); preferred for broad coverage aligned with your mutator.",
+      "remap_normalization": "Blocked/bypass strings are passed through normalize_for_mining_deep before substring mining and ML n-grams so windows do not start inside id remap tokens (e.g. Demo_project). Literals matching remap API fragments (e.g. roject%27) are dropped.",
+      "caveat": "Review false positives; verify RegexString limits and RE2/PCRE subset for your Web ACL."
+    },
+    "bypass_generalization": {
+      "bypass_inputs": 117,
+      "notes": [],
+      "min_support_docs": 3,
+      "distinct_patterns": 2
+    },
+    "bypass_generalized_regex_count": 2,
+    "mine_params": {
+      "min_support": 6,
+      "min_len": 5,
+      "max_len": 40,
+      "max_bypass_ratio": 0.35,
+      "max_byte_statements": 20,
+      "regex_literals": 80,
+      "regex_chunks_data": 4,
+      "regex_chunks_mutate": 2,
+      "regex_chunks_bypass_generalized": 1,
+      "max_regex_bytes_per_chunk": 200
+    },
+    "mined_substrings_top": [
+      {
+        "substring": "500%25",
+        "score": 131.0,
+        "blocked_windows": 131,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "2500%",
+        "score": 126.0,
+        "blocked_windows": 126,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "%2525",
+        "score": 116.0,
+        "blocked_windows": 116,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "252500",
+        "score": 102.0,
+        "blocked_windows": 102,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "%2500",
+        "score": 97.0,
+        "blocked_windows": 97,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "0%252",
+        "score": 67.0,
+        "blocked_windows": 67,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "0%250",
+        "score": 66.0,
+        "blocked_windows": 66,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "1=1--",
+        "score": 49.0,
+        "blocked_windows": 49,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "3D1--",
+        "score": 27.0,
+        "blocked_windows": 27,
+        "bypass_hits": 0
+      },
+      {
+        "substring": " 1=1-",
+        "score": 26.0,
+        "blocked_windows": 26,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "OR 1=1",
+        "score": 20.0,
+        "blocked_windows": 20,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "DUAL--",
+        "score": 15.0,
+        "blocked_windows": 15,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "1%3D1-",
+        "score": 14.0,
+        "blocked_windows": 14,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "33%25",
+        "score": 14.0,
+        "blocked_windows": 14,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "/*x*/",
+        "score": 13.0,
+        "blocked_windows": 13,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "ELECT",
+        "score": 13.0,
+        "blocked_windows": 13,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "336333333333331323732%2",
+        "score": 12.0,
+        "blocked_windows": 12,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "45635423%25",
+        "score": 12.0,
+        "blocked_windows": 12,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "*/1=1-",
+        "score": 12.0,
+        "blocked_windows": 12,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "20OR%2",
+        "score": 12.0,
+        "blocked_windows": 12,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "2527%2",
+        "score": 12.0,
+        "blocked_windows": 12,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "253D1-",
+        "score": 12.0,
+        "blocked_windows": 12,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "%2527",
+        "score": 12.0,
+        "blocked_windows": 12,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "%2520",
+        "score": 12.0,
+        "blocked_windows": 12,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "333333%2",
+        "score": 11.0,
+        "blocked_windows": 11,
+        "bypass_hits": 0
+      },
+      {
+        "substring": " OR 1",
+        "score": 11.0,
+        "blocked_windows": 11,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "27%25",
+        "score": 11.0,
+        "blocked_windows": 11,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "1%253D1",
+        "score": 10.0,
+        "blocked_windows": 10,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "d6f5f70",
+        "score": 10.0,
+        "blocked_windows": 10,
+        "bypass_hits": 0
+      },
+      {
+        "substring": "*/OR/*",
+        "score": 10.0,
+        "blocked_windows": 10,
+        "bypass_hits": 0
+      }
+    ],
+    "linear_ngram_model": {
+      "holdout_accuracy": 0.85,
+      "n_train": 316,
+      "n_test": 80
+    },
+    "top_char_ngrams_positive_blocked": [
+      [
+        "2500",
+        1.1008009224831021
+      ],
+      [
+        "%252",
+        0.8390963768639149
+      ],
+      [
+        "%250",
+        0.8224831819844846
+      ],
+      [
+        "%2500",
+        0.8224831819844846
+      ],
+      [
+        "1-- ",
+        0.6910040674819641
+      ],
+      [
+        "%2525",
+        0.6619571572678616
+      ],
+      [
+        "2525",
+        0.6619571572678616
+      ],
+      [
+        "2500 ",
+        0.642954076167771
+      ],
+      [
+        "500 ",
+        0.642954076167771
+      ],
+      [
+        "%25250",
+        0.6237305385883656
+      ],
+      [
+        "%252500",
+        0.6237305385883656
+      ],
+      [
+        "25250",
+        0.6237305385883656
+      ],
+      [
+        "252500",
+        0.6237305385883656
+      ],
+      [
+        "5250",
+        0.6237305385883656
+      ],
+      [
+        "52500",
+        0.6237305385883656
+      ],
+      [
+        "1=1-",
+        0.6137333879123975
+      ],
+      [
+        "1=1--",
+        0.6137333879123975
+      ],
+      [
+        "=1--",
+        0.6137333879123975
+      ],
+      [
+        " or ",
+        0.6088486011299924
+      ],
+      [
+        "1=1-- ",
+        0.5514753799404191
+      ],
+      [
+        "=1-- ",
+        0.5514753799404191
+      ],
+      [
+        "0%25",
+        0.5334731868074707
+      ],
+      [
+        "00%2",
+        0.5334731868074707
+      ],
+      [
+        "00%25",
+        0.5334731868074707
+      ],
+      [
+        "2500%",
+        0.5334731868074707
+      ]
+    ]
+  },
+  "rule": {
+    "Name": "Generated-SQLi-Patterns-ByteMatch",
+    "Priority": 1,
+    "Statement": {
+      "OrStatement": {
+        "Statements": [
+          {
+            "ByteMatchStatement": {
+              "SearchString": "%00",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "/**/",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "/*x*/",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "500%25",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "2500%",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "%2525",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "252500",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "%2500",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "0%252",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "0%250",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "1=1--",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "3D1--",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "1=1-",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "OR 1=1",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "DUAL--",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "1%3D1-",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "33%25",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "ELECT",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "336333333333331323732%2",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          },
+          {
+            "ByteMatchStatement": {
+              "SearchString": "45635423%25",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ],
+              "PositionalConstraint": "CONTAINS"
+            }
+          }
+        ]
+      }
+    },
+    "VisibilityConfig": {
+      "SampledRequestsEnabled": true,
+      "CloudWatchMetricsEnabled": true,
+      "MetricName": "GeneratedSqliByteMatch"
+    },
+    "Action": {
+      "Block": {}
+    }
+  },
+  "rule_regex_from_mutate_rules": {
+    "Name": "Generated-SQLi-From-MutateRules-Regex",
+    "Priority": 1,
+    "Statement": {
+      "OrStatement": {
+        "Statements": [
+          {
+            "RegexMatchStatement": {
+              "RegexString": "(?:(?:0x[0-9a-fA-F]{2}){4,}|%00|(?i)\\+(?:or|and|union|select)\\+|/\\*\\*/|/\\*x\\*/|\\t|%27|%20|%22|%3[Dd]|%2[Ff]|%[0-9A-Fa-f]{2}|%25[0-9A-Fa-f]{2}|%25%25%25|\\b(?:SELECT|UNION|FROM|WHERE|OR|AND)\\b)",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ]
+            }
+          },
+          {
+            "RegexMatchStatement": {
+              "RegexString": "(?:\\\\u[0-9a-fA-F]{4}|''|0x[0-9a-fA-F]{40,})",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "VisibilityConfig": {
+      "SampledRequestsEnabled": true,
+      "CloudWatchMetricsEnabled": true,
+      "MetricName": "GeneratedSqliFromMutateRegex"
+    },
+    "Action": {
+      "Block": {}
+    }
+  },
+  "rule_regex_from_bypass_generalized": {
+    "Name": "Generated-SQLi-BypassGeneralized-Regex",
+    "Priority": 1,
+    "Statement": {
+      "OrStatement": {
+        "Statements": [
+          {
+            "RegexMatchStatement": {
+              "RegexString": "(?:0x[0-9a-fA-F]{16,}|%00(?:%00)*)",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "VisibilityConfig": {
+      "SampledRequestsEnabled": true,
+      "CloudWatchMetricsEnabled": true,
+      "MetricName": "GeneratedSqliBypassGeneralized"
+    },
+    "Action": {
+      "Block": {}
+    }
+  },
+  "rule_regex_compact_from_data": {
+    "Name": "Generated-SQLi-From-Data-RegexCompact",
+    "Priority": 1,
+    "Statement": {
+      "OrStatement": {
+        "Statements": [
+          {
+            "RegexMatchStatement": {
+              "RegexString": "(?:%00|/\\*\\*/|/\\*x\\*/|500%25|2500%|%2525|252500|%2500|0%252|0%250|1=1\\-\\-|3D1\\-\\-|1=1\\-|OR\\ 1=1|DUAL\\-\\-|1%3D1\\-|33%25|ELECT|336333333333331323732%2|45635423%25|\\*/1=1\\-|20OR%2|2527%2|253D1\\-|%2527|%2520)",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ]
+            }
+          },
+          {
+            "RegexMatchStatement": {
+              "RegexString": "(?:333333%2|OR\\ 1|27%25|1%253D1|d6f5f70|\\*/OR/\\*|0x4465|201%2|UNION|36331'|/\\*\\*/O|27%20|OR%25|R%252|%2A%2|6f5f70726f6a65637|f70726f6a656374|3331323732%25|x44656d6f5f7|6c45635423%2|%27%2|7%252|SELEC)",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ]
+            }
+          },
+          {
+            "RegexMatchStatement": {
+              "RegexString": "(?:35423%252|36331%27|1\\-\\-%00|'\\ OR|/\\*\\*/1|2520O|25201|01%25|\\*x\\*/O|c322346724f6d234475416c2d2d%25|633333333333132373233%2|726f6a6563742|0OR%201|732%250|\\*\\*/1=1|%20OR%|520OR%|%2F%2A|'/\\*\\*/|\\*\\*/OR)",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ]
+            }
+          },
+          {
+            "RegexMatchStatement": {
+              "RegexString": "(?:R/\\*\\*/|7%20O|%201%|5201%|\\*x\\*/1|25252|3333333333333|2500|%252|%250|1\\-\\-)",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "VisibilityConfig": {
+      "SampledRequestsEnabled": true,
+      "CloudWatchMetricsEnabled": true,
+      "MetricName": "GeneratedSqliFromDataRegex"
+    },
+    "Action": {
+      "Block": {}
+    }
+  },
+  "regex_strings_mutate_raw": [
+    "(?:(?:0x[0-9a-fA-F]{2}){4,}|%00|(?i)\\+(?:or|and|union|select)\\+|/\\*\\*/|/\\*x\\*/|\\t|%27|%20|%22|%3[Dd]|%2[Ff]|%[0-9A-Fa-f]{2}|%25[0-9A-Fa-f]{2}|%25%25%25|\\b(?:SELECT|UNION|FROM|WHERE|OR|AND)\\b)",
+    "(?:\\\\u[0-9a-fA-F]{4}|''|0x[0-9a-fA-F]{40,})"
+  ],
+  "regex_strings_bypass_generalized": [
+    "(?:0x[0-9a-fA-F]{16,}|%00(?:%00)*)"
+  ],
+  "regex_strings_data_only": [
+    "(?:%00|/\\*\\*/|/\\*x\\*/|500%25|2500%|%2525|252500|%2500|0%252|0%250|1=1\\-\\-|3D1\\-\\-|1=1\\-|OR\\ 1=1|DUAL\\-\\-|1%3D1\\-|33%25|ELECT|336333333333331323732%2|45635423%25|\\*/1=1\\-|20OR%2|2527%2|253D1\\-|%2527|%2520)",
+    "(?:333333%2|OR\\ 1|27%25|1%253D1|d6f5f70|\\*/OR/\\*|0x4465|201%2|UNION|36331'|/\\*\\*/O|27%20|OR%25|R%252|%2A%2|6f5f70726f6a65637|f70726f6a656374|3331323732%25|x44656d6f5f7|6c45635423%2|%27%2|7%252|SELEC)",
+    "(?:35423%252|36331%27|1\\-\\-%00|'\\ OR|/\\*\\*/1|2520O|25201|01%25|\\*x\\*/O|c322346724f6d234475416c2d2d%25|633333333333132373233%2|726f6a6563742|0OR%201|732%250|\\*\\*/1=1|%20OR%|520OR%|%2F%2A|'/\\*\\*/|\\*\\*/OR)",
+    "(?:R/\\*\\*/|7%20O|%201%|5201%|\\*x\\*/1|25252|3333333333333|2500|%252|%250|1\\-\\-)"
+  ],
+  "rule_regex_compact": {
+    "Name": "Generated-SQLi-From-Data-RegexCompact",
+    "Priority": 1,
+    "Statement": {
+      "OrStatement": {
+        "Statements": [
+          {
+            "RegexMatchStatement": {
+              "RegexString": "(?:%00|/\\*\\*/|/\\*x\\*/|500%25|2500%|%2525|252500|%2500|0%252|0%250|1=1\\-\\-|3D1\\-\\-|1=1\\-|OR\\ 1=1|DUAL\\-\\-|1%3D1\\-|33%25|ELECT|336333333333331323732%2|45635423%25|\\*/1=1\\-|20OR%2|2527%2|253D1\\-|%2527|%2520)",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ]
+            }
+          },
+          {
+            "RegexMatchStatement": {
+              "RegexString": "(?:333333%2|OR\\ 1|27%25|1%253D1|d6f5f70|\\*/OR/\\*|0x4465|201%2|UNION|36331'|/\\*\\*/O|27%20|OR%25|R%252|%2A%2|6f5f70726f6a65637|f70726f6a656374|3331323732%25|x44656d6f5f7|6c45635423%2|%27%2|7%252|SELEC)",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ]
+            }
+          },
+          {
+            "RegexMatchStatement": {
+              "RegexString": "(?:35423%252|36331%27|1\\-\\-%00|'\\ OR|/\\*\\*/1|2520O|25201|01%25|\\*x\\*/O|c322346724f6d234475416c2d2d%25|633333333333132373233%2|726f6a6563742|0OR%201|732%250|\\*\\*/1=1|%20OR%|520OR%|%2F%2A|'/\\*\\*/|\\*\\*/OR)",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ]
+            }
+          },
+          {
+            "RegexMatchStatement": {
+              "RegexString": "(?:R/\\*\\*/|7%20O|%201%|5201%|\\*x\\*/1|25252|3333333333333|2500|%252|%250|1\\-\\-)",
+              "FieldToMatch": {
+                "AllQueryArguments": {}
+              },
+              "TextTransformations": [
+                {
+                  "Priority": 1,
+                  "Type": "URL_DECODE"
+                },
+                {
+                  "Priority": 2,
+                  "Type": "LOWERCASE"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "VisibilityConfig": {
+      "SampledRequestsEnabled": true,
+      "CloudWatchMetricsEnabled": true,
+      "MetricName": "GeneratedSqliFromDataRegex"
+    },
+    "Action": {
+      "Block": {}
+    }
+  },
+  "regex_strings_only": [
+    "(?:%00|/\\*\\*/|/\\*x\\*/|500%25|2500%|%2525|252500|%2500|0%252|0%250|1=1\\-\\-|3D1\\-\\-|1=1\\-|OR\\ 1=1|DUAL\\-\\-|1%3D1\\-|33%25|ELECT|336333333333331323732%2|45635423%25|\\*/1=1\\-|20OR%2|2527%2|253D1\\-|%2527|%2520)",
+    "(?:333333%2|OR\\ 1|27%25|1%253D1|d6f5f70|\\*/OR/\\*|0x4465|201%2|UNION|36331'|/\\*\\*/O|27%20|OR%25|R%252|%2A%2|6f5f70726f6a65637|f70726f6a656374|3331323732%25|x44656d6f5f7|6c45635423%2|%27%2|7%252|SELEC)",
+    "(?:35423%252|36331%27|1\\-\\-%00|'\\ OR|/\\*\\*/1|2520O|25201|01%25|\\*x\\*/O|c322346724f6d234475416c2d2d%25|633333333333132373233%2|726f6a6563742|0OR%201|732%250|\\*\\*/1=1|%20OR%|520OR%|%2F%2A|'/\\*\\*/|\\*\\*/OR)",
+    "(?:R/\\*\\*/|7%20O|%201%|5201%|\\*x\\*/1|25252|3333333333333|2500|%252|%250|1\\-\\-)"
+  ]
+}

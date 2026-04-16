@@ -1,58 +1,77 @@
 \section{Methodology}
 \label{sec:methodology}
-This section describes the experimental pipeline for evaluating mutation-based SQL injection payloads and presents the HTTP normalization technique that aligns WAF inspection with backend parsing. The overall goal is to remove representational degrees of freedom so that mutated payloads cannot survive inconsistent interpretations.
+This section specifies the adversarial evaluation methodology: adversary capabilities, staged mutation generation, HTTP probing, outcome labeling, and quantitative metrics. Artifacts reside under \texttt{paper/experiment}, including \texttt{ml-waf-aws-test} (live probing), shared generators under \texttt{ml-waf}, expansion from blocked traces (\texttt{ml-waf-blocked-adv}), offline surrogate scoring (\texttt{ml-waf-multi-eval}), and a compact RFC decoding pilot (\texttt{paper-defense-rfc-ml}).
 
-\subsection{Threat Model and Experimental Pipeline}
-We consider an adversary capable of sending arbitrary HTTP requests and generating many mutated variants of SQLi payloads. The defender deploys a rule-based WAF and an application backend that parses request data into application-specific query logic.
+\subsection{Experimental Environment}
+We deployed the live portion of the study on AWS so that our traffic encountered a Regional AWS WAF policy in front of a real origin, not an offline toy matcher. Requests leave our workstation, enter the Web ACL in \texttt{us-east-1} (Northern Virginia), and only then reach the EC2-hosted application. We configured it this way because it mirrors a common production pattern---inspection at the edge, with the backend seeing whatever the WAF forwards---while keeping the stack under our control for logging and repeat runs.
 
-To study bypass behavior, we implement a controlled pipeline:
-\[
- \text{Fuzzer} \rightarrow \text{WAF} \rightarrow \text{Application}.
- \]
-The WAF inspects the request and either blocks it or forwards it. The application then processes the forwarded request. A successful bypass is defined as a request that is allowed by the WAF and produces a behavior consistent with SQLi execution in the application context.
+The Web ACL \texttt{test-waf} holds three rules with fixed priorities and Web ACL capacity unit (WCU) budgets. At priority~0, \texttt{Block-SQLi-Strict-Pattern} is allocated 120~WCU. We aimed this rule at quick wins against classic tautology and boolean glue: it combines AWS WAF's SQL injection match with a byte match for substrings such as \texttt{1=1} and \texttt{or}, evaluated over all query arguments. Before matching, we chained transformations in order---URL decode, HTML entity decode, then a command-line style normalization---so that straightforward encodings of the same tokens still surface to the patterns.
+
+At priority~1, \texttt{AWS-AWSManagedRulesSQLiRuleSet} consumes 200~WCU. This is Amazon's managed SQLi bundle; we set every constituent rule to \emph{block} so that any hit terminates the request. During testing we treated it as the wide net: it brings vendor-maintained signatures for SQLi extended patterns across headers, URI path, body, and query arguments, plus additional SQLi coverage on URI path, cookies, body, and query arguments as labeled in the managed set.
+
+At priority~3, \texttt{Final-Optimized-SQLi-Rule} uses 119~WCU. We added it as a custom regular-expression stage with three patterns tuned for leftovers we cared about in the lab---hex-flavored encodings, SQL keywords paired with operators, null-byte style obfuscation, and variations on \texttt{OR 1=1}. The idea was to sit a focused regex layer after the managed core without pretending it replaces vendor coverage.
+
+We attached the ACL to an EC2 instance named \texttt{test.waf.bk}: a \texttt{t3.micro} in \texttt{us-east-1f} with public IP \texttt{3.231.210.98}, running a small custom web application we built for these experiments rather than a canned vulnerable app image.
+
+We drove the probes manually. \texttt{curl} and short custom scripts were only there to send bytes we had already chosen; we did not point sqlmap, Burp Suite, or similar automation at the endpoint. Representative families in our notes include hex-encoded fragments, tautology clauses built around \texttt{OR 1=1}, and union-style sketches such as \texttt{UNION SELECT}. During testing we read outcomes straight from HTTP: a \texttt{403} meant the WAF blocked the attempt, and a \texttt{200} meant the request cleared the edge policy far enough for the app to answer in the normal success path for our harness.
+
+\subsection{Adversary Model}
+We model a network adversary who can send arbitrary HTTP/1.1 requests to a public origin fronted by a managed WAF, observe responses (status and body), and adapt future mutations based on logged outcomes. The adversary has no white-box access to WAF rules, ML model weights, or application source. This matches typical external penetration and red-team constraints and aligns with black-box evasion literature \cite{guan2023ssqli,demetrio2020wafamole}.
+
+\subsection{Attack Pipeline}
+The end-to-end pipeline is:
+\begin{equation}
+\label{eq:attack-pipeline}
+\begin{aligned}
+\mathcal{M}: \text{Seeds} &\rightarrow \text{Augmentations} \rightarrow \text{Transforms} \rightarrow \mathcal{V}, \\
+\mathcal{V} &\xrightarrow{\text{HTTP}} \text{WAF} \rightarrow \text{App} \rightarrow \text{Label}.
+\end{aligned}
+\end{equation}
+Here $\mathcal{V}$ is a multiset of concrete request variants (the same logical payload may appear under different transform names or generations). The driver serializes each variant as a GET to the configured URL shape, records the response, and appends a JSON object to a line-oriented log.
 
 \begin{figure}[t]
   \centering
-  \fbox{\parbox{\columnwidth}{\centering Placeholder figure: HTTP-Normalizer proxy and inspection flow}}
-  \caption{Evaluation pipeline showing the interaction between payload generation, WAF inspection, and application processing.}
+  \fbox{\parbox{\columnwidth}{\centering Seeds (PG/Oracle) $\rightarrow$ augmentations \& mutate rules $\rightarrow$ optional 2nd-layer transforms $\rightarrow$ GET probes $\rightarrow$ JSONL + learned counters}}
+  \caption{Offensive evaluation workflow implemented in the repository; dashed policy boundaries (rate limits, caps) are configurable in \texttt{config.json}.}
   \label{fig:pipeline}
 \end{figure}
 
-\subsection{Payload Generation}
-We generate mutation-based SQLi payloads using a targeted transformation strategy. Starting from a set of base payload patterns, we apply mutations that preserve intended semantics while altering representation. Examples include:
+\subsection{Staged Mutation Generation}
+Generation is deliberately \emph{staged} so that diversity and reproducibility can be traded off explicitly.
 
-\begin{enumerate}
-  \item Encoding and delimiter mutations (e.g., percent-encoding variations, alternative operator spellings).
-  \item Structural mutations (e.g., nested expressions and operator adjacency changes).
-  \item Content-Type-aware wrapper mutations that target \texttt{multipart/form-data}, JSON, and XML body decoding paths \cite{mutation-sqli}.
-\end{enumerate}
+\subsubsection{Seeds and Dialects}
+Oracle-oriented templates originate from the shared \texttt{variants\_f5} corpus; PostgreSQL-oriented templates from \texttt{variants\_pg}. Dialect choice affects function names, literal syntax, and comment styles, which in turn interact with WAF tokenization and application SQL parsers.
 
-Optionally, an ML-guided selection stage can prioritize mutations that are more likely to pass preliminary filters by learning from previous trial outcomes. In this paper, the selection stage is briefly described and used only for efficiency; the core normalization evaluation remains deterministic.
+\subsubsection{Deployment Augmentations and Learned Rules}
+The AWS harness can inject additional dialect- and encoding-specific variants and merge transforms described in \texttt{mutate\_rules.json} (analogous to blocked-trace expansion in \texttt{ml-waf-blocked-adv}). Learned rules encode empirical regularities from prior blocked or bypass events; they bias the search toward regions of the space that previously produced informative outcomes.
 
-\subsection{HTTP-Normalizer Design}
-The proposed defense uses a proxy-based \emph{HTTP-Normalizer} positioned before WAF inspection. The normalizer transforms raw inbound HTTP messages into a deterministic canonical representation. Downstream components (WAF and application) then operate on this single canonical form.
+\subsubsection{Second-Layer Transforms and Search Bias}
+An optional second layer applies additional evasion transforms from a shared catalog, subject to caps and transform policy files. Consequently, the empirical distribution over families is \emph{not} a uniform draw from all possible SQLi strings; it reflects queue scheduling, generation limits, and historical learning. Aggregate bypass rates must be read as properties of this \emph{induced} distribution, not as an intrinsic property of ``all SQLi.'' This is a feature for red teams (realistic search) and a caveat for comparability across papers (different search budgets yield different hit rates).
 
-Formally, given a raw request $R$, the normalizer produces a normalized request:
-\[
- N(R) = R_{\text{canon}},
- \]
-where $N(\cdot)$ is implemented by strict parsing, canonicalization, and re-serialization.
+\subsubsection{Remapping as an Experimental Control}
+Numeric seed tokens are remapped to stable string prefixes (e.g., project names) so that the WAF and application agree on the injected parameter slot. Without such alignment, high bypass counts could confound parameter shadowing, optional query keys ignored by the app, or divergent casing conventions---effects that are important in practice but orthogonal to the mutation operators under study.
 
-\subsubsection{Ambiguity Elimination}
-The normalizer removes optional ambiguities that commonly appear in real-world clients. The implementation canonicalizes header values and whitespace, resolves safe encoding variations, and prevents duplicate semantic interpretations. When a client sends multiple representations that could be interpreted differently, the normalizer selects a single interpretation or rejects the request.
-
-\subsubsection{RFC-compliant Parsing and Re-serialization}
-To ensure deterministic behavior, the normalizer enforces RFC-compliant HTTP message structure and consistent Content-Type handling \cite{rfc7230,rfc3986,rfc8259,rfc7578}. For each request:
-
+\subsection{Outcome Semantics}
+Let each attempt $i$ produce HTTP status $s_i$ and body $b_i$. The probe assigns $y_i \in \{\textsf{bypass}, \textsf{blocked}, \textsf{other}\}$ according to rules encoded in \texttt{run\_probe.py} and companion documentation:
 \begin{itemize}
-  \item HTTP/1.1 message syntax is parsed using a strict grammar \cite{rfc7230}.
-  \item URI and query components are decoded and re-encoded under consistent rules \cite{rfc3986}.
-  \item Structured bodies are parsed according to the declared Content-Type, then re-serialized with deterministic formatting.
+  \item \textsf{blocked}: explicit WAF or edge denial (e.g., 403 in the lab configuration).
+  \item \textsf{bypass}: WAF-pass \emph{and} application-visible signals classified as consistent with effective SQLi-side effects for the testbed (including selected error semantics and non-blocking status patterns defined in the script).
+  \item \textsf{other}: ambiguous cases such as not-found or responses treated as ineffective noise (e.g., encoding-related 500s that do not meet the bypass predicate).
 \end{itemize}
+These labels are \emph{operational}: they operationalize a red-team notion of ``useful signal'' rather than a formal proof of exploitability. They should not be equated with vendor marketing metrics or with ground-truth database compromise.
 
-\subsubsection{Malformed Request Rejection}
-Requests that violate syntax constraints or exhibit ambiguous structure are rejected before reaching the WAF and application. This step limits differential parsing by ensuring that only messages conforming to the enforced grammar propagate further. In addition, size limits and structural validation reduce parser edge cases that attackers may exploit.
+\subsection{Metrics}
+Let $N$ be the number of analyzed attempts and $N_{\mathrm{bp}}$ the count with $y_i=\textsf{bypass}$. The \emph{aggregate bypass rate} is
+\begin{equation}
+\label{eq:aggregate-bypass-rate}
+\mathrm{BR}_{\mathrm{agg}} = \frac{N_{\mathrm{bp}}}{N}.
+\end{equation}
+For each mutation family $f$, let $N_f$ be attempts tagged with $f$ and $N_{f,\mathrm{bp}}$ bypasses among them. The \emph{family-level bypass rate} is $\mathrm{BR}_f = N_{f,\mathrm{bp}}/N_f$. Export scripts also attach binomial confidence intervals to per-variant or per-family rates in machine-readable outputs; we report point estimates in the main tables and caution that families with tiny $N_f$ produce unstable $\mathrm{BR}_f$.
 
-\subsection{Implementation Considerations}
-The normalizer is designed to be content-type aware and to treat each body format with the corresponding standard. This design is crucial for reducing discrepancies in \texttt{multipart/form-data} boundaries, JSON escaping behavior, and XML parsing edge cases \cite{rfc7578,rfc8259,xml-parser-discrepancies}. While strict normalization may reject some legitimate but non-conformant traffic, the approach provides a clear and auditable enforcement point for deployers.
+We additionally report \emph{unique payload cardinalities}: distinct strings observed in bypass versus blocked sets. Overlap between sets indicates that the same surface form can yield different labels under context (e.g., timing, rate limiting, or state), motivating analysis at the attempt level rather than payload level alone.
 
+\subsection{Secondary Control: RFC Decoding and Surrogate Scoring}
+To isolate one normalization axis, we map each probe string through repeated \texttt{urllib.parse.unquote\_plus} until a fixpoint (\texttt{unquote\_chain}), then train/evaluate a random forest on a 20-row labeled JSON list. This tests whether a minimal RFC-relevant decoder aligns feature space enough for a toy surrogate to improve; it does not evaluate a full HTTP proxy \cite{httpnormalizer,rfc7230,rfc3986}.
+
+\subsection{Implementation Notes}
+The probe maintains per-transform counters (\texttt{learned\_encodings.json}), supports dry-run and request caps, and can suggest regex fragments from logs for blue teams. Offline ModSecurity-style and RF scores (\texttt{ml-waf-multi-eval}) may disagree with the managed WAF; only live labels reflect the deployed policy.
