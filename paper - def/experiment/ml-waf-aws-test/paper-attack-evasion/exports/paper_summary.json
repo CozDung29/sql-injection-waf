@@ -1,0 +1,263 @@
+{
+  "how_to_read_two_roots": {
+    "aws_waf_lab": "Data under ml-waf-aws-test/data — AWS HTTP probe (aws_probe_results.jsonl) and learned logs for that lab run.",
+    "ml_waf_lab": "Data under ml-waf/data — separate lab (ModSecurity / local runs). Has bypass_learned etc.; usually no aws_probe_results.jsonl unless you copy or probe there.",
+    "cross_env_metrics": "Spearman is skipped unless aws_probe_results.jsonl exists in each env data/; see envs_missing_probe_file in cross_environment_* blocks."
+  },
+  "data_availability_by_env": {
+    "aws_waf_lab": {
+      "directory": "E:\\installQ\\chatbotAI\\chat-bot-ai\\ml-waf-aws-test\\data",
+      "present": {
+        "aws_probe_results.jsonl": true,
+        "bypass_learned.jsonl": true,
+        "blocked_learned.jsonl": true,
+        "adversarial_report.jsonl": false,
+        "attack.json": false,
+        "benign.json": false
+      }
+    },
+    "ml_waf_lab": {
+      "directory": "E:\\installQ\\chatbotAI\\chat-bot-ai\\ml-waf\\data",
+      "present": {
+        "aws_probe_results.jsonl": false,
+        "bypass_learned.jsonl": true,
+        "blocked_learned.jsonl": true,
+        "adversarial_report.jsonl": true,
+        "attack.json": true,
+        "benign.json": true
+      }
+    }
+  },
+  "probe_overall_bypass_rate_by_env": {
+    "aws_waf_lab": {
+      "total_attempts": 9435,
+      "total_bypass": 3721,
+      "overall_bypass_rate": 0.39438261791202966,
+      "probe_http_available": true
+    },
+    "ml_waf_lab": {
+      "probe_http_available": false,
+      "why": "No aws_probe_results.jsonl in this data directory; no HTTP probe aggregate (attempts / bypass rate) for this env.",
+      "from_learned_logs": {
+        "bypass_events": 2361,
+        "blocked_events": 1252,
+        "unique_bypass_payloads": 61,
+        "unique_blocked_payloads": 119,
+        "overlap_bypass_vs_blocked_payloads": 26
+      },
+      "to_enable_probe_block": "Add aws_probe_results.jsonl under this env data/ (same schema as ml-waf-aws-test) or point run_probe output here."
+    }
+  },
+  "cross_environment_variants": {
+    "comparison_status": "skipped",
+    "spearman_across_envs": null,
+    "reason": "missing_aws_probe_results_jsonl",
+    "envs_missing_probe_file": [
+      "ml_waf_lab"
+    ],
+    "how_to_enable": "Spearman needs aws_probe_results.jsonl in every env data/ directory. Typical fix: copy the same-schema JSONL to ml-waf/data/ after a probe, or configure run_probe to write RESULTS_JSONL under ml-waf/data."
+  },
+  "cross_environment_families": {
+    "comparison_status": "skipped",
+    "spearman_families": null,
+    "reason": "missing_aws_probe_results_jsonl",
+    "envs_missing_probe_file": [
+      "ml_waf_lab"
+    ],
+    "how_to_enable": "Same as cross_environment_variants: both envs need aws_probe_results.jsonl so family rates exist for Spearman."
+  },
+  "top_family_cohorts_preview": {
+    "aws_waf_lab": [
+      {
+        "family": "hex_account_style",
+        "distinct_variants": 2,
+        "attempts": 2,
+        "bypass": 2,
+        "blocked": 0,
+        "other": 0,
+        "bypass_rate": 1.0,
+        "bypass_rate_ci95_low": 0.3423719528896193,
+        "bypass_rate_ci95_high": 1.0,
+        "bypass_rate_minus_global": 0.6056173820879703
+      },
+      {
+        "family": "spawn_case_mix",
+        "distinct_variants": 459,
+        "attempts": 459,
+        "bypass": 412,
+        "blocked": 47,
+        "other": 0,
+        "bypass_rate": 0.8976034858387799,
+        "bypass_rate_ci95_low": 0.8664868420064863,
+        "bypass_rate_ci95_high": 0.9221198865157555,
+        "bypass_rate_minus_global": 0.5032208679267502
+      },
+      {
+        "family": "spawn_identity",
+        "distinct_variants": 1808,
+        "attempts": 1808,
+        "bypass": 1611,
+        "blocked": 191,
+        "other": 6,
+        "bypass_rate": 0.8910398230088495,
+        "bypass_rate_ci95_low": 0.8758392032984126,
+        "bypass_rate_ci95_high": 0.9045822198546931,
+        "bypass_rate_minus_global": 0.4966572050968199
+      },
+      {
+        "family": "spawn_null_byte",
+        "distinct_variants": 1807,
+        "attempts": 1807,
+        "bypass": 1610,
+        "blocked": 191,
+        "other": 6,
+        "bypass_rate": 0.8909795240730493,
+        "bypass_rate_ci95_low": 0.8757711219615363,
+        "bypass_rate_ci95_high": 0.9045290434422185,
+        "bypass_rate_minus_global": 0.4965969061610196
+      },
+      {
+        "family": "spawn_encoding",
+        "distinct_variants": 3471,
+        "attempts": 3471,
+        "bypass": 86,
+        "blocked": 3372,
+        "other": 13,
+        "bypass_rate": 0.024776721405934888,
+        "bypass_rate_ci95_low": 0.020106992666253376,
+        "bypass_rate_ci95_high": 0.030497213292372195,
+        "bypass_rate_minus_global": -0.36960589650609477
+      },
+      {
+        "family": "spawn_hex_style",
+        "distinct_variants": 1807,
+        "attempts": 1807,
+        "bypass": 0,
+        "blocked": 1801,
+        "other": 6,
+        "bypass_rate": 0.0,
+        "bypass_rate_ci95_low": 0.0,
+        "bypass_rate_ci95_high": 0.002121444526125311,
+        "bypass_rate_minus_global": -0.39438261791202966
+      },
+      {
+        "family": "whitespace_and_delimiters",
+        "distinct_variants": 16,
+        "attempts": 16,
+        "bypass": 0,
+        "blocked": 16,
+        "other": 0,
+        "bypass_rate": 0.0,
+        "bypass_rate_ci95_low": 0.0,
+        "bypass_rate_ci95_high": 0.19361341827271994,
+        "bypass_rate_minus_global": -0.39438261791202966
+      },
+      {
+        "family": "percent_encoding_variants",
+        "distinct_variants": 15,
+        "attempts": 15,
+        "bypass": 0,
+        "blocked": 15,
+        "other": 0,
+        "bypass_rate": 0.0,
+        "bypass_rate_ci95_low": 0.0,
+        "bypass_rate_ci95_high": 0.20388926630434784,
+        "bypass_rate_minus_global": -0.39438261791202966
+      },
+      {
+        "family": "sql_comment_obfuscation",
+        "distinct_variants": 14,
+        "attempts": 14,
+        "bypass": 0,
+        "blocked": 14,
+        "other": 0,
+        "bypass_rate": 0.0,
+        "bypass_rate_ci95_low": 0.0,
+        "bypass_rate_ci95_high": 0.21531701192718142,
+        "bypass_rate_minus_global": -0.39438261791202966
+      },
+      {
+        "family": "aws_dialect_variants",
+        "distinct_variants": 12,
+        "attempts": 12,
+        "bypass": 0,
+        "blocked": 12,
+        "other": 0,
+        "bypass_rate": 0.0,
+        "bypass_rate_ci95_low": 0.0,
+        "bypass_rate_ci95_high": 0.2425007574992425,
+        "bypass_rate_minus_global": -0.39438261791202966
+      },
+      {
+        "family": "hex_encoding",
+        "distinct_variants": 12,
+        "attempts": 12,
+        "bypass": 0,
+        "blocked": 12,
+        "other": 0,
+        "bypass_rate": 0.0,
+        "bypass_rate_ci95_low": 0.0,
+        "bypass_rate_ci95_high": 0.2425007574992425,
+        "bypass_rate_minus_global": -0.39438261791202966
+      },
+      {
+        "family": "other_misc",
+        "distinct_variants": 5,
+        "attempts": 5,
+        "bypass": 0,
+        "blocked": 5,
+        "other": 0,
+        "bypass_rate": 0.0,
+        "bypass_rate_ci95_low": 0.0,
+        "bypass_rate_ci95_high": 0.43449149475208104,
+        "bypass_rate_minus_global": -0.39438261791202966
+      },
+      {
+        "family": "null_byte_suffix",
+        "distinct_variants": 3,
+        "attempts": 3,
+        "bypass": 0,
+        "blocked": 3,
+        "other": 0,
+        "bypass_rate": 0.0,
+        "bypass_rate_ci95_low": 0.0,
+        "bypass_rate_ci95_high": 0.5615060804490177,
+        "bypass_rate_minus_global": -0.39438261791202966
+      },
+      {
+        "family": "nested_percent_encoding",
+        "distinct_variants": 2,
+        "attempts": 2,
+        "bypass": 0,
+        "blocked": 2,
+        "other": 0,
+        "bypass_rate": 0.0,
+        "bypass_rate_ci95_low": 0.0,
+        "bypass_rate_ci95_high": 0.6576280471103807,
+        "bypass_rate_minus_global": -0.39438261791202966
+      },
+      {
+        "family": "baseline_seed",
+        "distinct_variants": 1,
+        "attempts": 1,
+        "bypass": 0,
+        "blocked": 1,
+        "other": 0,
+        "bypass_rate": 0.0,
+        "bypass_rate_ci95_low": 0.0,
+        "bypass_rate_ci95_high": 0.7934567085261071,
+        "bypass_rate_minus_global": -0.39438261791202966
+      }
+    ]
+  },
+  "learned_totals": {
+    "aws_waf_lab": {
+      "unique_bypass_payloads": 42,
+      "unique_blocked_payloads": 147
+    },
+    "ml_waf_lab": {
+      "unique_bypass_payloads": 61,
+      "unique_blocked_payloads": 119
+    }
+  }
+}

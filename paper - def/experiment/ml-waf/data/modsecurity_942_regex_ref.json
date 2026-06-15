@@ -1,0 +1,17 @@
+[
+  {"id": "942160", "desc": "sleep/benchmark blind sqli", "pattern": "(?i:sleep\\(\\\\s*?\\\\d*?\\\\s*?\\)|benchmark\\(.*?\\\\,.*?\\))"},
+  {"id": "942170", "desc": "benchmark sleep if", "pattern": "(?i:(?:select|;)\\\\s+(?:benchmark|sleep|if)\\\\s*?\\\\(\\\\s*?\\\\(?\\\\s*?\\\\w+)"},
+  {"id": "942220", "desc": "integer overflow", "pattern": "(?i:-0000023456|4294967295|4294967296|2147483648|2147483647|0000012345|-2147483648|-2147483649|0000023456|3\\\\.0\\\\.00738585072007e-308|1e309)"},
+  {"id": "942230", "desc": "conditional case like having if", "pattern": "(?i:[\\\\s()]case\\\\s*?\\\\(|\\\\)\\\\s*?like\\\\s*?\\\\(|having\\\\s*?[^\\\\s]+\\\\s*?[^\\\\w\\\\s]|if\\\\s?\\\\[\\\\d\\\\w\\\\]\\\\s*?[=<>~])"},
+  {"id": "942240", "desc": "waitfor charset", "pattern": "(?i:[\\\"'`](?:;*\\\\s*?waitfor\\\\s+(?:delay|time)\\\\s+[\\\"'`]|;.*?:\\\\s*?goto)|alter\\\\s*?\\\\w+.*?cha(?:racte)?r\\\\s+set\\\\s+\\\\w+)"},
+  {"id": "942250", "desc": "merge execute immediate match against", "pattern": "(?i:merge.*?using\\\\s*?\\\\(|execute\\\\s*?immediate\\\\s*?[\\\"'`]|match\\\\s*?[\\\\w(),+-]+\\\\s*?against\\\\s*?\\\\()"},
+  {"id": "942270", "desc": "union select from", "pattern": "(?i)union.*?select.*?from"},
+  {"id": "942280", "desc": "shutdown waitfor pg_sleep", "pattern": "(?i:(?:;\\\\s*?shutdown\\\\s*?(?:[#;]|\\\\/\\\\*|--|\\\\{)|waitfor\\\\s*?delay\\\\s?[\\\"'`]+\\\\s?\\\\d|select\\\\s*?pg_sleep))"},
+  {"id": "942290", "desc": "MongoDB operator", "pattern": "(?i:(?:\\\\[\\\\$(?:ne|eq|lte?|gte?|n?in|mod|all|size|exists|type|slice|x?or|div|like|between|and)\\\\]))"},
+  {"id": "942320", "desc": "procedure declare exec", "pattern": "(?i:(?:create\\\\s+(?:procedure|function)\\\\s*?\\\\w+\\\\s*?\\\\(\\\\s*?\\\\)\\\\s*?-|;\\\\s*?(?:declare|open)\\\\s+[\\\\w-]+|procedure\\\\s+analyse\\\\s*?\\\\(|declare[^\\\\w]+[@#]\\\\s*?\\\\w+|exec\\\\s*?\\\\(\\\\s*?\\\\@))"},
+  {"id": "942500", "desc": "MySQL inline comment", "pattern": "(?i:/\\\\*[!+](?:[\\\\w\\\\s=_\\\\-()]+)?\\\\*/)"},
+  {"id": "942110", "desc": "quote semicolon test", "pattern": "(?:^\\\\s*[\\\"'`;]+|[\\\"'`]+\\\\s*$)"},
+  {"id": "942300", "desc": "or and div char when", "pattern": "(?i:(?:(?:n(?:and|ot)|(?:x?x)?or|between|\\\\|\\\\||like|and|div|&&)\\\\s+\\\\s*?\\\\w+\\\\(|\\\\)\\\\s*?when\\\\s*?\\\\d+\\\\s*?then|[\\\"'`]\\\\s*?(?:--|\\\\{|#)|cha?r\\\\s*?\\\\(\\\\s*?\\\\d|\\\\/\\\\*!\\\\s?\\\\d+))"},
+  {"id": "942140", "desc": "common DB names", "pattern": "(?i:\\\\b(?:(?:m(?:s(?:ys(?:ac(?:cess(?:objects|storage|xml)|es)|(?:relationship|object|querie)s|modules2?)|db)|aster\\\\.\\\\.sysdatabases|ysql\\\\.db)|pg_(?:catalog|toast)|information_schema|northwind|tempdb)\\\\b|s(?:(?:ys(?:\\\\.database_name|aux)|qlite(?:_temp)?_master)\\\\b|chema(?:_name\\\\b|\\\\W*\\\\())|d(?:atabas|b_nam)e\\\\W*\\\\())"},
+  {"id": "942190", "desc": "MSSQL info_schema exec", "pattern": "(?i:(?:[\\\"'`](?:;?\\\\s*?(?:having|select|union)\\\\b\\\\s*?[^\\\\s]|\\\\s*?!\\\\s*?[\\\"'`\\\\w])|(?:c(?:onnection_id|current_user)|database)\\\\s*?\\\\([^\\\\)]*?|u(?:nion(?:[\\\\w(\\\\s]*?select| select @)|ser\\\\s*?\\\\([^\\\\)]*?)|s(?:chema\\\\s*?\\\\([^\\\\)]*?|elect.*?\\\\w?user\\\\()|into[\\\\s+]+(?:dump|out)file\\\\s*?[\\\"'`]|\\\\s*?exec(?:ute)?.*?\\\\Wxp_cmdshell|from\\\\W+information_schema\\\\W|exec(?:ute)?\\\\s+master\\\\.|\\\\wiif\\\\s*?\\\\())"}
+]

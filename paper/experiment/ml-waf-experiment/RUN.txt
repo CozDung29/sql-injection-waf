@@ -1,0 +1,21 @@
+ml-waf-experiment — advanced evaluation (bandit sort, Wilson policy, fingerprint dedup, surrogate stub).
+Data only under ml-waf-experiment/data/ (does not touch ../ml-waf/data).
+
+cd ml-waf-experiment
+
+Run bypass loop:
+  py -3 evasion/run_until_bypass.py --fresh
+  py -3 evasion/run_until_bypass.py --sort thompson --dedup-fingerprint
+  py -3 evasion/run_until_bypass.py --max-tests 9000
+
+Policy from stats (Wilson CI optional):
+  py -3 evasion/encoding_metrics.py --summary
+  py -3 evasion/encoding_metrics.py --wilson --wilson-ub-max 0.08 --explore-thompson
+
+Report vs reference:
+  py -3 evasion/encoding_report.py
+
+Each run appends one line to data/experiment_runs.jsonl
+
+Adversarial (mutations from blocked payloads) — package: adversarial/
+  py -3 evasion/run_until_bypass.py --adv-from-block --adv-max-per-block 8 --adv-total-cap 5000

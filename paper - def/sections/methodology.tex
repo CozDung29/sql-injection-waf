@@ -1,0 +1,77 @@
+\section{Methodology}
+\label{sec:methodology}
+This section specifies the defensive audit methodology: threat scope, staged mutation generation, HTTP probing, outcome labeling, and quantitative coverage metrics. Artifacts reside under \texttt{paper/experiment}, including \texttt{ml-waf-aws-test} (live probing), shared generators under \texttt{ml-waf}, expansion from blocked traces (\texttt{ml-waf-blocked-adv}), offline surrogate scoring (\texttt{ml-waf-multi-eval}), and a compact RFC decoding pilot (\texttt{paper-defense-rfc-ml}).
+
+\subsection{Experimental Environment}
+We deployed the live portion of the study on AWS so that our traffic encountered a Regional AWS WAF policy in front of a real origin, not an offline toy matcher. Requests leave our workstation, enter the Web ACL in \texttt{us-east-1} (Northern Virginia), and only then reach the EC2-hosted application. We configured it this way because it mirrors a common production pattern---inspection at the edge, with the backend seeing whatever the WAF forwards---while keeping the stack under our control for logging and repeat runs.
+
+The Web ACL \texttt{test-waf} holds three rules with fixed priorities and Web ACL capacity unit (WCU) budgets. At priority~0, \texttt{Block-SQLi-Strict-Pattern} is allocated 120~WCU. This rule targets classic tautology and boolean glue: it combines AWS WAF's SQL injection match with a byte match for substrings such as \texttt{1=1} and \texttt{or}, evaluated over all query arguments. Before matching, transformations are chained in order---URL decode, HTML entity decode, then a command-line style normalization---so that straightforward encodings of the same tokens still surface to the patterns.
+
+At priority~1, \texttt{AWS-AWSManagedRulesSQLiRuleSet} consumes 200~WCU. This is Amazon's managed SQLi bundle with every constituent rule set to \emph{block}: it brings vendor-maintained signatures for extended SQLi patterns across headers, URI path, body, and query arguments. During testing we treated it as the wide-coverage layer: it represents the baseline policy a defender can activate without custom rule authoring.
+
+At priority~3, \texttt{Final-Optimized-SQLi-Rule} uses 119~WCU. We added it as a custom regular-expression stage with three patterns targeting residual gaps---hex-flavored encodings, SQL keywords paired with operators, null-byte style obfuscation, and variations on \texttt{OR 1=1}. The intent was to layer a focused custom regex stage after the managed core, covering the specific mutation shapes that motivated this audit.
+
+We attached the ACL to an EC2 instance named \texttt{test.waf.bk}: a \texttt{t3.micro} in \texttt{us-east-1f} with public IP \texttt{3.231.210.98}, running a small custom web application built for these experiments rather than a canned vulnerable app image.
+
+We drove the probes manually. \texttt{curl} and short custom scripts were used only to send pre-chosen request variants; we did not point automated exploitation tools at the endpoint. Representative families in our notes include hex-encoded fragments, tautology clauses (\texttt{OR 1=1}), and union-style sketches (\texttt{UNION SELECT}). Outcomes were read from HTTP responses: a \texttt{403} indicated the WAF successfully blocked the attempt; a \texttt{200} indicated the request passed the edge policy and reached the application---a coverage gap.
+
+\subsection{Threat Model and Coverage Scope}
+We model a network adversary who can send arbitrary HTTP/1.1 requests to a public origin fronted by a managed WAF, observe responses (status and body), and adapt future mutations based on logged outcomes. The adversary has no white-box access to WAF rules, ML model weights, or application source. This matches typical external penetration and red-team constraints and aligns with black-box evasion literature \cite{guan2023ssqli,demetrio2020wafamole}. Modeling this adversary precisely defines the coverage problem: for each mutation family, does the WAF policy succeed in blocking the modeled attacker?
+
+\subsection{Mutation Audit Pipeline}
+The end-to-end audit pipeline is:
+\begin{equation}
+\label{eq:audit-pipeline}
+\begin{aligned}
+\mathcal{M}: \text{Seeds} &\rightarrow \text{Augmentations} \rightarrow \text{Transforms} \rightarrow \mathcal{V}, \\
+\mathcal{V} &\xrightarrow{\text{HTTP}} \text{WAF} \rightarrow \text{App} \rightarrow \text{Coverage Label}.
+\end{aligned}
+\end{equation}
+Here $\mathcal{V}$ is a multiset of concrete request variants (the same logical payload may appear under different transform names or generations). The driver serializes each variant as a GET to the configured URL shape, records the response, and appends a JSON object to a line-oriented log. Each log entry carries enough information for a defender to reconstruct which mutation family produced a gap and under which transform configuration.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{\columnwidth}{\centering Seeds (PG/Oracle) $\rightarrow$ augmentations \& mutate rules $\rightarrow$ optional 2nd-layer transforms $\rightarrow$ GET probes $\rightarrow$ JSONL + coverage counters}}
+  \caption{Defensive audit workflow implemented in the repository: variant generation feeds into probing against a live WAF, producing per-family coverage gap logs. Dashed policy boundaries (rate limits, caps) are configurable in \texttt{config.json}.}
+  \label{fig:pipeline}
+\end{figure}
+
+\subsection{Staged Mutation Generation}
+Generation is deliberately \emph{staged} so that diversity and reproducibility can be traded off explicitly, and so that each stage's contribution to observed coverage gaps can be isolated.
+
+\subsubsection{Seeds and Dialects}
+Oracle-oriented templates originate from the shared \texttt{variants\_f5} corpus; PostgreSQL-oriented templates from \texttt{variants\_pg}. Dialect choice affects function names, literal syntax, and comment styles, which in turn interact with WAF tokenization and application SQL parsers---creating distinct coverage challenges for each dialect family.
+
+\subsubsection{Deployment Augmentations and Learned Rules}
+The AWS harness can inject additional dialect- and encoding-specific variants and merge transforms described in \texttt{mutate\_rules.json} (analogous to blocked-trace expansion in \texttt{ml-waf-blocked-adv}). Learned rules encode empirical regularities from prior blocked or gap events, biasing the search toward regions of the mutation space that previously produced informative outcomes for the defender.
+
+\subsubsection{Second-Layer Transforms and Search Bias}
+An optional second layer applies additional evasion transforms from a shared catalog, subject to caps and transform policy files. Consequently, the empirical distribution over families is \emph{not} a uniform draw from all possible SQLi strings; it reflects queue scheduling, generation limits, and historical learning. Aggregate gap rates must be read as properties of this \emph{induced} distribution, not as an intrinsic property of ``all SQLi.'' This is a feature for audit teams (realistic search priority) and a caveat for comparability across studies (different search budgets yield different gap rates).
+
+\subsubsection{Remapping as an Experimental Control}
+Numeric seed tokens are remapped to stable string prefixes (e.g., project names) so that the WAF and application agree on the injected parameter slot. Without such alignment, high gap counts could confound parameter shadowing, optional query keys ignored by the app, or divergent casing conventions---effects that are important in practice but orthogonal to the mutation operators under study.
+
+\subsection{Outcome Semantics}
+Let each attempt $i$ produce HTTP status $s_i$ and body $b_i$. The probe assigns $y_i \in \{\textsf{gap}, \textsf{defended}, \textsf{other}\}$ according to rules encoded in \texttt{run\_probe.py} and companion documentation:
+\begin{itemize}
+  \item \textsf{defended}: explicit WAF or edge denial (e.g., 403 in the lab configuration)---the policy successfully blocked the attempt.
+  \item \textsf{gap}: WAF-pass \emph{and} application-visible signals classified as consistent with effective SQLi-side effects for the testbed (including selected error semantics and non-blocking status patterns defined in the script)---a coverage failure requiring remediation.
+  \item \textsf{other}: ambiguous cases such as not-found or responses treated as ineffective noise (e.g., encoding-related 500s that do not meet the gap predicate).
+\end{itemize}
+These labels are \emph{operational}: they operationalize a defensive audit notion of ``policy gap'' rather than a formal proof of exploitability. They should not be equated with vendor marketing metrics or with ground-truth database compromise, but they do provide consistent, reproducible signals for comparing policy configurations.
+
+\subsection{Coverage Metrics}
+Let $N$ be the number of analyzed attempts and $N_{\mathrm{gap}}$ the count with $y_i=\textsf{gap}$. The \emph{aggregate gap rate} is
+\begin{equation}
+\label{eq:aggregate-gap-rate}
+\mathrm{GR}_{\mathrm{agg}} = \frac{N_{\mathrm{gap}}}{N}.
+\end{equation}
+For each mutation family $f$, let $N_f$ be attempts tagged with $f$ and $N_{f,\mathrm{gap}}$ gaps among them. The \emph{family-level gap rate} is $\mathrm{GR}_f = N_{f,\mathrm{gap}}/N_f$. Families with high $\mathrm{GR}_f$ are priority remediation targets; families with $\mathrm{GR}_f \approx 0$ confirm the policy already defends that mutation class well. Export scripts also attach binomial confidence intervals to per-variant or per-family rates in machine-readable outputs; we report point estimates in the main tables and caution that families with tiny $N_f$ produce unstable $\mathrm{GR}_f$.
+
+We additionally report \emph{unique payload cardinalities}: distinct strings observed in gap versus defended sets. Overlap between sets indicates that the same surface form can yield different labels under context (e.g., timing, rate limiting, or state), motivating analysis at the attempt level rather than payload level alone.
+
+\subsection{Secondary Control: RFC Decoding and Surrogate Scoring}
+To isolate one normalization axis, we map each probe string through repeated \texttt{urllib.parse.unquote\_plus} until a fixpoint (\texttt{unquote\_chain}), then train/evaluate a TF-IDF + logistic-regression pipeline (\texttt{paper-defense-rfc-ml/ml\_baseline.py}) on 20 labeled HTTP templates. The pilot corpus is \texttt{ml-waf/data/attack.json} (10 attack-like requests: SQLi, XSS, path traversal, and RCE-style examples) plus \texttt{benign.json} (10 generic benign requests); it is \emph{not} the live SQLi mutation set. This tests whether a minimal RFC-relevant decoder aligns feature space enough for a toy surrogate to improve---directly answering whether single-pass decoding would be sufficient as a low-cost defensive enhancement. It does not evaluate a full HTTP proxy \cite{httpnormalizer,rfc7230,rfc3986}. A separate optional track under \texttt{ml-waf/train.py} trains a random forest for ModSecurity-style offline scoring (\texttt{ml-waf-multi-eval}); that model is outside RQ3.
+
+\subsection{Implementation Notes}
+The probe maintains per-transform counters (\texttt{learned\_encodings.json}), supports dry-run and request caps, and can suggest regex fragments from gap logs for blue-team rule authoring. Offline ModSecurity-style and RF scores (\texttt{ml-waf-multi-eval}) may disagree with the managed WAF; only live labels reflect the deployed policy and thus constitute the authoritative coverage signal for policy improvement decisions.

@@ -1,0 +1,49 @@
+{
+  "ts": 1777967490.992107,
+  "base_url": "http://test-waf-949142697.us-east-1.elb.amazonaws.com/projects",
+  "inject_mode": "query",
+  "query_param": "projectName",
+  "id_remap": {
+    "from": "36331",
+    "to": "Demo_project"
+  },
+  "id_remap_legacy": [
+    {
+      "from": "Project 1",
+      "to": "Demo_project"
+    },
+    {
+      "from": "Project+1",
+      "to": "Demo_project"
+    }
+  ],
+  "sql_dialect": "postgresql",
+  "raw_payload": "36331' OR 1=1--",
+  "repeat_per_variant": 1,
+  "variants_tested": 5000,
+  "bypass": 2083,
+  "blocked": 2793,
+  "waf_passed": 2083,
+  "blocked_note": "blocked=WAF; bypass=200 OK, effective 500, 400/422 app errors; other_learned=404 not_found or 500 ineffective (utf8/encoding)",
+  "bypass_note": "bypass=effective outcome only; waf_passed=any non-WAF denial (includes 404 app not found, 502, ineffective 500)",
+  "other_or_error": 124,
+  "http_status_counts": {
+    "200": 2083,
+    "403": 2793
+  },
+  "calibration": {
+    "http_status": 200,
+    "url": "http://test-waf-949142697.us-east-1.elb.amazonaws.com/projects?projectName=Demo_project",
+    "body_snip": "{\"statusCode\":200,\"message\":\"[GET]:::/projects?projectName=Demo_project - Success\",\"data\":[{\"id\":3,\"applicationDomain\":\"https://example.com\",\"createdAt\":\"2025-05-27T16:18:06.399Z\",\"updatedAt\":\"2025-05-27T16:18:06.399Z\"},{\"id\":4,\"applicationDomain\":\"https://example.com\",\"createdAt",
+    "hint": "ok",
+    "waf_blocked": false,
+    "classify_detail": "ok_200"
+  },
+  "config": "E:\\installQ\\chatbotAI\\chat-bot-ai\\ml-waf-aws-test\\config.json",
+  "bypass_learned_jsonl": "E:\\installQ\\chatbotAI\\chat-bot-ai\\ml-waf-aws-test\\data\\bypass_learned.jsonl",
+  "blocked_learned_jsonl": "E:\\installQ\\chatbotAI\\chat-bot-ai\\ml-waf-aws-test\\data\\blocked_learned.jsonl",
+  "other_learned_jsonl": "E:\\installQ\\chatbotAI\\chat-bot-ai\\ml-waf-aws-test\\data\\other_learned.jsonl",
+  "learned_encodings_json": "E:\\installQ\\chatbotAI\\chat-bot-ai\\ml-waf-aws-test\\data\\learned_encodings.json",
+  "report_txt": "E:\\installQ\\chatbotAI\\chat-bot-ai\\ml-waf-aws-test\\data\\aws_probe_report.txt",
+  "bypass_found_txt": "E:\\installQ\\chatbotAI\\chat-bot-ai\\ml-waf-aws-test\\data\\bypass_found.txt"
+}

@@ -1,0 +1,7 @@
+{
+  "enabled": true,
+  "min_samples_for_exclude": 40,
+  "explore_rate": 0.15,
+  "never_exclude": ["other", "identity"],
+  "exclude": []
+}

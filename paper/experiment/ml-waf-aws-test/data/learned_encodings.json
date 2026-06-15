@@ -1,0 +1,35 @@
+{
+  "transforms": {
+    "url_encode": {
+      "bypass": 0,
+      "block": 486,
+      "other": 0,
+      "reach": 0
+    },
+    "null_byte": {
+      "bypass": 243,
+      "block": 0,
+      "other": 0,
+      "reach": 243
+    },
+    "hex": {
+      "bypass": 0,
+      "block": 241,
+      "other": 0,
+      "reach": 0
+    },
+    "identity": {
+      "bypass": 242,
+      "block": 0,
+      "other": 0,
+      "reach": 242
+    },
+    "case_mix": {
+      "bypass": 12,
+      "block": 0,
+      "other": 0,
+      "reach": 12
+    }
+  },
+  "updated_ts": 1777968248.652284
+}

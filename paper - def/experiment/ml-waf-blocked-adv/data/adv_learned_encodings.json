@@ -1,0 +1,131 @@
+{
+  "updated_ts": 1774456805.852765,
+  "source": "C:\\Users\\GAMING\\Desktop\\project\\chat-bot\\chat-bot-ai\\ml-waf-blocked-adv\\data\\test_results.jsonl",
+  "test_results_lines": 2430,
+  "transforms": {
+    "adv_url_encode": {
+      "bypass": 0,
+      "block": 443
+    },
+    "adv_double_url_encode": {
+      "bypass": 0,
+      "block": 360
+    },
+    "adv_case_mix": {
+      "bypass": 28,
+      "block": 96
+    },
+    "adv_comment_mysql": {
+      "bypass": 1,
+      "block": 10
+    },
+    "adv_comment_hash": {
+      "bypass": 10,
+      "block": 1
+    },
+    "adv_comment_dash": {
+      "bypass": 10,
+      "block": 1
+    },
+    "adv_comment_slash": {
+      "bypass": 1,
+      "block": 10
+    },
+    "adv_plus_space": {
+      "bypass": 1,
+      "block": 6
+    },
+    "adv_tab_space": {
+      "bypass": 1,
+      "block": 10
+    },
+    "adv_null_suffix": {
+      "bypass": 332,
+      "block": 315,
+      "error": 2
+    },
+    "adv_hex_chars": {
+      "bypass": 486,
+      "block": 6,
+      "unauthorized": 1,
+      "error": 2
+    },
+    "adv_split_union": {
+      "bypass": 1,
+      "block": 9
+    },
+    "adv_hex_prefix": {
+      "bypass": 283,
+      "block": 0
+    },
+    "adv_case_upper_kw": {
+      "bypass": 0,
+      "block": 4
+    }
+  },
+  "rates": {
+    "adv_url_encode": {
+      "bypass_rate": 0.0,
+      "n_bypass_block": 443
+    },
+    "adv_double_url_encode": {
+      "bypass_rate": 0.0,
+      "n_bypass_block": 360
+    },
+    "adv_case_mix": {
+      "bypass_rate": 0.22580645161290322,
+      "n_bypass_block": 124
+    },
+    "adv_comment_mysql": {
+      "bypass_rate": 0.09090909090909091,
+      "n_bypass_block": 11
+    },
+    "adv_comment_hash": {
+      "bypass_rate": 0.9090909090909091,
+      "n_bypass_block": 11
+    },
+    "adv_comment_dash": {
+      "bypass_rate": 0.9090909090909091,
+      "n_bypass_block": 11
+    },
+    "adv_comment_slash": {
+      "bypass_rate": 0.09090909090909091,
+      "n_bypass_block": 11
+    },
+    "adv_plus_space": {
+      "bypass_rate": 0.14285714285714285,
+      "n_bypass_block": 7
+    },
+    "adv_tab_space": {
+      "bypass_rate": 0.09090909090909091,
+      "n_bypass_block": 11
+    },
+    "adv_null_suffix": {
+      "bypass_rate": 0.5131375579598145,
+      "n_bypass_block": 647
+    },
+    "adv_hex_chars": {
+      "bypass_rate": 0.9878048780487805,
+      "n_bypass_block": 492
+    },
+    "adv_split_union": {
+      "bypass_rate": 0.1,
+      "n_bypass_block": 10
+    },
+    "adv_hex_prefix": {
+      "bypass_rate": 1.0,
+      "n_bypass_block": 283
+    },
+    "adv_case_upper_kw": {
+      "bypass_rate": 0.0,
+      "n_bypass_block": 4
+    }
+  },
+  "totals": {
+    "blocked": 1271,
+    "bypass": 1154,
+    "error": 4,
+    "unauthorized": 1
+  },
+  "note": "Keys are adv_label from mutate_rules. block counts result=blocked (not WAF 403)."
+}

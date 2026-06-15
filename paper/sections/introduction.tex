@@ -1,30 +1,22 @@
 \section{Introduction}
-Web applications have become the dominant interface for e-commerce, identity management, and data-driven services. To mitigate common injection and exploitation attempts, many deployments rely on Web Application Firewalls (WAFs) that inspect inbound traffic and block requests that match known attack patterns. In practice, WAFs are often configured using rule-based signatures and curated detection logic, including collections aligned with OWASP guidance \cite{owasp-crs,waf-survey}.
+Web applications remain the primary interface for online services, with Web Application Firewalls (WAFs) widely deployed to block injection attacks \cite{owasp-crs,waf-survey}. From an attacker's perspective, the key challenge is navigating a specific deployment's concrete rules and parsers to achieve a security-relevant application outcome. Signatures can be evaded by semantic-preserving rewrites, and parsers can disagree on decoding and parameter binding \cite{mutation-sqli-evasion,parsing-discrepancies,request-smuggling}. While these phenomena are well known, measuring the conditions and specific mutation structures under which bypasses occur remains a scientific challenge.
 
-Despite their prevalence, WAF effectiveness against modern attackers remains challenging. First, traditional payload obfuscation techniques that were historically useful for bypassing static signatures are increasingly detected as defenders improve normalization and detection coverage \cite{mutation-sqli-evasion}. Second, even when the WAF blocks a large fraction of mutated inputs, parsing discrepancies between the WAF and the backend application can still be exploited. The same HTTP message can be interpreted differently due to differences in how Content-Type values are parsed, how encodings are resolved, and how multipart or structured bodies are tokenized \cite{parsing-discrepancies,request-smuggling}. As a result, an attacker may craft a request that appears benign under the WAF's interpretation while retaining an injection-relevant representation when processed by the application.
+This paper contributes an operational, attack-centric evaluation. We systematically mutate SQLi fragments, probe a production-style AWS WAF deployment, and analyze outcomes at both aggregate and variant-family levels. We release our implementation as a reproducible artifact (\texttt{paper/experiment}) to provide red and blue teams with empirical distributions for prioritization and regression testing.
 
-This paper proposes a preprocessing-based defense that performs HTTP normalization before the request reaches the WAF and application processing logic. The key idea is to eliminate representational degrees of freedom by enforcing deterministic, RFC-compliant message handling. Specifically, we normalize URI and header encodings, canonicalize structured bodies according to their declared Content-Type, and reject malformed or ambiguous requests. By aligning the on-the-wire representation with a single canonical interpretation, the approach prevents mutation-based SQL injection payloads from surviving semantic inconsistencies \cite{rfc7230,rfc3986}.
+\subsection{Problem Statement}
+SQLi evasion combines representation-level mutation---altering substrings or encodings seen by a pattern matcher---and interpretation-level divergence, where the WAF and application decode the same sequence differently \cite{akhavani2025waffled}. 
 
-\subsection{Research Problem}
-Modern SQL injection (SQLi) evasion exhibits two complementary ``failure modes'': (i) adversarial mutations at the syntax level and (ii) parsing discrepancies at the protocol level.
+Prior adversarial methods demonstrate that the attack space is combinatorial. Systems like SSQLi \cite{guan2023ssqli}, GSQLi \cite{khan2024gsqli}, and WAF-A-MoLE \cite{demetrio2020wafamole} achieve high bypass rates by searching this space. However, success is rarely uniform across operators. Published rates seldom decompose by operator family on live managed WAFs, obscuring which mutations survive. Furthermore, while mutating HTTP structure induces parsing discrepancies \cite{akhavani2025waffled}, we focus on URL-visible injection with deterministic seed remapping. This minimizes parameter-name mismatch, providing a controlled setting to study representation-level evasion against a fixed policy.
 
-\subsubsection{Adversarial Mutations (Syntax-Level Evasion)}
-Attackers frequently craft mutation sets that aim to preserve \emph{Semantic Equivalence} while altering the textual representation inspected by the WAF. Reinforcement learning enables this process in a closed loop: SSQLi formulates SQLi mutation as a black-box reinforcement-learning problem and, using a soft actor--critic (SAC) strategy, reports bypass rates of up to 97.39\% \cite{guan2023ssqli}. Likewise, GSQLi leverages a GAN-based generator to produce diverse mutated SQLi payloads that evade detection while retaining exploit intent \cite{khan2024gsqli}. Beyond neural generation, WAF-A-MoLE demonstrates that syntax-preserving mutational fuzzing can systematically reduce ML-based WAF confidence and achieve successful bypasses \cite{demetrio2020wafamole}.
+\subsection{Objectives and Research Questions}
+We structure our empirical evaluation around three core questions:
+\begin{itemize}
+  \item \textbf{RQ1 (Scale and semantics).} Under an explicit bypass definition, what fraction of attempts succeed against our AWS WAF lab, and how does this relate to unique payload cardinality?
+  \item \textbf{RQ2 (Structure).} How much bypass mass concentrates in specific mutation families, and which are systematically suppressed?
+  \item \textbf{RQ3 (Normalization control).} Does minimal RFC percent-decoding materially improve a simple offline surrogate's ability to classify strings?
+\end{itemize}
 
-\subsubsection{Parsing Discrepancies (Protocol-Level Divergence)}
-Even when signature and ML-based detectors are hardened, bypasses can persist because the WAF and the backend application may not agree on how to interpret the same on-the-wire bytes. WAFFLED shows that by mutating non-malicious HTTP components (e.g., boundary and structure elements) attackers can induce 1{,}207 confirmed parsing-discrepancy bypasses across major WAF deployments, including AWS WAF and Cloudflare, using content-types such as multipart/form-data, application/json, and application/xml \cite{akhavani2025waffled}. 
-
-Together, these observations define the core research problem: how to prevent AI-driven, syntactically diverse SQLi mutations from exploiting representational mismatches between the WAF inspection layer and the application parsing layer.
-
-\subsection{Objective and Contributions}
-The objective of this work is to reduce mutation-based SQL injection bypass rates by ensuring consistent HTTP request interpretation via RFC-based normalization. Our contributions are as follows:
-
-\begin{enumerate}
-\item We design an HTTP-Normalizer proxy that canonicalizes HTTP message components and enforces strict RFC compliance for syntax, encoding, and Content-Type-dependent body parsing \cite{rfc7230,rfc8259,rfc7578}.
-\item We implement a controlled experimental pipeline (\emph{Fuzzer} $\rightarrow$ \emph{WAF} $\rightarrow$ \emph{Application}) to evaluate mutated SQL injection payloads across multiple Content-Types.
-\item We provide an empirical analysis that categorizes remaining bypasses and shows how normalization shifts the residual attack surface toward non-conformant client behavior.
-\end{enumerate}
+In addressing these questions, we formalize a black-box attack pipeline for managed WAF assessment. We provide an empirical characterization of a live AWS WAF run, detailing unique payload counts and family-level bypass rates that reveal sharp heterogeneity. Finally, we include a secondary control showing that basic canonicalization does not immediately rescue simple classifiers.
 
 \subsection{Paper Organization}
-Section~\ref{sec:background} reviews WAF mechanisms, parsing discrepancies, and mutation-based attacks. Section~\ref{sec:methodology} describes the normalization design and experimental setup. Section~\ref{sec:experiments} presents the dataset, benchmarking methodology, and results. Section~\ref{sec:discussion} concludes with implications, limitations, and future work.
-
+Section~\ref{sec:background} covers related work. Section~\ref{sec:methodology} details our methodology. Section~\ref{sec:experiments} presents the evaluation answering RQ1--RQ3. Section~\ref{sec:discussion} concludes the paper.

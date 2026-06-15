@@ -1,0 +1,71 @@
+{
+  "max_payload_len": 2000,
+  "transform_steps": [
+    {
+      "label": "adv_hex_chars",
+      "fn": "hex_encode_chars"
+    },
+    {
+      "label": "adv_comment_hash",
+      "fn": "comment_inline_mysql_hash"
+    },
+    {
+      "label": "adv_comment_dash",
+      "fn": "comment_inline_double_dash"
+    },
+    {
+      "label": "adv_null_suffix",
+      "fn": "null_byte_suffix"
+    },
+    {
+      "label": "adv_case_mix",
+      "fn": "case_mix"
+    },
+    {
+      "label": "adv_plus_space",
+      "fn": "plus_for_space"
+    },
+    {
+      "label": "adv_comment_mysql",
+      "fn": "comment_inline_mysql"
+    },
+    {
+      "label": "adv_comment_slash",
+      "fn": "comment_slash_star"
+    },
+    {
+      "label": "adv_tab_space",
+      "fn": "tab_newline_for_space"
+    },
+    {
+      "label": "adv_url_encode",
+      "fn": "url_encode"
+    },
+    {
+      "label": "adv_double_url_encode",
+      "fn": "double_url_encode"
+    },
+    {
+      "label": "adv_case_upper_kw",
+      "fn": "case_upper_keywords"
+    },
+    {
+      "label": "adv_unicode_esc",
+      "fn": "unicode_escape"
+    }
+  ],
+  "regex_rules": [
+    {
+      "label": "adv_split_union",
+      "pattern": "(?i)\\bunion\\s+select\\b",
+      "replacement": "UNION/**/SELECT",
+      "count": 1
+    }
+  ],
+  "hex_prefix_rule": {
+    "enabled": true,
+    "label": "adv_hex_prefix",
+    "prefix_chars": 24,
+    "max_hex_len": 400
+  }
+}

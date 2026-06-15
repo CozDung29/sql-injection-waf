@@ -1,14 +1,17 @@
 \section{Discussion and Conclusion}
 \label{sec:discussion}
-Our experiments demonstrate that mutation-based SQL injection bypasses succeed not only by hiding signatures, but also by leveraging differential HTTP parsing behavior across the WAF and the backend application. Even when WAF signatures are updated, representational degrees of freedom in HTTP message syntax, encoding, and Content-Type-specific body handling can preserve injection-relevant semantics across layers.
+This work decomposes SQLi WAF bypass analysis along semantics, scale, and structure under an induced search distribution.
 
-\subsection{Security vs Performance Trade-off}
-HTTP normalization improves security by enforcing deterministic, RFC-compliant interpretation, which eliminates many discrepancy surfaces that attackers rely on \cite{rfc7230,rfc3986}. The primary cost is preprocessing latency and strictness. Requests that violate syntactic constraints or exhibit ambiguous structure are rejected, which may reduce compatibility with legacy clients that send non-conformant traffic. In deployment, this trade-off can be managed by configuring size limits, maintaining observability for rejected requests, and gradually tightening policies.
+\subsection{Research Question Answers}
+\textbf{RQ1.} The archived run ($N=5{,}000$) yields a 41.7\% bypass rate but only 19 unique bypass payloads. High attempt-level rates coexist with concentrated string reuse.
 
-Normalization also concentrates residual bypasses into a small set of mechanisms that remain relevant only when clients deviate from strict protocol expectations. This shift enables defenders to focus mitigations on a smaller and more principled attack surface, rather than chasing an expanding collection of mutation patterns.
+\textbf{RQ2.} Bypass probability varies drastically across families. Identity-, case-, and null-byte-oriented spawns achieve nearly 100\% success, while encoding and hex-style spawns are fully blocked. This highlights that global metrics mask structural holes.
 
-\subsection{Conclusion}
-This paper proposed an RFC-based, preprocessing approach that places an HTTP-Normalizer proxy before WAF inspection. By canonicalizing HTTP message components and enforcing strict parsing and re-serialization, the method aligns WAF inspection with backend parsing and reduces the success rate of mutation-based SQL injection bypasses across \texttt{multipart/form-data}, JSON, and XML request bodies.
+\textbf{RQ3.} Fixpoint percent-decoding did not improve our offline surrogate pilot's accuracy, demonstrating that live bypass vulnerabilities cannot be trivially resolved by simple canonicalization. Stronger mitigations require richer feature interactions and protocol-complete normalization.
 
-Overall, the results support the conclusion that deterministic RFC-based normalization is a robust defense against mutation-based attacks driven by parsing discrepancies. Future work will extend the normalization policy to additional HTTP versions and proxy behaviors and will explore automated discrepancy discovery to further reduce the residual bypass space.
+\subsection{Implications and Conclusion}
+For defenders, policy tuning and regression testing must be family-aware; relying on aggregate dashboards is insufficient. Edge decisions should be combined with robust application-layer controls. For offensive researchers, publishing induced search configurations and explicit outcome logs is vital for reproducible science.
 
+We presented a reproducible black-box methodology for SQLi WAF evaluation. The core takeaway is that meaningful offensive evaluation demands decomposed statistics and transparent search bias. Our family-level analysis identifies specific operational vulnerabilities, reinforcing the need for layered, context-aware defenses.
+
+\textbf{Limitations and Ethics.} Our findings are bounded by a single policy snapshot and URL injection channel. All methodology is strictly intended for authorized testing environments.

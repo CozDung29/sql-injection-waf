@@ -1,0 +1,17 @@
+env,family,distinct_variants,attempts,bypass,blocked,other,bypass_rate,ci95_low,ci95_high
+aws_waf_lab,hex_account_style,2,2,2,0,0,1.000000,0.342372,1.000000
+aws_waf_lab,spawn_case_mix,459,459,412,47,0,0.897603,0.866487,0.922120
+aws_waf_lab,spawn_identity,1808,1808,1611,191,6,0.891040,0.875839,0.904582
+aws_waf_lab,spawn_null_byte,1807,1807,1610,191,6,0.890980,0.875771,0.904529
+aws_waf_lab,spawn_encoding,3471,3471,86,3372,13,0.024777,0.020107,0.030497
+aws_waf_lab,spawn_hex_style,1807,1807,0,1801,6,0.000000,0.000000,0.002121
+aws_waf_lab,whitespace_and_delimiters,16,16,0,16,0,0.000000,0.000000,0.193613
+aws_waf_lab,percent_encoding_variants,15,15,0,15,0,0.000000,0.000000,0.203889
+aws_waf_lab,sql_comment_obfuscation,14,14,0,14,0,0.000000,0.000000,0.215317
+aws_waf_lab,aws_dialect_variants,12,12,0,12,0,0.000000,0.000000,0.242501
+aws_waf_lab,hex_encoding,12,12,0,12,0,0.000000,0.000000,0.242501
+aws_waf_lab,other_misc,5,5,0,5,0,0.000000,0.000000,0.434491
+aws_waf_lab,null_byte_suffix,3,3,0,3,0,0.000000,0.000000,0.561506
+aws_waf_lab,nested_percent_encoding,2,2,0,2,0,0.000000,0.000000,0.657628
+aws_waf_lab,baseline_seed,1,1,0,1,0,0.000000,0.000000,0.793457
+aws_waf_lab,keyword_surface_variants,1,1,0,1,0,0.000000,0.000000,0.793457

@@ -1,0 +1,66 @@
+ml-waf-aws-test — probe ELB/WAF using the SAME variant set as ml-waf evasion/curl_bypass_f5.py (variants_f5).
+
+Unchanged F5 payloads live in ml-waf; id_remap rewrites the numeric prefix (e.g. 36331 -> Demo_project) so ?projectName=Demo_project%27...
+
+Data only under ml-waf-aws-test/data/ (separate from ml-waf and ml-waf-blocked-adv).
+
+Probe only exercises the URL the WAF sees; backend may ignore unknown query keys unless your API implements them.
+Example: inject_mode query + query_param projectName (NestJS camelCase) + id_remap -> .../projects?projectName=Demo_project%27...
+inject_mode path: .../projects/<segment> (remap e.g. to numeric id if you use path).
+
+Setup:
+  cd ml-waf-aws-test
+  py -3 -m pip install -r requirements.txt
+  copy config.example.json config.json   (or edit config.json)
+  py -3 run_probe.py --fresh
+
+Dry-run (print URLs only):
+  py -3 run_probe.py --dry-run
+
+Full pipeline (same idea as ml-waf evasion/run_until_bypass.py — queue, spawn_from, generations; can be thousands of HTTP GETs):
+  py -3 run_probe.py --full --fresh
+  Optional: set "max_requests": 4000 in config.json to cap total GETs (null = run until max_generations or queue empty).
+
+Config:
+  base_url     — e.g. http://host/projects (path mode) OR full URL with ? for query mode
+  inject_mode  — path (default): .../projects/<payload>   |   query: ...?q=<payload>
+  id_remap     — string replace 36331 -> seed prefix (e.g. Demo_project) on each variant
+  id_remap_legacy — optional extra [{from,to}, ...] e.g. Project 1 -> Demo_project (old runs / saved seeds)
+  aws_extra_variants — add AWS/SQL dialect + encoding extras (default true); aws_extra_max caps new unique rows
+  adv_mutate_* — same idea as ml-waf-blocked-adv mutate_rules.json on remapped seed; adv_second_layer runs evasion.transformers all_transforms on first-layer outputs (capped)
+  data/transform_policy.json — if present, overrides ml-waf policy (use empty exclude[] to allow tab/newline/plus transforms in --full)
+  query_param  — inject_mode=query only (e.g. projectName for Nest @Query('projectName'))
+  raw_payload  — inject fragment after remap (default PG: 36331' OR 1=1--); use UNION SELECT 1,2-- only if you test UNION columns
+  sql_dialect  — postgresql (default) uses pg_variants.py; oracle uses ml-waf variants_f5 (FROM DUAL, CHR Oracle)
+  Neon / PostgreSQL: no DUAL table (Oracle-only). Full mode refill now uses the same dialect for gen>=1 base expansion (was Oracle-only before).
+  probe_mode   — variants (default, ~27 GETs) | full (use --full; ml-waf transform queue + gens)
+  max_generations — full mode only; default 5 (same as run_until_bypass MAX_GEN)
+  sleep_seconds — delay between GETs (~F5 batch pace; default 0.15)
+  max_requests — variants mode: cap list length | full mode: cap total HTTP GETs (null = unlimited)
+
+Outputs:
+  data/aws_probe_results.jsonl — one line per variant (result: bypass | blocked | other)
+  data/aws_probe_report.txt    — human-readable table (same rows as console)
+  data/bypass_learned.jsonl    — result=bypass (WAF passed; effective 500, 200, 400/422 app errors)
+  data/blocked_learned.jsonl    — result=blocked (WAF/edge)
+  data/other_learned.jsonl     — result=other with not_found (404) or ineffective_500 (utf8/encoding noise)
+  data/learned_encodings.json  — per-transform bypass / block / other counts
+  data/aws_probe_summary.json  — counts, http_status_counts, paths
+
+Classification: blocked=WAF. Bypass=effective cases (200, non-encoding 500, 400/422 JSON). 404 and UTF-8/field noise 500 go to other_learned (weak / wrong transform).
+Each request is printed to the terminal as it completes (flush); use PYTHONUNBUFFERED=1 if your shell buffers output.
+
+If the API expects another param name or path style, change query_param / base_url.
+
+Generate suggested AWS WAF rules from mutate_rules.json (broad, aligned with adv_mutate) and/or bypass/blocked JSONL (data-specific):
+  py -3 -m pip install -r requirements.txt
+  py -3 generate_rules_from_data.py
+  General patterns only (read data/mutate_rules.json — regex_rules + transform fn map): py -3 generate_rules_from_data.py --mode mutate
+  Data + mutate (default): py -3 generate_rules_from_data.py --mode both
+  JSONL only: py -3 generate_rules_from_data.py --mode data
+  Optional: py -3 generate_rules_from_data.py --mutate-rules ./data/mutate_rules.json --data-dirs ./data ../ml-waf/data --max-patterns 15 --out-json data/generated_aws_rule_suggestion.json
+  Review generated_aws_rule_suggestion.json: rule_regex_from_mutate_rules (raw regex from mutator), rule_regex_from_bypass_generalized (bypass JSONL mined + generalized), rule_regex_compact_from_data / rule_regex_compact (escaped literals from mined data when --mode data or both). Tune --bypass-min-support-ratio, --no-bypass-generalize, --min-support, --max-bypass-ratio as needed.
+  Remap-aware: mining and ML n-grams run on normalize_for_mining_deep() so windows are not taken inside id remap tokens (e.g. Demo_project); remap-like fragments (e.g. roject%27) are dropped from ByteMatch / escaped-regex pools.
+
+Semantic regex + rich transforms (few rules, broad patterns — tune for false positives):
+  See presets/semantic_sqli_regex_presets.json (Or merge those Statement blocks into a Web ACL rule). Chains in text_transform_chains.* are reusable on any RegexMatchStatement.

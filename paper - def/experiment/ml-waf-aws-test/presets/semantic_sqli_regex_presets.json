@@ -1,0 +1,74 @@
+{
+  "description": "Hand-tuned RegexMatchStatement presets: few rules, broad intent. Combine with managed rules and tune for FP. AWS WAF uses RE2; (?i) enables case-insensitive. Order TextTransformations from decode/normalize toward comparison.",
+  "text_transform_chains": {
+    "query_decode_normalize": [
+      { "Priority": 1, "Type": "URL_DECODE" },
+      { "Priority": 2, "Type": "HTML_ENTITY_DECODE" },
+      { "Priority": 3, "Type": "COMPRESS_WHITE_SPACE" },
+      { "Priority": 4, "Type": "LOWERCASE" }
+    ],
+    "query_decode_normalize_cmdline": [
+      { "Priority": 1, "Type": "URL_DECODE" },
+      { "Priority": 2, "Type": "HTML_ENTITY_DECODE" },
+      { "Priority": 3, "Type": "CMD_LINE" },
+      { "Priority": 4, "Type": "COMPRESS_WHITE_SPACE" },
+      { "Priority": 5, "Type": "LOWERCASE" }
+    ],
+    "minimal_like_sqli_managed": [
+      { "Priority": 1, "Type": "URL_DECODE" },
+      { "Priority": 2, "Type": "HTML_ENTITY_DECODE" },
+      { "Priority": 3, "Type": "CMD_LINE" },
+      { "Priority": 4, "Type": "LOWERCASE" }
+    ]
+  },
+  "rules": [
+    {
+      "Name": "Semantic-Tautology-Or-And-Eq",
+      "MetricName": "SemanticTautologyOrAndEq",
+      "Statement": {
+        "RegexMatchStatement": {
+          "RegexString": "(?i)\\b(or|and)\\b\\s+['\"\\w]+\\s*=\\s*['\"\\w]+",
+          "FieldToMatch": { "AllQueryArguments": {} },
+          "TextTransformations": [
+            { "Priority": 1, "Type": "URL_DECODE" },
+            { "Priority": 2, "Type": "HTML_ENTITY_DECODE" },
+            { "Priority": 3, "Type": "COMPRESS_WHITE_SPACE" },
+            { "Priority": 4, "Type": "LOWERCASE" }
+          ]
+        }
+      }
+    },
+    {
+      "Name": "Semantic-Union-Select-Fragment",
+      "MetricName": "SemanticUnionSelectFragment",
+      "Statement": {
+        "RegexMatchStatement": {
+          "RegexString": "(?i)\\bunion\\b\\s+\\bselect\\b",
+          "FieldToMatch": { "AllQueryArguments": {} },
+          "TextTransformations": [
+            { "Priority": 1, "Type": "URL_DECODE" },
+            { "Priority": 2, "Type": "HTML_ENTITY_DECODE" },
+            { "Priority": 3, "Type": "COMPRESS_WHITE_SPACE" },
+            { "Priority": 4, "Type": "LOWERCASE" }
+          ]
+        }
+      }
+    },
+    {
+      "Name": "Semantic-Sql-Comment-Bypass-Heuristic",
+      "MetricName": "SemanticSqlCommentHeuristic",
+      "Statement": {
+        "RegexMatchStatement": {
+          "RegexString": "(?i)(/\\*|--|#).{0,48}\\b(select|union|insert|update|delete|drop)\\b",
+          "FieldToMatch": { "AllQueryArguments": {} },
+          "TextTransformations": [
+            { "Priority": 1, "Type": "URL_DECODE" },
+            { "Priority": 2, "Type": "HTML_ENTITY_DECODE" },
+            { "Priority": 3, "Type": "COMPRESS_WHITE_SPACE" },
+            { "Priority": 4, "Type": "LOWERCASE" }
+          ]
+        }
+      }
+    }
+  ]
+}

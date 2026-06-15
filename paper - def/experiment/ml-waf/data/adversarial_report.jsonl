@@ -1,0 +1,5 @@
+{"payload": "36331' UNION SELECT 1,2 FROM DUAL--", "name": "original", "local": "block", "local_score": 1.0}
+{"payload": "36331'+UNION+SELECT+1,2+FROM+DUAL--", "name": "plus_space", "local": "block", "local_score": 1.0}
+{"payload": "36331'\tUNION\tSELECT\t1,2\tFROM\tDUAL--", "name": "tab", "local": "block", "local_score": 1.0}
+{"payload": "36331'\nUNION\nSELECT\n1,2\nFROM\nDUAL--", "name": "newline", "local": "block", "local_score": 1.0}
+{"payload": "36331'\u000bUNION\u000bSELECT\u000b1,2\u000bFROM\u000bDUAL--", "name": "vtab", "local": "block", "local_score": 1.0}

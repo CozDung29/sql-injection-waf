@@ -1,0 +1,105 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{guan2023ssqli}
+\citation{akhavani2025waffled}
+\citation{owasp-crs,waf-survey}
+\citation{mutation-sqli-evasion,parsing-discrepancies,request-smuggling}
+\citation{akhavani2025waffled}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-A}}Problem Statement}{1}{subsection.1.1}\protected@file@percent }
+\citation{guan2023ssqli}
+\citation{khan2024gsqli}
+\citation{demetrio2020wafamole}
+\citation{akhavani2025waffled}
+\citation{guan2023ssqli}
+\citation{khan2024gsqli}
+\citation{demetrio2020wafamole}
+\citation{mutation-sqli}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {I-A}1}Mutation-Aware Coverage Gaps}{2}{subsubsection.1.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {I-A}2}Discrepancy-Aware Defense Surfaces}{2}{subsubsection.1.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-B}}Research Questions}{2}{subsection.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-C}}Objectives and Contributions}{2}{subsection.1.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Conceptual layering for SQLi WAF coverage assessment (simplified). Each layer can introduce transformations that affect whether a static rule or model ``sees'' attack tokens---and therefore which layer a defensive rule must address.}}{2}{figure.1}\protected@file@percent }
+\newlabel{fig:related-taxonomy}{{1}{2}{Conceptual layering for SQLi WAF coverage assessment (simplified). Each layer can introduce transformations that affect whether a static rule or model ``sees'' attack tokens---and therefore which layer a defensive rule must address}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-D}}Paper Organization}{2}{subsection.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {II}Background and Related Work}{2}{section.2}\protected@file@percent }
+\newlabel{sec:background}{{II}{2}{Background and Related Work}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}Mutation-Based SQLi Research and What It Reveals for Defenders}{2}{subsection.2.1}\protected@file@percent }
+\citation{akhavani2025waffled}
+\citation{elebiary2026wamm}
+\citation{wu2025wafbooster}
+\citation{zhang2026bwafsql}
+\citation{httpnormalizer}
+\citation{guan2023ssqli,demetrio2020wafamole}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Parsing Discrepancies and Defensive Scope}{3}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Defensive Frameworks and Coverage Evaluation Requirements}{3}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-D}}Coverage Metrics and Threat of Confounding}{3}{subsection.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {III}Methodology}{3}{section.3}\protected@file@percent }
+\newlabel{sec:methodology}{{III}{3}{Methodology}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Experimental Environment}{3}{subsection.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Defensive audit workflow implemented in the repository: variant generation feeds into probing against a live WAF, producing per-family coverage gap logs. Dashed policy boundaries (rate limits, caps) are configurable in \texttt  {config.json}.}}{4}{figure.2}\protected@file@percent }
+\newlabel{fig:pipeline}{{2}{4}{Defensive audit workflow implemented in the repository: variant generation feeds into probing against a live WAF, producing per-family coverage gap logs. Dashed policy boundaries (rate limits, caps) are configurable in \texttt {config.json}}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Threat Model and Coverage Scope}{4}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Mutation Audit Pipeline}{4}{subsection.3.3}\protected@file@percent }
+\newlabel{eq:audit-pipeline}{{1}{4}{Mutation Audit Pipeline}{equation.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Staged Mutation Generation}{4}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-D}1}Seeds and Dialects}{4}{subsubsection.3.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-D}2}Deployment Augmentations and Learned Rules}{4}{subsubsection.3.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-D}3}Second-Layer Transforms and Search Bias}{4}{subsubsection.3.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-D}4}Remapping as an Experimental Control}{4}{subsubsection.3.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-E}}Outcome Semantics}{4}{subsection.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-F}}Coverage Metrics}{4}{subsection.3.6}\protected@file@percent }
+\newlabel{eq:aggregate-gap-rate}{{2}{4}{Coverage Metrics}{equation.2}{}}
+\citation{httpnormalizer,rfc7230,rfc3986}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-G}}Secondary Control: RFC Decoding and Surrogate Scoring}{5}{subsection.3.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-H}}Implementation Notes}{5}{subsection.3.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Experiments and Results}{5}{section.4}\protected@file@percent }
+\newlabel{sec:experiments}{{IV}{5}{Experiments and Results}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Experiment Setup and Environment}{5}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Audit Scenarios and WAF Coverage Findings}{5}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Measurement Method}{5}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}RQ1: Aggregate Coverage Gap, Labels, and Unique Payloads}{5}{subsection.4.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Archived live-probe coverage summary: aggregate gap rate and contrasting family-level behavior (Table~\ref {tab:bypass_categories}). Fully-defended families (encoding/hex) confirm existing rules work; high-gap families (identity/case/null-byte) are priority remediation targets.}}{6}{figure.3}\protected@file@percent }
+\newlabel{fig:bypass}{{3}{6}{Archived live-probe coverage summary: aggregate gap rate and contrasting family-level behavior (Table~\ref {tab:bypass_categories}). Fully-defended families (encoding/hex) confirm existing rules work; high-gap families (identity/case/null-byte) are priority remediation targets}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-E}}RQ1 (continued): Channel and Workload Shape}{6}{subsection.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-F}}RQ2: Family-Level Coverage Gap Structure}{6}{subsection.4.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-G}}RQ3: Normalization Sufficiency Under RFC-Style Decoding}{6}{subsection.4.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-H}}Threats to Validity and Confounds}{6}{subsection.4.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-I}}Measurement Overhead and Ethics}{6}{subsection.4.9}\protected@file@percent }
+\citation{httpnormalizer,rfc7230}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces AWS WAF audit corpus: coverage gap summary (archived run).}}{7}{table.1}\protected@file@percent }
+\newlabel{tab:dataset}{{I}{7}{AWS WAF audit corpus: coverage gap summary (archived run)}{table.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces WAF coverage by mutation family (AWS WAF lab): attempts $N_f$, gap rate $\mathrm  {GR}_f{=}N_{f,\mathrm  {gap}}/N_f$, and defensive assessment.}}{7}{table.2}\protected@file@percent }
+\newlabel{tab:bypass_categories}{{II}{7}{WAF coverage by mutation family (AWS WAF lab): attempts $N_f$, gap rate $\mathrm {GR}_f{=}N_{f,\mathrm {gap}}/N_f$, and defensive assessment}{table.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Normalization control (TF-IDF + logistic regression; $n{=}20$ labeled HTTP templates): test accuracy before and after RFC-style canonicalization. Identical accuracy confirms normalization alone does not close the coverage gap.}}{7}{table.3}\protected@file@percent }
+\newlabel{tab:bypass_rates}{{III}{7}{Normalization control (TF-IDF + logistic regression; $n{=}20$ labeled HTTP templates): test accuracy before and after RFC-style canonicalization. Identical accuracy confirms normalization alone does not close the coverage gap}{table.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-J}}Reproducibility}{7}{subsection.4.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {V}Discussion and Conclusion}{7}{section.5}\protected@file@percent }
+\newlabel{sec:discussion}{{V}{7}{Discussion and Conclusion}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Answering the Research Questions}{7}{subsection.5.1}\protected@file@percent }
+\citation{zhang2026bwafsql}
+\bibcite{guan2023ssqli}{1}
+\bibcite{akhavani2025waffled}{2}
+\bibcite{httpnormalizer}{3}
+\bibcite{zhang2026bwafsql}{4}
+\bibcite{wu2025wafbooster}{5}
+\bibcite{demetrio2020wafamole}{6}
+\bibcite{khan2024gsqli}{7}
+\bibcite{elebiary2026wamm}{8}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Implications for Defenders}{8}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}Implications for Authorized Security Testing}{8}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-D}}Ethics and Legal Scope}{8}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-E}}Limitations and Future Work}{8}{subsection.5.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-F}}Conclusion}{8}{subsection.5.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{8}{section*.2}\protected@file@percent }
+\bibcite{owasp-crs}{9}
+\bibcite{waf-survey}{10}
+\bibcite{mutation-sqli-evasion}{11}
+\bibcite{parsing-discrepancies}{12}
+\bibcite{request-smuggling}{13}
+\bibcite{mutation-sqli}{14}
+\bibcite{rfc7230}{15}
+\bibcite{rfc3986}{16}
+\gdef \@abspage@last{9}

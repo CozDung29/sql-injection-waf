@@ -1,0 +1,66 @@
+{
+  "datasets": [
+    {
+      "name": "benign.json",
+      "total": 10,
+      "correct": 10,
+      "accuracy": 1.0,
+      "label": "benign",
+      "scores_min": 0.0,
+      "scores_max": 0.0,
+      "scores_avg": 0.0
+    },
+    {
+      "name": "attack.json",
+      "total": 10,
+      "correct": 6,
+      "accuracy": 0.6,
+      "label": "attack",
+      "scores_min": 0.18,
+      "scores_max": 0.93,
+      "scores_avg": 0.62
+    },
+    {
+      "name": "bypass_learned.jsonl",
+      "total": 1530,
+      "correct": 1530,
+      "accuracy": 1.0,
+      "label": "attack",
+      "scores_min": 1.0,
+      "scores_max": 1.0,
+      "scores_avg": 1.0
+    },
+    {
+      "name": "blocked_learned.jsonl",
+      "total": 3388,
+      "correct": 3388,
+      "accuracy": 1.0,
+      "label": "attack",
+      "scores_min": 1.0,
+      "scores_max": 1.0,
+      "scores_avg": 1.0
+    },
+    {
+      "name": "bypass_dataset.json",
+      "total": 455,
+      "correct": 455,
+      "accuracy": 1.0,
+      "label": "attack",
+      "scores_min": 0.96,
+      "scores_max": 1.0,
+      "scores_avg": 0.9996
+    }
+  ],
+  "overall": {
+    "benign": {
+      "total": 10,
+      "correct": 10,
+      "accuracy": 1.0
+    },
+    "attack": {
+      "total": 5383,
+      "correct": 5379,
+      "accuracy": 0.9992569199331228
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "transforms": {
+    "other": {
+      "bypass": 0,
+      "block": 1
+    },
+    "newline": {
+      "bypass": 0,
+      "block": 1
+    },
+    "vtab": {
+      "bypass": 0,
+      "block": 1
+    },
+    "cr": {
+      "bypass": 0,
+      "block": 1
+    },
+    "ff": {
+      "bypass": 0,
+      "block": 1
+    },
+    "comment_block": {
+      "bypass": 0,
+      "block": 1
+    },
+    "tab": {
+      "bypass": 0,
+      "block": 1
+    },
+    "encoded": {
+      "bypass": 0,
+      "block": 8
+    },
+    "case_mix": {
+      "bypass": 78,
+      "block": 15
+    },
+    "split_comment": {
+      "bypass": 0,
+      "block": 1
+    },
+    "chr_oracle": {
+      "bypass": 0,
+      "block": 1
+    },
+    "case_random": {
+      "bypass": 0,
+      "block": 1
+    },
+    "concat_oracle": {
+      "bypass": 0,
+      "block": 1
+    },
+    "hex": {
+      "bypass": 762,
+      "block": 107
+    },
+    "identity": {
+      "bypass": 761,
+      "block": 107
+    },
+    "null_byte": {
+      "bypass": 760,
+      "block": 106
+    },
+    "url_encode": {
+      "bypass": 0,
+      "block": 898
+    }
+  },
+  "updated_ts": 1774451868.9496124
+}

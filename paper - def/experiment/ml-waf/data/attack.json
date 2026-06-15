@@ -1,0 +1,12 @@
+[
+  {"method": "GET", "path": "/api/users", "query": "id=1' OR '1'='1", "headers": {}, "body": ""},
+  {"method": "GET", "path": "/search", "query": "q=<script>alert(1)</script>", "headers": {}, "body": ""},
+  {"method": "POST", "path": "/api/login", "query": "", "headers": {"content-type": "application/json"}, "body": "{\"email\":\"admin'--\",\"password\":\"x\"}"},
+  {"method": "GET", "path": "/../../../etc/passwd", "query": "", "headers": {}, "body": ""},
+  {"method": "GET", "path": "/api?id=1; DROP TABLE users;--", "query": "", "headers": {}, "body": ""},
+  {"method": "POST", "path": "/api/comment", "query": "", "headers": {"content-type": "application/json"}, "body": "{\"text\":\"<img src=x onerror=alert(1)>\"}"},
+  {"method": "GET", "path": "/api/file", "query": "file=....//....//etc/passwd", "headers": {}, "body": ""},
+  {"method": "POST", "path": "/api/exec", "query": "", "headers": {"content-type": "application/json"}, "body": "{\"cmd\":\"ls -la\"}"},
+  {"method": "GET", "path": "/api/users", "query": "id=1 UNION SELECT * FROM passwords", "headers": {}, "body": ""},
+  {"method": "POST", "path": "/api/upload", "query": "", "headers": {"content-type": "multipart/form-data"}, "body": "<?php system($_GET['c']); ?>"}
+]

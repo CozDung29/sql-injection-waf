@@ -1,0 +1,125 @@
+\section{Experiments and Results}
+\label{sec:experiments}
+We answered RQ1--RQ3 using two datasets exported from our repository. The main dataset came from live AWS WAF probing, and the secondary dataset came from the RFC decoding surrogate pilot.
+
+\Needspace{10\baselineskip}
+\subsection{Experiment Setup and Environment}
+We ran all scripts on a Windows machine with version 10.0.26200 and 15.84 GB RAM. The experiment code is under \texttt{paper/experiment}, mainly \texttt{ml-waf-aws-test}, \texttt{ml-waf-blocked-adv}, \texttt{ml-waf-multi-eval}, and \texttt{ml-waf-adversarial-eval}. The Python dependencies used in these folders include \texttt{requests>=2.28.0}, \texttt{numpy>=1.24.0}, \texttt{scikit-learn>=1.3.0}, and \texttt{joblib>=1.3.0}. For the live run, we used \texttt{run\_probe.py} and saved outputs to JSONL/TXT/JSON files under each module's \texttt{data} folder.
+
+\Needspace{12\baselineskip}
+\subsection{Audit Scenarios and WAF Coverage Findings}
+We followed the same flow every time so the runs were comparable:
+\begin{enumerate}
+  \item We started with SQLi seeds from PostgreSQL/Oracle style payload sets, then remapped IDs to the target parameter format.
+  \item We enabled mutation rules and optional second-layer transforms, then sent GET requests to the WAF-protected endpoint.
+  \item We logged each HTTP response as \textsf{gap}, \textsf{defended}, or \textsf{other} based on the classifier logic in \texttt{run\_probe.py}.
+  \item We repeated this process at larger request counts and compared family-level behavior from exported summaries.
+\end{enumerate}
+During auditing, we observed two stable patterns: identity/case/null-byte families consistently exposed coverage gaps at high rates, while encoding-heavy families were successfully defended in this deployment---confirming the rule layers covering encoding-style mutations are effective, while identity and null-byte style mutations require additional rule attention.
+
+\Needspace{12\baselineskip}
+\subsection{Measurement Method}
+We measured three groups of outputs:
+\begin{itemize}
+  \item \textbf{Attempt-level counts (RQ1):} \texttt{variants\_tested}, \texttt{gap}, and \texttt{defended} from \texttt{aws\_probe\_summary.json}, written by \texttt{run\_probe.py} at the end of each live run. This file summarizes \emph{one} run; it is the primary source for aggregate $N$ and $N_{\mathrm{gap}}$.
+  \item \textbf{Family-level gap rates (RQ2):} $N_f$ and $\mathrm{GR}_f$ recomputed from the trailing slice of \texttt{aws\_probe\_results.jsonl} whose length matches \texttt{variants\_tested} in that summary (the JSONL file is append-only and can contain multiple runs).
+  \item \textbf{Surrogate pilot accuracy (RQ3):} test accuracy from \texttt{defense\_eval.json} (TF-IDF + logistic regression on \texttt{ml-waf/data/attack.json} and \texttt{benign.json}) before and after \texttt{unquote\_chain}.
+\end{itemize}
+Data collection was file-based. Every request appends one JSON line to \texttt{aws\_probe\_results.jsonl}; the summary JSON is overwritten per run. We report numbers read directly from these artifacts (and family tables derived from the last-run JSONL slice), not from stale aggregates in older export JSON that summed cumulative logs.
+
+\Needspace{10\baselineskip}
+\subsection{RQ1: Aggregate Coverage Gap, Labels, and Unique Payloads}
+The archived last complete live run (\texttt{aws\_probe\_summary.json}) reports $N=5{,}000$ variants tested with $N_{\mathrm{gap}}=2{,}083$ gap-labeled outcomes, $2{,}793$ successfully defended, and $124$ \textsf{other}/error, so $\mathrm{GR}_{\mathrm{agg}}=0.417$ (41.7\%). This means the WAF's current policy configuration fails to block 41.7\% of the tested mutation variants---a substantial coverage gap that warrants targeted rule improvements. Parsing the matching trailing $5{,}000$ lines of \texttt{aws\_probe\_results.jsonl} yields 19 distinct \texttt{projectName} strings among gap attempts and 34 among defended attempts, with zero overlap---far fewer than $N_{\mathrm{gap}}$, so the search reuses similar surface forms under different transform labels, indicating concentrated policy failures rather than a uniformly broad attack surface.
+
+\textbf{Data-source note.} Cumulative JSONL in the repository has more than $5{,}000$ lines because probing is append-only; an older export script once reported $N{=}9{,}435$ / $N_{\mathrm{gap}}{=}3{,}721$ by aggregating the full JSONL history. Those figures do \emph{not} match the current \texttt{aws\_probe\_summary.json} and should not be cited as the last-run result. Table~\ref{tab:dataset} summarizes the archived run.
+
+\begin{table*}[t]
+  \centering
+  \caption{AWS WAF audit corpus: coverage gap summary (archived run).}
+  \label{tab:dataset}
+  \begin{tabular}{lrr}
+    \toprule
+    Metric & Value & Notes \\
+    \midrule
+    Variants tested $N$ & 5{,}000 & \texttt{aws\_probe\_summary.json} \\
+    Policy gaps $N_{\mathrm{gap}}$ & 2{,}083 & $\mathrm{GR}_{\mathrm{agg}}=41.7\%$ --- coverage failure \\
+    Successfully defended & 2{,}793 & Same summary file \\
+    Other/error & 124 & Same summary file \\
+    Unique gap payloads & 19 & Last-run JSONL slice \\
+    Unique defended payloads & 34 & Last-run JSONL slice \\
+    Payloads in both sets & 0 & Last-run JSONL slice \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\Needspace{10\baselineskip}
+\subsection{RQ1 (continued): Channel and Workload Shape}
+Our injection path used URL-visible slots with remapped SQLi fragments. The workload exercised percent-encoding changes, case changes, delimiter tricks, and dialect-specific spellings. This archived run does not directly test multipart \texttt{form-data}, JSON bodies, or XML bodies, so those channels require additional audit probes to achieve full coverage assessment. Also, this dataset is skewed toward attack-like inputs by design, so it is not a benign baseline for false-positive analysis.
+
+\Needspace{10\baselineskip}
+\subsection{RQ2: Family-Level Coverage Gap Structure}
+Figure~\ref{fig:bypass} highlights the qualitative structure: the aggregate gap rate is substantial, but the mass is not spread evenly across mutation operators---a finding with direct implications for rule prioritization.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{\columnwidth}{\centering $\mathrm{GR}_{\mathrm{agg}}\approx 0.42$ over $N{=}5{,}000$; spawn\_encoding/hex fully defended; identity/case/null-byte spawns $\mathrm{GR}_f\approx 0.99$ (critical gaps)}}
+  \caption{Archived live-probe coverage summary: aggregate gap rate and contrasting family-level behavior (Table~\ref{tab:bypass_categories}). Fully-defended families (encoding/hex) confirm existing rules work; high-gap families (identity/case/null-byte) are priority remediation targets.}
+  \label{fig:bypass}
+\end{figure}
+
+Table~\ref{tab:bypass_categories} lists the largest families in the last-run JSONL slice ($N{=}5{,}000$). The \emph{spawn\_identity}, \emph{spawn\_case\_mix}, and \emph{spawn\_null\_byte} cohorts expose near-complete coverage gaps ($\mathrm{GR}_f\approx 0.99$--$1.00$), meaning these families almost always pass through the WAF undetected. In contrast, \emph{spawn\_encoding} and \emph{spawn\_hex\_style} are fully defended ($\mathrm{GR}_f=0$), indicating the current policy handles nested encodings and hex-style spellings effectively. This sharp heterogeneity provides a clear remediation roadmap: defenders should prioritize adding or strengthening rules for identity, case-mix, and null-byte family mutations before addressing other areas.
+
+\textbf{Statistical caution.} Per-family rates are binomial proportions conditioned on the observed $N_f$ for family $f$. Families with very small $N_f$ (for example, two attempts) can show $\mathrm{GR}_f=1$ but still be unreliable. The exported analysis pipeline includes confidence intervals in CSV/JSON outputs, so those files should be checked when comparing families with very different attempt counts before making rule-change decisions.
+
+\begin{table*}[t]
+  \centering
+  \caption{WAF coverage by mutation family (AWS WAF lab): attempts $N_f$, gap rate $\mathrm{GR}_f{=}N_{f,\mathrm{gap}}/N_f$, and defensive assessment.}
+  \label{tab:bypass_categories}
+  \begin{tabular}{lrrr}
+    \toprule
+    Family & $N_f$ & $\mathrm{GR}_f$ (\%) & Defensive Assessment \\
+    \midrule
+    spawn\_identity & 973 & $\approx$98.7 & \textbf{Critical gap} --- rule improvement needed \\
+    spawn\_null\_byte & 972 & $\approx$98.8 & \textbf{Critical gap} --- rule improvement needed \\
+    spawn\_case\_mix & 142 & $\approx$100.0 & \textbf{Critical gap} --- rule improvement needed \\
+    spawn\_encoding & 1{,}940 & $0$ & Well defended --- existing rules effective \\
+    spawn\_hex\_style & 973 & $0$ & Well defended --- existing rules effective \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\Needspace{10\baselineskip}
+\subsection{RQ3: Normalization Sufficiency Under RFC-Style Decoding}
+Table~\ref{tab:bypass_rates} summarizes the offline pilot. We used \texttt{paper-defense-rfc-ml/ml\_baseline.py}: TF-IDF features and logistic regression (not the random forest in \texttt{ml-waf/train.py}). The labeled set has 20 HTTP templates---10 from \texttt{attack.json} (SQLi, XSS, path traversal, and RCE-style examples) and 10 generic benign rows from \texttt{benign.json}. Test accuracy stayed at 42.9\% for both raw strings and \texttt{unquote\_chain}-canonicalized strings ($n_{\mathrm{test}}{=}7$ of 20; see \texttt{defense\_eval.json}). In this small, mixed-class sample, fixpoint percent-decoding did not improve or reduce surrogate performance---demonstrating that single-pass RFC normalization is insufficient as a standalone defensive enhancement and that closing observed coverage gaps requires richer feature interactions, broader policy coverage, and protocol-complete normalization where appropriate.
+
+\begin{table*}[t]
+  \centering
+  \caption{Normalization control (TF-IDF + logistic regression; $n{=}20$ labeled HTTP templates): test accuracy before and after RFC-style canonicalization. Identical accuracy confirms normalization alone does not close the coverage gap.}
+  \label{tab:bypass_rates}
+  \begin{tabular}{lcc}
+    \toprule
+    Condition & Test accuracy & Notes \\
+    \midrule
+    Raw strings & 0.429 & Same seed and split \\
+    After \texttt{unquote\_chain} & 0.429 & Fixpoint \texttt{unquote\_plus} --- no improvement \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\Needspace{10\baselineskip}
+\subsection{Threats to Validity and Confounds}
+\textbf{Label validity.} Gap labels encode a script-specific mapping from HTTP observables to outcomes; different applications would require recalibration before applying these coverage findings to a different deployment.
+
+\textbf{Policy snapshot.} AWS WAF rules, rate limits, and IP reputation evolve; our numbers describe one archived run. Defenders should treat the findings as a baseline requiring periodic re-auditing as policies change.
+
+\textbf{Search bias.} Queue order, caps, and learned transforms skew which families receive high $N_f$; $\mathrm{GR}_f$ compares families under that skewed design rather than under uniform random mutation. Gap estimates are therefore conservative for under-sampled families.
+
+\textbf{Surrogate mismatch.} The logistic-regression pilot is not a proxy for the managed WAF, and the 20-template JSON set is not the live SQLi mutation corpus; RQ3 addresses only a narrow normalization hypothesis on a toy classifier and should not be extrapolated to full WAF coverage claims.
+
+\Needspace{10\baselineskip}
+\subsection{Measurement Overhead and Ethics}
+The harness prioritizes logging fidelity over maximum throughput, and sleep intervals plus request caps are configurable. All experiments were designed for \emph{authorized} targets only; auditing without authorization is illegal and unethical. The methodology is intended as a diagnostic instrument for system owners and authorized security teams.
+
+\Needspace{10\baselineskip}
+\subsection{Reproducibility}
+Summaries can be regenerated with scripts under \texttt{ml-waf-aws-test/paper-attack-evasion} and \texttt{ml-waf-aws-test/paper-defense-rfc-ml}. Some JSON metadata may include absolute paths from the original workstation, so those paths should be updated after checkout. Running \texttt{run\_probe.py} against a live endpoint will produce fresh logs, but counts will only match archived values if both configuration and WAF policy are the same---which is by design: policy changes should produce different coverage measurements, enabling regression testing.

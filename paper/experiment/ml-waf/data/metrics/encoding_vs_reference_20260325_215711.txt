@@ -1,0 +1,26 @@
+current:  bypass=1427 block=478 total=1905
+reference: bypass=3181 block=5686 total=8867
+delta:    bypass=-1754 block=-5208 total=-6962
+
+key                       ref_b   ref_bl    cur_b   cur_bl    d_tot
+----------------------------------------------------------------------
+case_mix                    279      588       60        1     -806
+case_random                   0       24        0        1      -23
+chr_oracle                    0       22        0        1      -21
+comment_block                11       21        0        1      -31
+comment_inline               22       24        0        0      -46
+concat_oracle                 0       22        0        1      -21
+cr                            0       15        0        1      -14
+double_encoded_quote          0       14        0        0      -14
+encoded                       0       16        0        8       -8
+ff                          843     1036        0        1    -1878
+hex                         765      543      456        0     -852
+identity                    844      814      455        0    -1203
+newline                       0       96        0        1      -95
+null_byte                     0        0      456        0      456
+other                       117       52        0        1     -168
+plus_space                    0       38        0        0      -38
+split_comment                 0       24        0        1      -23
+tab                           0      292        0        1     -291
+url_encode                  300     2045        0      458    -1887
+vtab                          0        0        0        1        1

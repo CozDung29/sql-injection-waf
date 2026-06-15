@@ -1,0 +1,5 @@
+mode=both mutate_regex=18 mutate_bytes=3 bypass_gen_regex=2
+bypass_unique=97 blocked_unique=257 benign_strings=5
+min_support=6 mined_candidates=75 byte_statements=20 regex_mutate=2 regex_bypass_gen=1 regex_data=4 alt_chunks_mut=2 alt_chunks_bypass=1 alt_chunks_data=4
+linear_holdout_acc=0.8732394366197183
+wrote E:\installQ\chatbotAI\chat-bot-ai\ml-waf-aws-test\data\generated_aws_rule_suggestion.json
