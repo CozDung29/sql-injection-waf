@@ -1,25 +1,17 @@
 \section{Discussion and Conclusion}
 \label{sec:discussion}
-This work advances an attack-oriented, measurement-grounded view of SQLi WAF bypass. Rather than treating bypass as a scalar score, we decompose it along three axes emphasized throughout the paper: \emph{semantics} (operational labels tied to observable HTTP/application signals), \emph{scale} (attempt counts versus unique payload cardinality), and \emph{structure} (family-level rates $\mathrm{BR}_f$ under an induced search distribution).
+This work decomposes SQLi WAF bypass analysis along semantics, scale, and structure under an induced search distribution.
 
-\subsection{Answering the Research Questions}
-\textbf{RQ1.} The archived lab log yields $\mathrm{BR}_{\mathrm{agg}}=39.4\%$ with $N=9{,}435$, but only dozens of unique bypass strings, illustrating that high attempt-level rates can coexist with concentrated string reuse and partial overlap between bypass- and blocked-labeled payloads.
+\subsection{Research Question Answers}
+\textbf{RQ1.} The archived run ($N=5{,}000$) yields a 41.7\% bypass rate but only 19 unique bypass payloads. High attempt-level rates coexist with concentrated string reuse.
 
-\textbf{RQ2.} Bypass probability is highly anisotropic across families: identity-, case-, and null-byte-oriented spawns achieve $\mathrm{BR}_f\approx 0.89$--$0.90$ in the export, while an encoding-heavy spawn cohort is largely blocked ($\mathrm{BR}_f\approx 0.025$). For defenders, this implies that global block-rate dashboards can mask persistent holes in specific operator classes; regression suites should include family-targeted cases. For attackers (in authorized settings), the same table prioritizes mutation budget toward high-yield families for a given policy snapshot.
+\textbf{RQ2.} Bypass probability varies drastically across families. Identity-, case-, and null-byte-oriented spawns achieve nearly 100\% success, while encoding and hex-style spawns are fully blocked. This highlights that global metrics mask structural holes.
 
-\textbf{RQ3.} Fixpoint percent-decoding does not improve a 20-example random-forest surrogate; live bypass therefore cannot be dismissed as an artifact of ``the defender forgot to URL-decode once.'' Stronger mitigations must address richer feature interactions, policy coverage, and protocol-complete normalization where appropriate \cite{httpnormalizer,rfc7230}.
+\textbf{RQ3.} Fixpoint percent-decoding did not improve our offline surrogate pilot's accuracy, demonstrating that live bypass vulnerabilities cannot be trivially resolved by simple canonicalization. Stronger mitigations require richer feature interactions and protocol-complete normalization.
 
-\subsection{Implications for Defenders}
-Policy tuning should be \emph{family-aware}: after rule changes, re-run family-stratified probes rather than relying on a single aggregate metric. Combine WAF telemetry with application-layer controls (parameterized queries, least-privilege DB roles) because edge decisions will never be perfect. Where preprocessing is used, evaluate it against explicit attack logs rather than synthetic averages alone \cite{zhang2026bwafsql}.
+\subsection{Implications and Conclusion}
+For defenders, policy tuning and regression testing must be family-aware; relying on aggregate dashboards is insufficient. Edge decisions should be combined with robust application-layer controls. For offensive researchers, publishing induced search configurations and explicit outcome logs is vital for reproducible science.
 
-\subsection{Implications for Offensive Research}
-Open logs enable third parties to dispute or refine labels, add families, or compare alternative outcome definitions---a step toward reproducible offensive security science. Publishing induced search configurations (caps, policies, seeds) is as important as publishing headline rates.
+We presented a reproducible black-box methodology for SQLi WAF evaluation. The core takeaway is that meaningful offensive evaluation demands decomposed statistics and transparent search bias. Our family-level analysis identifies specific operational vulnerabilities, reinforcing the need for layered, context-aware defenses.
 
-\subsection{Ethics and Legal Scope}
-The methodology is intended solely for systems the operator owns or is authorized to test. Unauthorized scanning or bypass attempts violate law and policy; the artifact is a measurement instrument, not an endorsement of misuse.
-
-\subsection{Limitations and Future Work}
-Limitations include single-channel URL injection in the archived aggregate, single policy snapshot, and non-uniform search bias. Future work comprises multipart/JSON/XML probes, synchronized comparison of surrogate scores and live decisions on identical corpora, adaptive attackers that reweight families online, and pairing offensive logs with defensive rule synthesis tools already sketched in the repository (\texttt{generate\_rules\_from\_data.py}).
-
-\subsection{Conclusion}
-We presented a reproducible black-box mutation and probing methodology for SQLi WAF evaluation, together with aggregate metrics, unique-payload structure, and family-resolved bypass rates from a live AWS WAF lab. The central methodological takeaway is that \emph{depth} in offensive evaluation comes from explicit labels, decomposed statistics, and honest discussion of search bias and validity---not from a lone percentage. Family-level analysis reveals which mutation shapes dominate success under our conditions; a minimal RFC decoding control shows that trivial normalization does not resolve the offline surrogate pilot, reinforcing the need for layered defenses and richer benchmarks.
+\textbf{Limitations and Ethics.} Our findings are bounded by a single policy snapshot and URL injection channel. All methodology is strictly intended for authorized testing environments.

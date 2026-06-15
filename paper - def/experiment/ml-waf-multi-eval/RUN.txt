@@ -1,0 +1,28 @@
+Standalone evaluator (sibling of ml-waf). Scores each payload as a synthetic GET /api?<param>=payload.
+
+Systems:
+  modsecurity_regex — CRS-style SQLi regex subset from ml-waf/rules/modsecurity_sqli_regex.py (block if any rule matches the same request surface string used by ml-waf features).
+  ml_rf_surrogate — RandomForest trained via ml-waf/train.py (block if predict == attack).
+  combined_or — blocked if ModSecurity OR ML flags attack (typical defense-in-depth OR).
+  combined_and — blocked only if BOTH flag attack (weaker; useful for ablation).
+
+Install:
+  cd ml-waf-multi-eval
+  pip install -r requirements.txt
+
+Examples:
+  cd ml-waf-multi-eval
+  python3 evaluate.py ../ml-waf/data/blocked_learned.jsonl
+  python3 evaluate.py ../ml-waf/data/bypass_dataset.json --by-group --out data/multi_waf_report.json
+  python3 evaluate.py --skip-ml ../ml-waf/data/blocked_learned.jsonl
+  python3 evaluate.py --skip-modsec ../ml-waf/data/blocked_learned.jsonl
+
+Train the ML surrogate (delegates to ml-waf/train.py):
+  cd ml-waf-multi-eval
+  python3 train_surrogate.py
+
+Or:
+  cd ../ml-waf
+  python3 train.py
+
+Model path: ml-waf/models/waf_model.joblib. If missing, use --skip-ml on evaluate.py.

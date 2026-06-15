@@ -1,0 +1,78 @@
+{
+  "primary_ml_waf_data": {
+    "data_dir": "E:\\installQ\\chatbotAI\\chat-bot-ai\\ml-waf\\data",
+    "n_attack_requests": 10,
+    "n_benign_requests": 10,
+    "ml_on_raw_strings": {
+      "n_total": 20,
+      "n_train": 13,
+      "n_test": 7,
+      "accuracy": 0.42857142857142855,
+      "classification_report": {
+        "0": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "1": {
+          "precision": 0.42857142857142855,
+          "recall": 1.0,
+          "f1-score": 0.6,
+          "support": 3.0
+        },
+        "accuracy": 0.42857142857142855,
+        "macro avg": {
+          "precision": 0.21428571428571427,
+          "recall": 0.5,
+          "f1-score": 0.3,
+          "support": 7.0
+        },
+        "weighted avg": {
+          "precision": 0.18367346938775508,
+          "recall": 0.42857142857142855,
+          "f1-score": 0.2571428571428571,
+          "support": 7.0
+        }
+      }
+    },
+    "ml_on_rfc_canonicalized_strings": {
+      "n_total": 20,
+      "n_train": 13,
+      "n_test": 7,
+      "accuracy": 0.42857142857142855,
+      "classification_report": {
+        "0": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "1": {
+          "precision": 0.42857142857142855,
+          "recall": 1.0,
+          "f1-score": 0.6,
+          "support": 3.0
+        },
+        "accuracy": 0.42857142857142855,
+        "macro avg": {
+          "precision": 0.21428571428571427,
+          "recall": 0.5,
+          "f1-score": 0.3,
+          "support": 7.0
+        },
+        "weighted avg": {
+          "precision": 0.18367346938775508,
+          "recall": 0.42857142857142855,
+          "f1-score": 0.2571428571428571,
+          "support": 7.0
+        }
+      }
+    },
+    "methodology": {
+      "defense_track": "rfc_canonicalize_then_ml_baseline",
+      "canonicalization": "urllib.parse.unquote_plus repeated until fixpoint (see rfc_canonicalize.unquote_chain)",
+      "note": "Small public-style attack/benign JSON; extend with larger labeled HTTP captures for paper experiments."
+    }
+  }
+}

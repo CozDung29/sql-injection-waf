@@ -1,0 +1,39 @@
+\section{Discussion and Conclusion}
+\label{sec:discussion}
+This work advances a defense-oriented, measurement-grounded view of SQLi WAF coverage gaps. Rather than treating gap rate as a scalar score of attacker success, we decompose it along three axes emphasized throughout the paper: \emph{semantics} (operational labels tied to observable HTTP/application signals that define what ``policy gap'' means concretely), \emph{scale} (attempt counts versus unique payload cardinality), and \emph{structure} (family-level gap rates $\mathrm{GR}_f$ under an induced search distribution that reflects realistic attacker priorities).
+
+\subsection{Answering the Research Questions}
+\textbf{RQ1.} The archived last complete live run (\texttt{aws\_probe\_summary.json}) yields $\mathrm{GR}_{\mathrm{agg}}=41.7\%$ with $N=5{,}000$, but only 19 unique gap payload strings in that run (34 unique defended; zero overlap). This illustrates that a high attempt-level gap rate can coexist with concentrated string reuse---the policy failures are traceable to a small set of surface patterns, which is encouraging for defenders: a focused rule improvement targeting those patterns can address a large fraction of the aggregate gap.
+
+\textbf{RQ2.} Coverage failure is highly anisotropic across families: identity-, case-, and null-byte-oriented spawns expose near-complete gaps ($\mathrm{GR}_f\approx 0.99$) in the archived run, while encoding- and hex-style spawn cohorts are fully defended ($\mathrm{GR}_f=0$). This finding has a direct, actionable interpretation for defenders: the current encoding and hex-style rules are working well and should be maintained; rules covering identity, case-mix, and null-byte mutations are the priority improvement area. Global coverage dashboards that report only an aggregate gap rate would mask this critical distinction, causing defenders to either under-invest (misreading ``58\% blocked'' as adequate) or mis-invest (strengthening rules that are already fully effective).
+
+\textbf{RQ3.} Fixpoint percent-decoding does not improve a 20-example TF-IDF + logistic-regression surrogate on mixed attack/benign templates; observed coverage gaps therefore cannot be dismissed as an artifact of ``the defender forgot to URL-decode.'' Closing the gaps exposed by identity/null-byte families requires richer measures: explicit case-normalization rules, null-byte stripping at the edge, and policy-complete normalization where appropriate \cite{httpnormalizer,rfc7230}---not merely a single additional decoding pass.
+
+\subsection{Implications for Defenders}
+The family-level coverage findings translate directly into a prioritized remediation agenda:
+
+\textbf{Immediate rule improvements.} The three critical gap families---identity, case-mix, and null-byte spawns---should be addressed through dedicated WAF rules or augmentations to existing managed rule sets. Specifically: (i) case-insensitive matching should be enabled for SQL keyword patterns where not already active; (ii) null-byte (\texttt{\%00}) stripping or rejection should be enforced at the edge before pattern matching; (iii) identity-preserving variants (unmodified canonical SQLi strings) suggest the managed rule set may have gaps in its base signature coverage that warrant review.
+
+\textbf{Family-aware regression testing.} Policy tuning should always be followed by family-stratified re-auditing rather than relying on a single aggregate metric. A rule change that reduces the aggregate gap rate without eliminating the critical-gap families has not actually solved the problem---it may have only shifted which variants fall into the \textsf{other} category.
+
+\textbf{Defense in depth.} Combine WAF telemetry with application-layer controls---parameterized queries, prepared statements, and least-privilege database roles---because edge decisions will never be perfect. WAF coverage gaps indicate where edge rules fail; parameterized queries provide a complementary guarantee that is independent of WAF rule completeness.
+
+\textbf{Preprocessing evaluation.} Where decoding or normalization preprocessing is used as a defensive measure, evaluate it against explicit family-stratified gap logs rather than synthetic averages alone \cite{zhang2026bwafsql}. RQ3 demonstrates that even a conceptually correct normalization (RFC percent-decoding) can fail to improve a surrogate's performance---suggesting the attack surface lies in features beyond what that normalization addresses.
+
+\subsection{Implications for Authorized Security Testing}
+Open logs enable third parties to dispute or refine outcome labels, add mutation families, or compare alternative outcome definitions---a step toward reproducible defensive security science. Publishing induced search configurations (caps, policies, seeds) alongside gap measurements is as important as publishing the measurements themselves: without configuration context, gap rates cannot be compared across studies or replication attempts.
+
+\subsection{Ethics and Legal Scope}
+The methodology is intended solely for systems the operator owns or is authorized to test. Unauthorized scanning or bypass attempts violate law and policy; the artifact is a diagnostic instrument for authorized security teams, not an endorsement of misuse.
+
+\subsection{Limitations and Future Work}
+Limitations include single-channel URL injection in the archived aggregate, single policy snapshot, and non-uniform search bias across families. Future work comprises:
+\begin{itemize}
+  \item Multipart/JSON/XML channel probes to achieve full HTTP surface coverage assessment.
+  \item Synchronized comparison of surrogate scores and live WAF decisions on identical corpora to characterize where offline models diverge from production policy.
+  \item Adaptive audit tools that reweight families online based on current gap rates, enabling faster convergence to the highest-risk coverage areas.
+  \item Pairing offensive gap logs with defensive rule synthesis tools already sketched in the repository (\texttt{generate\_rules\_from\_data.py}) to provide a complete audit-to-remediation pipeline.
+\end{itemize}
+
+\subsection{Conclusion}
+We presented a reproducible, defense-oriented methodology for diagnosing SQLi WAF coverage gaps through family-stratified mutation testing, together with aggregate coverage metrics, unique-payload structure, and family-resolved gap rates from a live AWS WAF lab. The central methodological takeaway is that \emph{depth} in defensive evaluation comes from explicit outcome labels, decomposed family statistics, and honest discussion of search bias and validity---not from a lone aggregate percentage. Family-level analysis reveals which mutation shapes the current policy fails to cover; a minimal RFC decoding control shows that trivial normalization does not resolve the offline surrogate pilot, reinforcing the need for layered defenses and targeted rule improvements. By providing reproducible artifacts and actionable family-level coverage findings, this work contributes a diagnostic baseline that security teams can use to prioritize, implement, and validate WAF policy improvements.

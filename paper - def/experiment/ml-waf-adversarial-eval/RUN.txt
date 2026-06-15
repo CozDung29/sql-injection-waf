@@ -1,0 +1,34 @@
+Mục tiêu: WAF ML là một dịch vụ có thể thay model (train lại), mọi đánh giá bypass trên dataset đều bằng cách "bắn thật" HTTP tới đúng WAF đó (cùng pipeline extract + predict như ml-waf).
+
+1) Train model (lần đầu hoặc sau khi thu thập thêm mẫu):
+   cd ../ml-waf
+   python3 train.py
+
+2) Chạy WAF HTTP (terminal 1) — load waf_model.joblib, cổng mặc định 8787:
+   cd ml-waf-adversarial-eval
+   set ML_WAF_MODEL=..\ml-waf\models\waf_model.joblib
+   set ML_WAF_PORT=8787
+   python3 serve_waf.py
+
+   Linux/macOS: export ML_WAF_MODEL=... export ML_WAF_PORT=8787
+
+3) Probe dataset (terminal 2):
+   python3 probe_waf.py ..\ml-waf\data\blocked_learned.jsonl --limit 200 --out data\probe_results.jsonl
+
+   bypass_rate = tỉ lệ dòng có blocked=false (payload được coi là "lọt" qua WAF hiện tại).
+
+4) Vòng lặp adversarial (ý tưởng):
+   - Ghi nhận các payload bypass trong probe_results.jsonl → merge vào tập train attack (hoặc hard-negative) trong ml-waf/data.
+   - train.py lại → thay waf_model.joblib → restart serve_waf.py → probe lại → so sánh bypass_rate giữa các phiên bản model.
+
+Lưu ý: serve_waf.py dùng đúng features.extract + RF như predict.py — đây là "WAF ML" cục bộ. Khác với test HTTP tới API production trong ml-waf-blocked-adv (WAF thật ngoài mạng).
+
+5) Kết hợp backend NestJS (server/):
+   - Terminal 1: chạy serve_waf.py như trên (8787).
+   - Biến môi trường cho Nest: WAF_SERVICE_URL=http://127.0.0.1:8787
+   - Chạy API: cd server && pnpm start:dev (hoặc npm run start:dev)
+   - Swagger: GET/POST http://localhost:3001/waf-eval (payload query hoặc JSON body).
+   - Probe qua Nest thay vì gọi thẳng Python:
+     python3 probe_waf.py ..\ml-waf\data\blocked_learned.jsonl --base-url http://127.0.0.1:3001 --evaluate-path /waf-eval --limit 50
+
+   Nest chỉ proxy sang serve_waf; model vẫn do Python load.

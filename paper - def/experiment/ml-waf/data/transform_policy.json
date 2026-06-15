@@ -1,0 +1,15 @@
+{
+  "enabled": true,
+  "min_samples_for_exclude": 30,
+  "explore_rate": 0.08,
+  "never_exclude": [
+    "other",
+    "identity"
+  ],
+  "exclude": [
+    "newline",
+    "plus_space",
+    "tab"
+  ],
+  "built_ts": 1774448892.0852973
+}
